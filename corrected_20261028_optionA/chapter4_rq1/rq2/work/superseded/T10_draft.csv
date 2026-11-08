@@ -1,0 +1,5 @@
+Test set,Xception test videos (fake %),Xception ROC-AUC,Xception Acc (%),Xception F1,Xception Rec (%),Xception Spec (%),SwinFusion++ test videos (fake %),SwinFusion++ (BO) ROC-AUC,SwinFusion++ (fixed) ROC-AUC
+FF++ C23,280 (50.00%),0.7725,69.64,0.6886,67.14,72.14,280 (50.00%),0.9964,0.9942
+FF++ C40,280 (50.00%),0.8109,74.29,0.7429,74.29,74.29,280 (50.00%),0.9941,0.9878
+Celeb-DF v2,859 (84.17%),0.6480,84.17,0.9140,100.00,0.00,978 (86.20%),0.9983,0.9951
+DeeperForensics-1.0,"2,385 (91.61%)",0.9978,46.00,0.5821,41.05,100.00,402 (50.00%),0.9954,0.9974

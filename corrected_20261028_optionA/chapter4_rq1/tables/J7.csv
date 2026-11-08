@@ -1,0 +1,11 @@
+Comparison,"Holm p (final, m = 18)","Holm p (pre-scoring, m = 27)","Holm p (pooled, m = 26)",Seed sign agreement,Holm p (DFo global clusters),CDF leave-one-identity-out ΔAUC
+C23 → DFo vs Swin-B,< 0.005,0.005,0.005,9/9,< 0.005,—
+CDF → C23 vs Swin-B,0.018,0.024,0.034,9/9,—,—
+CDF → C40 vs Swin-B,< 0.005,0.005,0.005,9/9,—,—
+CDF → C40 vs Video Swin-B,< 0.005,0.005,0.005,8/9,—,—
+CDF → DFo vs Swin-B,< 0.005,0.005,0.005,9/9,< 0.005,—
+CDF → DFo vs Video Swin-B,< 0.005,0.006,0.007,9/9,< 0.005,—
+DFo → C23 vs Swin-B,< 0.005,0.005,0.005,9/9,—,—
+DFo → C40 vs Swin-B,< 0.005,0.005,0.005,9/9,—,—
+DFo → C40 vs Video Swin-B,< 0.005,0.005,0.005,9/9,—,—
+DFo → CDF vs Swin-B,< 0.005,0.005,0.005,9/9,—,+0.1122 to +0.1477

@@ -1,0 +1,5 @@
+Bandos, A. I., Rockette, H. E., & Gur, D. (2005). A permutation test sensitive to differences in areas for comparing ROC curves from a paired design. Statistics in Medicine, 24(18), 2873–2893. https://doi.org/10.1002/sim.2149
+
+Holm, S. (1979). A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics, 6(2), 65–70.
+
+[Checked 2026-10-30: Bandos metadata (authors, title, journal, volume 24, issue 18, pages 2873–2893) confirmed via api.crossref.org/works/10.1002/sim.2149. Holm (1979) has no DOI (JSTOR 4615733); details are the standard citation. Italicize journal names and volume numbers in the manuscript.]

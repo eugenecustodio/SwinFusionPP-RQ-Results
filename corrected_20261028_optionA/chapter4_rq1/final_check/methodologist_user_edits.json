@@ -1,0 +1,115 @@
+[
+ {
+  "id": "U1",
+  "block": 264,
+  "old": "(Albert et al., 2021; ISO, 2018; ISO, 2023; Urera & Balahadia, 2019).",
+  "new": "(Albert et al., 2021; ISO, 2018; ISO, 2023; Urera & Balahadia, 2019). The conceptual framework of the study is presented in Figure 1.",
+  "note": "MUST. Figure 1 callout. Last paragraph before the Conceptual Framework heading; the image directly follows that heading, so this is the only text before it."
+ },
+ {
+  "id": "U2",
+  "block": 361,
+  "old": "Help and transparency content in the surrounding pages further guides the user in interpreting the result responsibly.",
+  "new": "Help and transparency content in the surrounding pages further guides the user in interpreting the result responsibly. The process flow of the system is presented below as a HIPO chart (Figure 2) and a system flowchart (Figure 3).",
+  "note": "MUST. Figure 2 and 3 callouts. Last prose paragraph before the Process Flow (HIPO and System Flowchart) heading; blocks 372 and 376 are bold labels, not sentences."
+ },
+ {
+  "id": "U3",
+  "block": 403,
+  "old": "For this study, the alpha level was set to 0.05",
+  "new": "In applying Cochran’s formula for continuous data (Figure 4) to this study, the alpha level was set to 0.05",
+  "note": "MUST. Figure 4 callout. The formula image directly follows the Determination of Sample Size heading, so the callout is the first sentence after it (the paragraph before the heading belongs to Study Site)."
+ },
+ {
+  "id": "U4",
+  "block": 403,
+  "old": "the acceptable margin of error in scale points is computed as:",
+  "new": "the acceptable margin of error in scale points is computed as shown in Figure 5:",
+  "note": "MUST. Figure 5 lead-in."
+ },
+ {
+  "id": "U5",
+  "block": 406,
+  "old": "Thus, the estimated standard deviation is:",
+  "new": "Thus, the estimated standard deviation is as shown in Figure 6:",
+  "note": "MUST. Figure 6 lead-in."
+ },
+ {
+  "id": "U6",
+  "block": 409,
+  "old": "Substituting these values into Cochran’s continuous-data formula yields:",
+  "new": "Substituting these values into Cochran’s continuous-data formula yields the result shown in Figure 7:",
+  "note": "MUST. Figure 7 lead-in."
+ },
+ {
+  "id": "U7",
+  "block": 414,
+  "old": "distributed equally as:",
+  "new": "distributed equally as shown in Figure 8:",
+  "note": "MUST. Figure 8 lead-in."
+ },
+ {
+  "id": "U8",
+  "block": 419,
+  "old": "the number of distributed questionnaires may be adjusted using:",
+  "new": "the number of distributed questionnaires may be adjusted using the formula in Figure 9:",
+  "note": "MUST. Figure 9 lead-in."
+ },
+ {
+  "id": "U9",
+  "block": 422,
+  "old": "the required number of distributed questionnaires is calculated as follows:",
+  "new": "the required number of distributed questionnaires is calculated as shown in Figure 10:",
+  "note": "MUST. Figure 10 lead-in."
+ },
+ {
+  "id": "U10",
+  "block": 259,
+  "old": "In this respect, local findings support evaluating SwinFusion++ as a public-facing decision-support tool rather than as an isolated technical model.",
+  "new": "In this respect, local findings support evaluating SwinFusion++ as a public-facing decision-support tool rather than as an isolated technical model. Local detection research is also emerging: Esperanza et al. (2025) combined a pre-trained convolutional network with an attention-based recurrent network, tuned by particle swarm optimization, for deepfake video detection, and Laureta et al. (2025) developed a web-based CNN–LSTM system that distinguishes AI-generated from real voices in English and Tagalog.",
+  "note": "MUST. Cites the two uncited references (one sentence, local-studies paragraph of Review of Related Studies). Content from the abstracts (Crossref) and the PDFs: both New Era University, ISU Linker JECT 2(1), June 30, 2025."
+ },
+ {
+  "id": "U11",
+  "block": 784,
+  "old": "Esperanza, J., Marquez, J. F., & Sy, R. A. (2025).",
+  "new": "Esperanza, J. C., Marquez, J. F. E., & Sy, R. A. A. (2025).",
+  "note": "MUST. Initials as printed in the article byline (Jeremias C. Esperanza, Jean Fidelio E. Marquez, Ron Anthony A. Sy). Title, journal, 2(1), 99–115 and DOI verified. Laureta entry (block 838) verified exactly against its byline; no change."
+ },
+ {
+  "id": "U12",
+  "block": 253,
+  "old": "(B. Chen et al., 2022; Saikia et al., 2022; Liang et al., 2023)",
+  "new": "(B. Chen et al., 2022; Kuang et al., 2022; Liang et al., 2023; Saikia et al., 2022)",
+  "note": "SHOULD. Restores Kuang et al. (2022), verified on Crossref (first author Liang Kuang; co-author Beijing Chen, also first author of B. Chen et al., 2022); its temporal branch is a Bi-LSTM on EfficientNet optical-flow features (abstract), tested on compressed FF++ and Celeb-DF, matching the package RQ3 fallback \"Kuang 2022\" (autonomous_decisions_v020.md D-15). Citation order made alphabetical (APA 8.12). Requires U13."
+ },
+ {
+  "id": "U13",
+  "block": 834,
+  "old": null,
+  "new": "Kuang, L., Wang, Y., Hang, T., Chen, B., & Zhao, G. (2022). A dual-branch neural network for DeepFake video detection by detecting spatial and temporal inconsistencies. Multimedia Tools and Applications, 81(29), 42591–42606. https://doi.org/10.1007/s11042-021-11539-y",
+  "insert_after_block": 834,
+  "note": "SHOULD, only with U12. INSERT a new reference paragraph after block 834 (Kohli & Gupta, 2021) and before Kumar et al. (2020), in the same paragraph style and with the same empty separator paragraph as its neighbors. Metadata from Crossref: Multimedia Tools and Applications 81(29), 42591–42606, 2022. \"DeepFake\" kept as in the published title, like the Khormali and Kohli entries."
+ },
+ {
+  "id": "U14",
+  "block": 253,
+  "old": "Saikia et al. (2022) The former",
+  "new": "Saikia et al. (2022). The former",
+  "note": "MUST. Missing full stop introduced by my round-1 edit F4 (the original period after \"et al.\" also ended the sentence)."
+ },
+ {
+  "id": "U15",
+  "block": 1163,
+  "old": "Turnitin Results - Similarity Report",
+  "new": "TURNITIN RESULTS – SIMILARITY REPORT",
+  "note": "MUST. Matches Appendix A–G title lines (caps, en dash). Paragraph is already bold and centered."
+ },
+ {
+  "id": "U16",
+  "block": 1166,
+  "old": "Turnitin Results - AI Report",
+  "new": "TURNITIN RESULTS – AI REPORT",
+  "note": "MUST. As U15."
+ }
+]

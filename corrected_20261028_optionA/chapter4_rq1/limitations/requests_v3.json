@@ -1,0 +1,171 @@
+{
+ "ids": [
+  "A1",
+  "A2",
+  "A3",
+  "A4a",
+  "A4b",
+  "A5",
+  "E3>N3",
+  "after E5",
+  "after E7",
+  "after E8",
+  "after E10"
+ ],
+ "requests": [
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "To ensure that comparisons are meaningful and attributable to model design (rather than inconsistent preprocessing), SwinFusion++ is benchmarked relative to established baselines (e.g., CNN-LSTM and recent fusion-oriented spatio-temporal approaches), and the comparisons are conducted under aligned preprocessing and matched evaluation logic as stated in the current methodology.",
+     "matchCase": true
+    },
+    "replaceText": "SwinFusion++ is also benchmarked relative to established baselines (e.g., CNN-LSTM and recent fusion-oriented spatio-temporal approaches) using their previously reported results. To ensure that comparisons are meaningful and attributable to model design (rather than inconsistent preprocessing), the controlled comparison is made against standalone Swin-B and Video Swin-B, which are trained and evaluated with the same preprocessing, training recipe, and evaluation logic as SwinFusion++.",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "practical heuristic evaluation principles as reflected in your document)",
+     "matchCase": true
+    },
+    "replaceText": "practical heuristic evaluation principles)",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "with a maximum file size of 250 MB and a maximum input quality of 1080p. Videos that exceed these limits must be trimmed, compressed, or downscaled before upload.",
+     "matchCase": true
+    },
+    "replaceText": "with a length of 10 seconds to 2 minutes, a resolution of 360p to 1080p, and a maximum file size of 250 MB; links are accepted only for public videos from TikTok, Facebook, X, or Reddit. Longer, larger, or higher-resolution videos must be trimmed, compressed, or downscaled before upload, and shorter or lower-resolution videos cannot be checked.",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "This component addressed RQ1, RQ2, RQ3, and RQ5",
+     "matchCase": true
+    },
+    "replaceText": "This component addressed RQ1, RQ2, RQ3, RQ4, and RQ6",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "This component addressed RQ4 and",
+     "matchCase": true
+    },
+    "replaceText": "This component addressed RQ5 and",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "To preserve fairness, all compared models are evaluated",
+     "matchCase": true
+    },
+    "replaceText": "To preserve fairness, all models trained in this study (SwinFusion++, Swin-B, and Video Swin-B) are evaluated",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "The model may also be less effective on short clips, low-frame-rate footage, or videos with limited subject motion, since these provide insufficient temporal information.",
+     "matchCase": true
+    },
+    "replaceText": "Video-level decision. In the benchmark evaluation, each video is judged from a fixed number of short face clips sampled at a reduced frame rate, and the clip scores are averaged into one video-level score. A manipulation that affects only a short part of a longer video, or an artifact that appears only between consecutive frames at the original frame rate, may therefore have a weaker effect on the final score, and short clips, low-frame-rate footage, or videos with little facial motion give the temporal stream less evidence.",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "or post-processing pipelines.",
+     "matchCase": true
+    },
+    "replaceText": "or post-processing pipelines.\nManipulation types. From FaceForensics++, only the DeepFakes subset is used; the other manipulation subsets, such as Face2Face, FaceSwap, and NeuralTextures, are not. All three benchmarks therefore contain face swaps only, and because they were released in 2019 and 2020, the results do not cover expression reenactment, lip-sync manipulation, fully synthetic faces, diffusion-based video generation, or face-swap tools released after 2020.\nPopulation coverage. The benchmark datasets were not collected to represent Filipino subjects or Philippine media, and performance is not measured separately by age, sex, or skin tone. Equal performance across demographic groups is therefore not established.\nShared footage. DeeperForensics-1.0 creates its manipulated videos by swapping new faces into FaceForensics++ videos, and its real class in this study consists of those FaceForensics++ originals, so transfer between these two datasets is not fully independent; subsets without shared footage are analyzed but are small (20 to 60 videos for these directions). Transfer from FaceForensics++ C23 to C40 tests the same videos under stronger compression rather than a new dataset. In addition, the face-preprocessing rules were developed on training videos, some of which share footage with held-out videos, and frames from some held-out videos were viewed, without labels or scores, during face-quality review.",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "by the system’s evidence extraction strategy.",
+     "matchCase": true
+    },
+    "replaceText": "by the system’s evidence extraction strategy.\nBenchmark ceiling and transfer. When trained and tested on the same benchmark, the three models compared in this study all score close to the maximum, so differences between them within a single benchmark are small and hard to detect. Every model, SwinFusion++ included, performs less well on datasets it was not trained on. Differences between the models are therefore more informative under cross-dataset transfer, and any transfer advantage is relative to the compared encoders; detection on unseen data remains an open problem.\nStatistical precision. The test sets contain 280 videos for each FaceForensics++ quality level, 978 for Celeb-DF v2, and 402 for DeeperForensics-1.0, with related videos kept in the same partition. All manipulated Celeb-DF v2 test videos come from nine identities, so its confidence intervals are approximate, and most of its test videos are manipulated, so its accuracy is read together with ROC-AUC. SwinFusion++, Swin-B, and Video Swin-B are each trained with three random seeds and evaluated as three-seed ensembles, which show whether results are stable across training runs but do not measure seed-to-seed variation precisely. Small differences between models may therefore go undetected.\nPublished comparisons. Established baselines, including the CNN-LSTM models, CAST, and TSFF-Net, are not retrained; their results are taken from published papers, which use their own data splits, preprocessing, and evaluation units, so these comparisons place SwinFusion++ in context rather than serving as controlled head-to-head tests.\nTraining recipe and tuning. In the principal comparison, SwinFusion++, Swin-B, and Video Swin-B are trained with one shared fixed recipe, so none receives tuning the others do not, although the shared recipe may not be the best setting for each model. Bayesian hyperparameter optimization is applied to SwinFusion++ only, so the optimized model is reported separately as a configured system and is not used to judge the architecture.\nModel size and cost. SwinFusion++ runs both backbones, so it has about 181 million parameters, against about 87 million for Swin-B and 88 million for Video Swin-B, and needs about twice the training memory of one backbone; the fusion module itself adds only about 6.5 million parameters. Inference latency on the deployment server is not benchmarked, and the model is not compressed (for example, by pruning, distillation, or quantization). Because two encoders are combined, part of an advantage over a single encoder may come from the combination rather than from the fusion module; Chapter 4 examines this under RQ4.\nDecision thresholds and confidence values. Each model’s decision threshold is chosen on the validation data of its training dataset and kept unchanged when the model is tested on other datasets. On a dataset with a different distribution, a fixed threshold can make a detector too cautious or too permissive, so threshold-based measures (accuracy, precision, recall, and F1-score) under transfer are read together with ROC-AUC, which does not depend on a single threshold. For the same reason, the platform’s verdict and confidence value are most reliable for videos similar to the training data.",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "for legal or evidentiary contexts.",
+     "matchCase": true
+    },
+    "replaceText": "for legal or evidentiary contexts.\nEvidence maps. The evidence maps shown by the platform highlight the facial regions that most influenced a result. They are not validated as faithful explanations of the model’s decision, and they do not identify which frames or regions were manipulated or which manipulation method was used.\nPlatform and benchmark results. The detection results in Chapter 4 come from the offline benchmark evaluation, which scores seven fixed clips per video. The platform instead analyzes the whole video for its verdict, so its outputs can differ from the benchmark results, and its own detection accuracy is not measured. The detector recommendations and the Auto option’s selection rules describe the typical content of each training dataset and are not evaluated. The user and expert evaluation assesses the platform’s quality in use, not its detection accuracy.",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  },
+  {
+   "replaceAllText": {
+    "containsText": {
+     "text": "falls outside the intended scope of the study.",
+     "matchCase": true
+    },
+    "replaceText": "falls outside the intended scope of the study.\nRespondent sample. End users were drawn from the University of the East community, aged 15 to 59, through quota and purposive sampling, and experts from organizations in Metro Manila through purposive sampling. Because these are non-probability samples, the results describe the participating respondents and cannot be generalized to all social-media users. The sample size was set with Cochran’s formula, which assumes random sampling; with quota and purposive sampling, it served as a planning target, and no sampling margin of error is claimed for the results.\nSelf-reported ratings. The ISO/IEC 25010-based questionnaires record how respondents perceived the platform during short, first-time, task-based sessions with researcher-provided or authorized test clips; during the evaluation period, the built-in sample clips were all deepfakes. Security is rated as perceived and is not verified through penetration testing or a formal security audit; uploads pass through third-party hosting and GPU services, and their automatic deletion is not independently audited. Performance-efficiency ratings reflect the server’s speed and availability between 12 and 30 October 2026, including start-up delays after idle periods.",
+    "tabsCriteria": {
+     "tabIds": [
+      "t.l5c18frq5wuo"
+     ]
+    }
+   }
+  }
+ ]
+}

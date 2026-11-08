@@ -1,0 +1,538 @@
+[
+ {
+  "id": "F1",
+  "block": 209,
+  "old": "(Thakre et al., 2025;",
+  "new": "(Thakre et al., 2026;",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F2",
+  "block": 228,
+  "old": "Kuang et al., 2022; ",
+  "new": "",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F3",
+  "block": 228,
+  "old": "family of Chen et al. and",
+  "new": "family of B. Chen et al. (2022) and",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F4",
+  "block": 228,
+  "old": "CNN–LSTM family of Saikia et al.",
+  "new": "CNN–LSTM family of Saikia et al. (2022)",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F5",
+  "block": 559,
+  "old": "(Nielsen, J., 2024)",
+  "new": "(Nielsen, 2024)",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F6",
+  "block": 148,
+  "old": "after one independent Optuna/TPE study for each condition.",
+  "new": "after one independent Bayesian optimization (BO) study for each condition, run in Optuna (Akiba et al., 2019) with its Tree-structured Parzen Estimator (TPE; Bergstra et al., 2011).",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F7",
+  "block": 455,
+  "old": "The automated policy will be identified by its standard name, RandAugment, and cited accordingly.",
+  "new": "The automated policy will be RandAugment (Cubuk et al., 2020).",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F8",
+  "block": 615,
+  "old": "Holm adjustment will be the default",
+  "new": "Holm adjustment (Holm, 1979) will be the default",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F9",
+  "block": 433,
+  "old": "A validation ROC-AUC of at least",
+  "new": "A validation area under the receiver operating characteristic curve (ROC-AUC) of at least",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10a",
+  "block": 205,
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10b",
+  "block": 207,
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10c",
+  "block": 219,
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10d",
+  "block": 519,
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10e",
+  "block": 520,
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10f",
+  "block": 206,
+  "old": "Wang et al., 2020",
+  "new": "R. Wang et al., 2020",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10g",
+  "block": 231,
+  "old": "Wang et al. (2020)",
+  "new": "R. Wang et al. (2020)",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10h",
+  "block": 207,
+  "old": "Chen et al., 2022",
+  "new": "B. Chen et al., 2022",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10i",
+  "block": 208,
+  "old": "Chen et al., 2022",
+  "new": "B. Chen et al., 2022",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10j",
+  "block": 228,
+  "old": "(Chen et al., 2022;",
+  "new": "(B. Chen et al., 2022;",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10k",
+  "block": 230,
+  "old": "Chen et al. (2022)",
+  "new": "B. Chen et al. (2022)",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10l",
+  "block": 515,
+  "old": "Chen et al., 2022",
+  "new": "B. Chen et al., 2022",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10m",
+  "block": 215,
+  "old": "Chen et al., 2021",
+  "new": "C.-F. R. Chen et al., 2021",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10n",
+  "block": 218,
+  "old": "Guo et al., 2017",
+  "new": "C. Guo et al., 2017",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10o",
+  "block": 231,
+  "old": "Guo et al. (2020)",
+  "new": "Z. Guo et al. (2020)",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10p",
+  "block": 209,
+  "old": "Zhao et al., 2023",
+  "new": "C. Zhao et al., 2023",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10q",
+  "block": 226,
+  "old": "Zhao et al., 2023",
+  "new": "C. Zhao et al., 2023",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10r",
+  "block": 209,
+  "old": "Zhang et al., 2024",
+  "new": "H. Zhang et al., 2024",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10s",
+  "block": 227,
+  "old": "Zhang et al., 2024",
+  "new": "H. Zhang et al., 2024",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10t",
+  "block": 220,
+  "old": "Zhang et al., 2016",
+  "new": "K. Zhang et al., 2016",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10u",
+  "block": 233,
+  "old": "Li and Lyu (2018)",
+  "new": "Y. Li and Lyu (2018)",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F10v",
+  "block": 233,
+  "old": "Li et al. (2018)",
+  "new": "Y. Li et al. (2018)",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11a",
+  "block": 146,
+  "old": "cross- attention",
+  "new": "cross-attention",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11b",
+  "block": 147,
+  "old": "corre- sponding",
+  "new": "corresponding",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11c",
+  "block": 148,
+  "old": "source- selected",
+  "new": "source-selected",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11d",
+  "block": 215,
+  "old": "cross- attention",
+  "new": "cross-attention",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11e",
+  "block": 225,
+  "old": "temporal- consistency",
+  "new": "temporal-consistency",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11f",
+  "block": 226,
+  "old": "zero- initialized",
+  "new": "zero-initialized",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11g",
+  "block": 228,
+  "old": "spatio- temporal-attention",
+  "new": "spatio-temporal-attention",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11h",
+  "block": 304,
+  "old": "temperature- scaled",
+  "new": "temperature-scaled",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11i",
+  "block": 323,
+  "old": "FaceNet- style",
+  "new": "FaceNet-style",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11j",
+  "block": 323,
+  "old": "clip- consistent",
+  "new": "clip-consistent",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11k",
+  "block": 367,
+  "old": "materi- alize",
+  "new": "materialize",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11l",
+  "block": 367,
+  "old": "non- attentive",
+  "new": "non-attentive",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F11m",
+  "block": 616,
+  "old": "Cross- compression",
+  "new": "Cross-compression",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F12a",
+  "block": 226,
+  "old": "Video-Swin-B hierarchy",
+  "new": "Video Swin-B hierarchy",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F12b",
+  "block": 237,
+  "old": "a Video-Swin-B stream",
+  "new": "a Video Swin-B stream",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "F12c",
+  "block": 291,
+  "old": "Video-Swin-B stages",
+  "new": "Video Swin-B stages",
+  "level": "MUST",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S1",
+  "block": 505,
+  "old": "Ties will be resolved by higher PR-AUC, lower validation BCE,",
+  "new": "Ties will be resolved by higher area under the precision–recall curve (PR-AUC), lower validation binary cross-entropy (BCE),",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S2",
+  "block": 614,
+  "old": "expected calibration error will be added",
+  "new": "expected calibration error (ECE) will be added",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S3",
+  "block": 191,
+  "old": "may cause MTCNN or identity association to fail",
+  "new": "may cause the multi-task cascaded convolutional network (MTCNN) face detector or identity association to fail",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S4a",
+  "block": 219,
+  "old": "Celeb-DF (v2),",
+  "new": "Celeb-DF v2,",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S4b",
+  "block": 263,
+  "old": "Celeb‑DF (v2)",
+  "new": "Celeb-DF v2",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S4c",
+  "block": 418,
+  "old": "Celeb-DF (v2)",
+  "new": "Celeb-DF v2",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S5",
+  "block": 204,
+  "old": "Review of Related Literatures",
+  "new": "Review of Related Literature",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S6",
+  "block": 394,
+  "old": "the number of distributed questionnaire may be adjusted",
+  "new": "the number of distributed questionnaires may be adjusted",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S7a",
+  "block": 404,
+  "old": "remain visible.  Before",
+  "new": "remain visible. Before",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S7b",
+  "block": 404,
+  "old": "not be permitted.  The same",
+  "new": "not be permitted. The same",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S7c",
+  "block": 404,
+  "old": "or training.  Training selection",
+  "new": "or training. Training selection",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "S7d",
+  "block": 487,
+  "old": "representation  so that",
+  "new": "representation so that",
+  "level": "SHOULD",
+  "group": "(i) Ch1-3"
+ },
+ {
+  "id": "G2",
+  "block": 1147,
+  "old": "(Tables J1 to J8)",
+  "new": "(Tables J1 to J8 and Figure J1)",
+  "level": "MUST",
+  "group": "(ii) Ch4/App J"
+ },
+ {
+  "id": "G3",
+  "block": 639,
+  "old": "another condition's",
+  "new": "another condition’s",
+  "level": "SHOULD",
+  "group": "(ii) Ch4/App J"
+ },
+ {
+  "id": "G5",
+  "block": 632,
+  "old": "the predeclared horizontal-flip variant is reported in Appendix J.",
+  "new": "the predeclared horizontal-flip variant is reported in Appendix J, Table J4.",
+  "level": "SHOULD",
+  "group": "(ii) Ch4/App J"
+ },
+ {
+  "id": "G6",
+  "block": 633,
+  "old": "are described in Chapter 3 under Amendments after Test Scoring.",
+  "new": "are described in Chapter 3 under Amendments after Test Scoring, and the original and corrected tests are compared in Appendix J, Table J5.",
+  "level": "SHOULD",
+  "group": "(ii) Ch4/App J"
+ },
+ {
+  "id": "G7",
+  "block": 652,
+  "old": "All three models therefore operated near the ceiling of the metric on every test set.",
+  "new": "All three models therefore operated near the ceiling of the metric on every test set (ROC curves in Appendix J, Figure J1).",
+  "level": "SHOULD",
+  "group": "(ii) Ch4/App J"
+ },
+ {
+  "id": "G8",
+  "block": 1146,
+  "old": "Supplementary Results for Research Questions 1 and 2",
+  "new": "SUPPLEMENTARY RESULTS FOR RESEARCH QUESTIONS 1 AND 2",
+  "level": "SHOULD",
+  "group": "(ii) Ch4/App J"
+ },
+ {
+  "id": "P5",
+  "block": 682,
+  "old": "For an unseen dataset, the frozen screening label is therefore much less informative than the ranking results suggest, for all three models.",
+  "new": "For all three models, the frozen screening label on an unseen dataset is therefore much less informative than the ranking results suggest.",
+  "level": "SHOULD",
+  "group": "(ii) Ch4/App J"
+ },
+ {
+  "id": "P12",
+  "block": 720,
+  "old": "they place SwinFusion++ among the listed methods on FaceForensics++ but cannot rank it against them.",
+  "new": "they place SwinFusion++ in the same high range as the listed methods on FaceForensics++ and DeeperForensics-1.0, without ranking it against them.",
+  "level": "SHOULD",
+  "group": "(ii) Ch4/App J"
+ }
+]

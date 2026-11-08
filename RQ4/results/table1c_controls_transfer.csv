@@ -1,0 +1,7 @@
+training,test,comparison,delta_auc,ci_low,ci_high,permutation_p,holm_p,videos
+FF++ C23 (HQ),Celeb-DF v2,swinfusionpp__fixed_no_bo vs topology_control__fixed_no_bo,0.004621941039497313,-0.007240290427908497,0.015920999919466192,0.46910617876424715,1.0,978
+FF++ C23 (HQ),DeeperForensics-1.0,swinfusionpp__fixed_no_bo vs topology_control__fixed_no_bo,-0.021942526175094623,-0.03799441845498864,-0.00638598054503603,0.014797040591881624,0.07398520295940812,402
+FF++ C23 (HQ),FF++ C40 (LQ),swinfusionpp__fixed_no_bo vs topology_control__fixed_no_bo,-0.0020153061224489344,-0.006173469387755093,0.0015816326530613267,0.266746650669866,1.0,280
+FF++ C23 (HQ),Celeb-DF v2,swinfusionpp__fixed_no_bo vs capacity_control__fixed_no_bo,-0.00029875664513878686,-0.011335038340766972,0.01312831904176994,0.9804039192161568,1.0,978
+FF++ C23 (HQ),DeeperForensics-1.0,swinfusionpp__fixed_no_bo vs capacity_control__fixed_no_bo,0.04155837726788947,0.02266033018984681,0.06124941214326385,0.0005998800239952009,0.0035992801439712055,402
+FF++ C23 (HQ),FF++ C40 (LQ),swinfusionpp__fixed_no_bo vs capacity_control__fixed_no_bo,-0.00033163265306124234,-0.004694515306122504,0.0036230867346939938,0.8868226354729054,1.0,280

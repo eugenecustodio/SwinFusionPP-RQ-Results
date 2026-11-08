@@ -1,0 +1,133 @@
+{
+ "T4": [
+  "Model",
+  "ROC-AUC [95% CI]",
+  "PR-AUC",
+  "Acc (%)",
+  "Prec (%)",
+  "Rec (%)",
+  "Spec (%)",
+  "F1",
+  "FP",
+  "FN",
+  "Seed AUC mean \u00b1 SD"
+ ],
+ "T5": [
+  "Test set",
+  "Comparator",
+  "\u0394AUC",
+  "95% CI",
+  "Raw p",
+  "Holm p"
+ ],
+ "T6": [
+  "Direction",
+  "Comparator",
+  "SwinFusion++ AUC",
+  "Comparator AUC",
+  "\u0394AUC",
+  "95% CI",
+  "Raw p",
+  "Holm p"
+ ],
+ "T7": [
+  "Model",
+  "PR-AUC",
+  "Acc (%)",
+  "Prec (%)",
+  "Rec (%)",
+  "Spec (%)",
+  "F1",
+  "TP",
+  "FP"
+ ],
+ "T8": [
+  "Condition",
+  "Comparator",
+  "SwinFusion++ (BO) AUC",
+  "Comparator AUC",
+  "\u0394AUC",
+  "95% CI",
+  "Raw p",
+  "Holm p"
+ ],
+ "T9": [
+  "Condition",
+  "BO AUC",
+  "Fixed AUC",
+  "\u0394AUC",
+  "95% CI",
+  "Raw p",
+  "Holm p"
+ ],
+ "J1": [
+  "Training \u2192 test",
+  "Model",
+  "Seed 1",
+  "Seed 2",
+  "Seed 3",
+  "Mean \u00b1 SD",
+  "Ensemble"
+ ],
+ "J2": [
+  "Condition",
+  "Comparator",
+  "\u0394Acc [95% CI]",
+  "\u0394Prec [95% CI]",
+  "\u0394Rec [95% CI]",
+  "\u0394F1 [95% CI]"
+ ],
+ "J3": [
+  "Direction (n)",
+  "Model",
+  "Seed 1",
+  "Seed 2",
+  "Seed 3",
+  "Mean"
+ ],
+ "J4": [
+  "Condition",
+  "SwinFusion++ plain",
+  "SwinFusion++ TTA",
+  "Swin-B plain",
+  "Swin-B TTA",
+  "Video Swin-B plain",
+  "Video Swin-B TTA",
+  "SwinFusion++ (BO) plain",
+  "SwinFusion++ (BO) TTA"
+ ],
+ "J5": [
+  "Family",
+  "Comparison",
+  "\u0394AUC",
+  "Raw-logit p",
+  "Holm (original)",
+  "Rank p",
+  "Holm (rank)",
+  "Decision changed?"
+ ],
+ "J6": [
+  "Test set",
+  "Comparator",
+  "SE(\u0394AUC)",
+  "MDD (\u03b1 = 0.05)",
+  "MDD (\u03b1 = 0.05/8)",
+  "Headroom"
+ ],
+ "J7": [
+  "Comparison",
+  "Holm p (final, m = 18)",
+  "Holm p (pre-scoring, m = 27)",
+  "Holm p (pooled, m = 26)",
+  "Seed sign agreement",
+  "Holm p (DFo global clusters)",
+  "CDF leave-one-identity-out \u0394AUC"
+ ],
+ "J8": [
+  "Direction",
+  "SwinFusion++",
+  "Swin-B",
+  "Video Swin-B",
+  "SwinFusion++ (BO)"
+ ]
+}

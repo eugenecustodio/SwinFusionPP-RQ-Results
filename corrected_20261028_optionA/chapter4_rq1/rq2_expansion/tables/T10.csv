@@ -1,0 +1,17 @@
+Model,FF++ C23,FF++ C40,Celeb-DF v2,DeeperForensics-1.0
+__SPAN__,"This study: three-seed ensembles, thresholds frozen on source validation",,,
+SwinFusion++ (BO-selected),Acc 98.21; AUC 0.9964,Acc 96.07; AUC 0.9941,Acc 98.36; AUC 0.9983,Acc 98.51; AUC 0.9954
+SwinFusion++ (fixed recipe),Acc 97.86; AUC 0.9942,Acc 94.64; AUC 0.9878,Acc 97.75; AUC 0.9951,Acc 98.76; AUC 0.9974
+__SPAN__,"Previously reported, Tier A (each paper’s own split, frame sampling, and operating point)",,,
+Xception,Acc 98.93–100.00ᵃᵇ,Acc 96.78–97.14ᵃᵇ,Acc 99.44ᵇ,Acc 100.00ᶜ
+D-FWA,—,—,Acc 98.58ᵇ,—
+CNN–LSTM,Acc 99.64ᵇ,Acc 96.43ᵇ,Acc 95.73ᵇ,—
+ResNet+LSTM,—,—,—,Acc 100.00ᶜ
+C3D,Acc 92.86ᵃ,Acc 89.29ᵃ,—,Acc 98.50ᶜ
+I3D,Acc 92.86ᵇ,Acc 91.07ᵇ,Acc 99.23ᵇ,Acc 100.00ᶜ
+TSN,—,—,—,Acc 99.25ᶜ
+TEI,Acc 97.86ᵃ,Acc 95.00ᵃ,Acc 99.12ᵃ,—
+S-MIL-T,Acc 99.64ᵇ,Acc 97.14ᵇ,Acc 98.84ᵇ,—
+ADDNet-3D,Acc 92.14ᵃ,Acc 90.36ᵃ,Acc 95.16ᵃ,—
+STIL,Acc 99.64ᵃ,Acc 98.21; AUC 0.9712ᵃ,Acc 99.78ᵃ,—
+SFormer,Acc 98.50–99.90ᵈ,Acc 94.82–98.15ᵈ,Acc 95.04–99.10ᵈ,Acc 99.67–100.00ᵈ

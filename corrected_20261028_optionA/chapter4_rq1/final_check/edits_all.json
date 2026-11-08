@@ -1,0 +1,1321 @@
+[
+ {
+  "id": "C1",
+  "op": "replace",
+  "src": "M-1 (neutral to D-1)",
+  "old": "The study will also use topology and capacity-matched controls, two CNN–LSTM comparators on FaceForensics++ C23/C40, a verified established-baseline core, component ablations,",
+  "new": "The study will also use topology and capacity-matched controls, previously reported results for CNN–LSTM comparators on FaceForensics++ C23/C40 and for established baselines, component ablations,",
+  "why": "No external model was retrained in this study (A-10)."
+ },
+ {
+  "id": "C2",
+  "op": "replace",
+  "src": "M-2",
+  "old": "provisionally the unperturbed manipulated subset when the observed distribution supports that label; perturbation variants will otherwise remain separately identified robustness strata.",
+  "new": "and perturbation variants will remain separately identified and will not be used in the reported evaluations.",
+  "why": "Perturbation strata were never scored."
+ },
+ {
+  "id": "C3",
+  "op": "replace",
+  "src": "M-3",
+  "old": "Exact file identifiers, counts, lineage keys, and exclusions will be reported only after the filesystem and manifest audit.",
+  "new": "Exact file identifiers, lineage keys, and exclusions are fixed in versioned manifests; test-set counts, lineage overlap, and coverage are reported in Chapter 4.",
+  "why": "Matches Chapter 4 Table 1."
+ },
+ {
+  "id": "C4",
+  "op": "replace",
+  "src": "S-A4 = M-4",
+  "old": "The DeeperForensics- 1.0 fake class",
+  "new": "The DeeperForensics-1.0 fake class",
+  "why": "Typo (S-2)."
+ },
+ {
+  "id": "C5",
+  "op": "replace",
+  "src": "S-A4 = M-4",
+  "old": "Before the full BO campaigns, a resource pilot will determine whether the predeclared total trial count is 12, 16, or 20 per study; the choice will be based on measured compute and storage rather than test performance.",
+  "new": "The total trial count will be 12 per study for C23/HQ and C40/LQ and 8 for Celeb-DF v2 and DeeperForensics-1.0, set from measured compute time and the project schedule before any test scoring rather than from test performance.",
+  "why": "Actual BO budgets 12/12/8/8 (bo_summary; A-12)."
+ },
+ {
+  "id": "C6",
+  "op": "replace",
+  "src": "S-1",
+  "old": "RQ1 will first compare Swin-B, Video Swin-B, and SwinFusion++ under the same fixed non-BO recipe on every within-dataset condition.",
+  "new": "RQ1 will first compare Swin-B, Video Swin-B, and SwinFusion++ under the same fixed non-BO recipe on every within-dataset condition and under frozen transfer.",
+  "why": "RQ1 covers cross-dataset evaluation (block 163; Chapter 4)."
+ },
+ {
+  "id": "C7",
+  "op": "replace",
+  "src": "M-5",
+  "old": "The contribution of TLBG-HCA will be examined through both a topology non-attentive control and a capacity-matched no-exchange control, together with one-directional, no-gate, no-agreement/disagreement, Stages-3–4-only, gamma-policy, and augmentation- policy ablations.",
+  "new": "Under RQ4, the contribution of TLBG-HCA will be examined through both a topology non-attentive control and a capacity-matched no-exchange control trained on C23/HQ, together with single-seed one-directional, no-gate, no-agreement/disagreement, and Stages-3–4-only ablations of the BO-selected C23/HQ configuration.",
+  "why": "Gamma/augmentation ablations not run; controls C23-only; Tier B single-seed (A-11, A-12, A-14, A-18)."
+ },
+ {
+  "id": "C8",
+  "op": "replace",
+  "src": "D-1 neutral wording (lead) + RQ2 expansion",
+  "old": "RQ2 will compare BO-selected SwinFusion++ with a verified established-baseline core that targets Xception, I3D, STIL, FTCN with its Temporal Transformer component, TALL-Swin, and SFormer where implementation and license audits pass. RQ3 will include two reproducible CNN–LSTM models on C23 and C40.",
+  "new": "RQ2 will compare BO-selected SwinFusion++, with the fixed-recipe result alongside, with previously reported results for established frame-level, recurrent, 3D-convolutional, and spatio-temporal detectors, including Xception, I3D, STIL, FTCN with its Temporal Transformer component, TALL-Swin, and SFormer. RQ3 will compare SwinFusion++ on C23 and C40 with previously reported CNN–LSTM results.",
+  "why": "No baseline retrained in this study; wording true whether or not the preliminary study is cited (D-1)."
+ },
+ {
+  "id": "C9",
+  "op": "replace",
+  "src": "M-6",
+  "old": "RQ4 will address CAST and TSFF-Net per dataset without mischaracterizing their inputs.",
+  "new": "RQ4 will also place CAST and TSFF-Net in context through their previously reported results, without mischaracterizing their inputs.",
+  "why": "CAST/TSFF-Net not run (A-10)."
+ },
+ {
+  "id": "C10",
+  "op": "replace",
+  "src": "M-7",
+  "old": "RQ6 will synthesize these within-dataset results with directional frozen transfer and the two SFormer replication tracks.",
+  "new": "RQ6 will synthesize these within-dataset results with directional frozen transfer and previously reported spatio-temporal results.",
+  "why": "SFormer replication tracks superseded (A-10)."
+ },
+ {
+  "id": "C11",
+  "op": "replace",
+  "src": "M-8 (≈ S-B2) + both R3 (final period)",
+  "old": "Four Base-sized within-dataset campaigns, four Bayesian- optimization studies, multiple controls, external baselines, and transfer tests require substantial accelerator time and storage. The final BO trial count is therefore selected only after a cost pilot and may limit lower-priority ablations or optional external reproductions",
+  "new": "Four Base-sized within-dataset campaigns, four Bayesian-optimization studies, multiple controls, and transfer tests require substantial accelerator time and storage. The available accelerator time therefore limits the BO trial count (12 trials for C23/HQ and C40/LQ; 8 for Celeb-DF v2 and DeeperForensics-1.0) and restricts the matched controls and component ablations to C23/HQ training.",
+  "why": "Actual limits (A-12)."
+ },
+ {
+  "id": "C12",
+  "op": "replace",
+  "src": "M-9",
+  "old": "Lineage matching, common decoding/cropping, metadata-only shortcut tests, and stratified reporting reduce",
+  "new": "Lineage matching, common decoding/cropping, and metadata-only shortcut tests reduce",
+  "why": "D-43 stratified reporting not produced."
+ },
+ {
+  "id": "C13",
+  "op": "replace",
+  "src": "M-10 (neutral to D-1)",
+  "old": "External-baseline reproducibility. Some published methods may lack official code, weights, complete preprocessing details, compatible licenses, or the inputs needed by the common protocol. Such models will be labeled literature-only, not reported, or blocked rather than silently approximated.",
+  "new": "External baselines. The study trains only Swin-B, Video Swin-B, SwinFusion++, and the SwinFusion++ controls and ablations. Results for external methods are taken from previously reported work, keep their original datasets, protocols, and evaluation units, and are not entered into paired tests.",
+  "why": "No external model trained (A-10; block 616)."
+ },
+ {
+  "id": "C14",
+  "op": "replace",
+  "src": "S-B7",
+  "old": "Consequential use requires provenance checks, contextual verification, or specialist forensic examination.",
+  "new": "The validation-calibrated estimated probability is fitted on source-validation videos, so its calibration is not guaranteed for videos from unfamiliar sources. Consequential use requires provenance checks, contextual verification, or specialist forensic examination.",
+  "why": "Transfer calibration is poor (median ECE 0.446; CALIBRATION.md)."
+ },
+ {
+  "id": "C15",
+  "op": "replace",
+  "src": "S-3",
+  "old": "developed as both a robust detection model and a deployable platform",
+  "new": "developed as both a detection model evaluated under cross-dataset shift and a deployable platform",
+  "why": "\"Robust\" overclaims (Chapter 4)."
+ },
+ {
+  "id": "C16",
+  "op": "replace",
+  "src": "M-11",
+  "old": "(label + confidence + metadata)",
+  "new": "(screening label, model score or calibrated estimated probability, and metadata)",
+  "why": "Term rule (block 316)."
+ },
+ {
+  "id": "C17",
+  "op": "delete_paragraph",
+  "src": "M-12",
+  "match": "Within this architectural direction, cross-attention is meaningful only when the participating representations are indexed compatible.",
+  "why": "Verbatim duplicate of block 214."
+ },
+ {
+  "id": "C18",
+  "op": "delete_paragraph",
+  "src": "M-13",
+  "match": "Temporal alignment alone does not determine how the streams should exchange evidence. Global cross-attention at early high-resolution stages would create large attention matrices and would permit unrelated facial regions to interact directly. Local matched-window attention offers a more controlled alternative: approximately co-located spatial and temporal regions interact first, while the shifted-window backbones provide broader contextual propagation across layers. Bidirectional cross-attention further allows appearance evidence to retrieve motion evidence and motion evidence to retrieve appearance evidence, which is relevant when either stream may contain the stronger manipulation cue. CrossVIT",
+  "why": "Duplicate of block 215."
+ },
+ {
+  "id": "C19",
+  "op": "delete_paragraph",
+  "src": "M-14",
+  "match": "A newly initialized fusion block can also disturb pretrained representations",
+  "why": "Earlier draft of block 216."
+ },
+ {
+  "id": "C20",
+  "op": "delete_paragraph",
+  "src": "M-15",
+  "match": "These architectural choices must be evaluated through controls that isolate the proposed mechanism.",
+  "why": "Earlier draft of block 218."
+ },
+ {
+  "id": "C21",
+  "op": "replace",
+  "src": "S-4",
+  "old": "EfficientNet-BiLSTM with optical flow and facial-geometry CNN–LSTM remain predeclared fallbacks when a preferred model cannot be reproduced. ",
+  "new": "",
+  "why": "No recurrent model reproduced in this study."
+ },
+ {
+  "id": "C22",
+  "op": "replace",
+  "src": "M-16",
+  "old": "outputs a Real or Fake label with confidence must communicate uncertainty",
+  "new": "outputs a Real or Fake label with a model score or calibrated estimated probability must communicate uncertainty",
+  "why": "Term rule."
+ },
+ {
+  "id": "C23",
+  "op": "replace",
+  "src": "M-17 + V-3",
+  "old": "Python with deep-learning frameworks such as PyTorch/TensorFlow and supporting libraries",
+  "new": "Python with PyTorch and supporting libraries",
+  "why": "Model code is PyTorch."
+ },
+ {
+  "id": "C24",
+  "op": "replace",
+  "src": "M-17",
+  "old": "(MTCNN for face detection/alignment, FaceNet for face verification, and gamma correction for illumination normalization).",
+  "new": "(MTCNN for face detection/alignment and FaceNet for face verification).",
+  "why": "Gamma disabled (D-08)."
+ },
+ {
+  "id": "C25",
+  "op": "replace",
+  "src": "M-18",
+  "old": "where facial evidence is standardized via alignment, dark-frame correction, identity verification, and data augmentation using RandomAugment—operationalized as controlled randomized transformations (e.g., shift/rotate/noise) applied in a manner that preserves clip integrity—together with class-imbalance handling through undersampling;",
+  "new": "where facial evidence is standardized via alignment and identity verification, with training-only RandAugment augmentation—operationalized as controlled randomized transformations applied in a manner that preserves clip integrity—and class-balanced training sampling (class → source or identity group → video → clip);",
+  "why": "No gamma; RandAugment; sampler class_group_video_clip."
+ },
+ {
+  "id": "C26",
+  "op": "replace",
+  "src": "M-19",
+  "old": "benchmarking against established models, and conducting robustness checks under stressors such as compression, perturbation, resolution, and preprocessing conditions—thereby ensuring that conclusions about effectiveness are grounded not only in in-dataset accuracy but also in demonstrated robustness under distribution shift.",
+  "new": "comparing against previously reported results of established models, and examining performance under compression (FaceForensics++ C23/HQ versus C40/LQ) and cross-dataset shift—so that conclusions about effectiveness rest not only on in-dataset accuracy but also on performance under distribution shift.",
+  "why": "No stressor analyses; \"demonstrated robustness\" overclaims."
+ },
+ {
+  "id": "C27",
+  "op": "replace",
+  "src": "M-20",
+  "old": "Any low-light transformation is decided at the clip level and is evaluated as an ablation.",
+  "new": "The final pipeline applies no low-light transformation.",
+  "why": "Gamma disabled; ablation not run."
+ },
+ {
+  "id": "C28",
+  "op": "replace",
+  "src": "M-21",
+  "old": "are documented in the appendix",
+  "new": "are recorded in the versioned dataset manifest",
+  "why": "No such appendix."
+ },
+ {
+  "id": "C29",
+  "op": "replace",
+  "src": "S-B3",
+  "old": "At least 5,000 cluster-bootstrap replicates were used to construct the principal 95% confidence intervals and paired statistical comparisons.",
+  "new": "At least 5,000 cluster-bootstrap replicates were used to construct the principal 95% confidence intervals, including those for paired differences, and paired differences were tested with a cluster-level permutation test.",
+  "why": "Decisions come from the permutation test."
+ },
+ {
+  "id": "C30",
+  "op": "replace",
+  "src": "M-22 (≈ S-B1)",
+  "old": "A capped resource pilot will estimate the cost of the four independent Optuna/TPE studies; the final per-study trial count will be fixed before full BO.",
+  "new": "The per-study trial counts of the four independent Optuna/TPE studies will be set from measured compute time and the project schedule before any test scoring (12 trials for C23/HQ and C40/LQ; 8 for Celeb-DF v2 and DeeperForensics-1.0).",
+  "why": "Counts cut on 2026-09-30 during BO (A-12)."
+ },
+ {
+  "id": "C31",
+  "op": "replace",
+  "src": "M-23 (neutral to D-1) + RQ2 expansion",
+  "old": "The external-baseline stage will verify and, where feasible, reproduce Xception, I3D, STIL, FTCN with Temporal Transformer, TALL-Swin, SFormer, two CNN–LSTM models, and the conditionally reproducible CAST and TSFF-Net comparisons.",
+  "new": "External baselines (Xception, I3D, STIL, FTCN with Temporal Transformer, TALL-Swin, SFormer, CNN–LSTM models, CAST, TSFF-Net, and the other previously reported detectors listed in Chapter 4) will not be retrained in this study; their previously reported results will be recorded with their datasets, protocols, and evaluation units.",
+  "why": "No external model reproduced (A-10)."
+ },
+ {
+  "id": "C32",
+  "op": "replace",
+  "src": "M-24 (= S-B10)",
+  "old": "calibration, efficiency, failure, shortcut, and robustness analyses",
+  "new": "calibration, efficiency, failure, and shortcut analyses",
+  "why": "No perturbation-robustness analysis."
+ },
+ {
+  "id": "C33",
+  "op": "replace",
+  "src": "M-25",
+  "old": "applies gamma correction to dark frames when needed, ",
+  "new": "",
+  "why": "Gamma disabled."
+ },
+ {
+  "id": "C34",
+  "op": "replace",
+  "src": "M-26",
+  "old": "The output layer will translate the computed prediction into user-readable results. The system will present a classification result, a confidence or probability score, and contextual video metadata such as filename, resolution, frame rate, duration, file size, and format. These outputs are designed as decision-support information rather than standalone forensic proof. ",
+  "new": "",
+  "why": "Duplicates block 335; banned term."
+ },
+ {
+  "id": "C35",
+  "op": "replace",
+  "src": "M-27",
+  "old": "The fixed-recipe RQ1 runs will precede the BO cost pilot and four independent Optuna/TPE studies.",
+  "new": "The fixed-recipe RQ1 runs and the four independent Optuna/TPE studies will form separate campaigns.",
+  "why": "Order was the reverse (A-01, A-06)."
+ },
+ {
+  "id": "C36",
+  "op": "replace",
+  "src": "M-28 (neutral to D-1)",
+  "old": "External models will be audited and reproduced only when their defining inputs and mechanisms can be preserved.",
+  "new": "External models will not be retrained; their previously reported results will be reported separately with their original protocols.",
+  "why": "No external model reproduced."
+ },
+ {
+  "id": "C37",
+  "op": "replace",
+  "src": "M-29 (= S-B10)",
+  "old": "computational cost, calibration, failures, and robustness separately.",
+  "new": "computational cost, calibration, and failures separately.",
+  "why": "No perturbation-robustness analysis."
+ },
+ {
+  "id": "C38",
+  "op": "replace",
+  "src": "S-C3 / M-30",
+  "old": "The final report will state the target counts, realized counts, realized percentages, class prevalence, and any unavoidable deviation caused by indivisible groups.",
+  "new": "The final report will state the test-set counts and class prevalence for every condition.",
+  "why": "Only test counts are reported (Table 1); see D-6."
+ },
+ {
+  "id": "C39",
+  "op": "replace",
+  "src": "V-2 + methodologist R2",
+  "old": "with counts shown by class and dataset.",
+  "new": "with test-set and source-validation counts shown by dataset in Chapter 4.",
+  "why": "Training-partition failures not available."
+ },
+ {
+  "id": "C40",
+  "op": "replace",
+  "src": "M-31",
+  "old": "Swin-B, Video Swin-B, SFormer, and other models will apply their own verified checkpoint-specific normalization at load time.",
+  "new": "Swin-B and Video Swin-B will apply their own verified checkpoint-specific normalization at load time.",
+  "why": "External models not run."
+ },
+ {
+  "id": "C41",
+  "op": "replace",
+  "src": "V-1",
+  "old": "are computed and compared with Euclidean distance to enforce",
+  "new": "are computed and compared to enforce",
+  "why": "Metric unverified (Euclidean vs cosine)."
+ },
+ {
+  "id": "C42",
+  "op": "replace",
+  "src": "M-32",
+  "old": "Clip-consistent photometric handling. Low-light normalization will not be decided independently frame by frame. When retained, the trigger will be computed once for the clip and the same transformation will be applied to all frames. For Iin ∈ [0, 1] and γ = 2, the brightening convention is:",
+  "new": "Photometric handling. The final pipeline applies no low-light or gamma correction, for any model or dataset.",
+  "why": "Gamma disabled."
+ },
+ {
+  "id": "C43",
+  "op": "delete_paragraph",
+  "src": "M-33",
+  "match": "Iₒᵤₜ = Iᵢₙ¹⁄ᵞ = √Iᵢₙ",
+  "why": "Gamma formula no longer applies."
+ },
+ {
+  "id": "C44",
+  "op": "delete_paragraph",
+  "src": "M-34",
+  "match": "The trigger is selected from development data only and the entire gamma policy is tested as a preprocessing ablation.",
+  "why": "Gamma ablation not run."
+ },
+ {
+  "id": "C45",
+  "op": "replace",
+  "src": "S-5 (≈ S-B11)",
+  "old": "This stratification supports standardized reporting and provides an interpretable basis for communicating expected performance behaviors under varying input quality conditions (also reflected in system design and user guidance).",
+  "new": "This stratification is used in the platform’s input guidance and messages; model results are not reported by resolution stratum.",
+  "why": "No resolution-stratified results."
+ },
+ {
+  "id": "C46",
+  "op": "replace",
+  "src": "M-35",
+  "old": "The final implementation will report the operation set, number of operations, magnitude, probability behavior, and random seed. Because aggressive transformations can erase authentic forensic evidence or synthesize label-correlated artifacts, the retained policy will be checked through a preprocessing ablation and applied identically to authentic and manipulated training clips.",
+  "new": "Because aggressive transformations can erase authentic forensic evidence or synthesize label-correlated artifacts, the same policy will be applied identically to authentic and manipulated training clips.",
+  "why": "Parameters not reported; ablation not run."
+ },
+ {
+  "id": "C47",
+  "op": "replace",
+  "src": "S-6",
+  "old": "Keval and the uniformly spaced anchor rule will be selected from training/validation valid-track distributions only; test and target duration or track structure will not influence that choice.",
+  "new": "Keval and the uniformly spaced anchor rule will be selected from training/validation valid-track distributions only; test and target duration or track structure will not influence that choice. The final configuration uses 2 frames per second and Keval = 7 evaluation clips per video.",
+  "why": "Matches Chapter 4 (evaluation_protocol_v020.json)."
+ },
+ {
+  "id": "C48",
+  "op": "replace",
+  "src": "S-7",
+  "old": "When an external baseline requires a different native frame count or normalization, it will construct its model-native view from the same anchor region and disclose the adaptation rather than changing the evaluation videos. ",
+  "new": "",
+  "why": "No external baseline run."
+ },
+ {
+  "id": "C49",
+  "op": "replace",
+  "src": "A6 (S) = M",
+  "old": "BF16 mixed precision on a supported H100 or A100, with the exact scaler behavior recorded;",
+  "new": "BF16 mixed precision on an NVIDIA RTX 5090, with the exact scaler behavior recorded;",
+  "why": "Actual hardware (A-08)."
+ },
+ {
+  "id": "C50",
+  "op": "replace",
+  "src": "A3 (S)",
+  "old": "A resource pilot will select the final total from 12, 16, or 20 trials per study using measured GPU-hour and storage limits, never test performance.",
+  "new": "The total will be 12 trials per study for C23/HQ and C40/LQ and 8 for Celeb-DF v2 and DeeperForensics-1.0, including pruned trials, set from measured compute time and the project schedule before any test scoring, never from test performance.",
+  "why": "bo_summary; A-12; A-16."
+ },
+ {
+  "id": "C51",
+  "op": "replace",
+  "src": "S-8",
+  "old": "The full SFormer-aligned comparator inventory retained in this study therefore includes",
+  "new": "The full SFormer-aligned comparator inventory reviewed for this study includes",
+  "why": "Only a subset has reported results."
+ },
+ {
+  "id": "C52",
+  "op": "replace",
+  "src": "S-9 + RQ2 expansion",
+  "old": "they are grouped according to the kind of evidence they emphasize and the kind of comparison they make possible.",
+  "new": "they are grouped according to the kind of evidence they emphasize and the kind of comparison they make possible. Previously reported results will be given for the subset with values on the datasets of this study: frame-level detectors (Xception, MesoNet, Face X-ray, F3-Net, FDFL, Multi-attention, RECCE, Add-Net, and the face-warping-artifact detectors D-FWA and DSP-FWA); recurrent models (CNN–LSTM models, ResNet+LSTM, CNN–GRU, and Two-branch); 3D-convolutional and video-recognition models (C3D, I3D, TSN, TEI, and ADDNet-3D); spatio-temporal detectors (S-MIL, STIL, FTCN, and LipForensics); and transformer-based and fusion models (ViViT, VTN, VidTr, DFDT, ADT, M2TR, ISTVT, TALL-Swin, SFormer, CAST, and TSFF-Net).",
+  "why": "Which comparators appear."
+ },
+ {
+  "id": "C53",
+  "op": "replace",
+  "src": "S-10",
+  "old": "produces a measurable advantage.",
+  "new": "produces an advantage; because SFormer is not retrained in this study, this comparison uses its previously reported results and is descriptive.",
+  "why": "No paired test vs SFormer possible."
+ },
+ {
+  "id": "C54",
+  "op": "replace",
+  "src": "M-36",
+  "old": "To preserve fairness, all compared models are evaluated under aligned preprocessing and matched decision logic as far as implementation allows. Face detection and alignment, cropping, resizing, low-light correction, identity-consistency verification,",
+  "new": "To preserve fairness, all models trained in this study (Swin-B, Video Swin-B, SwinFusion++, and the SwinFusion++ controls) are evaluated under the same preprocessing and decision logic. Face detection and alignment, cropping, resizing, identity-consistency verification,",
+  "why": "Only internal models share the pipeline; no low-light correction."
+ },
+ {
+  "id": "C55",
+  "op": "replace",
+  "src": "A1 (S)",
+  "old": "The second is cross-dataset transfer evaluation, in which a model trained on one dataset is tested on the remaining datasets to assess robustness under distribution shift.",
+  "new": "The second is cross-dataset transfer evaluation, in which a model trained on FaceForensics++ C23, Celeb-DF v2, or DeeperForensics-1.0 is tested on each of the remaining datasets to assess robustness under distribution shift.",
+  "why": "C40 never a source (9 directions)."
+ },
+ {
+  "id": "C56",
+  "op": "replace",
+  "src": "M-37",
+  "old": "(face detection/alignment, resizing, and low-light correction as needed)",
+  "new": "(face detection/alignment, identity-consistency checking, and resizing)",
+  "why": "App applies no low-light correction."
+ },
+ {
+  "id": "C57",
+  "op": "replace",
+  "src": "M-38",
+  "old": "Confidence Score, and",
+  "new": "Model score or validation-calibrated estimated probability, with its calibration status identified, and",
+  "why": "Term rule (block 316)."
+ },
+ {
+  "id": "C58",
+  "op": "replace",
+  "src": "M-39",
+  "old": "what the confidence score means",
+  "new": "what the displayed score means",
+  "why": "Term rule."
+ },
+ {
+  "id": "C59",
+  "op": "replace",
+  "src": "M-40",
+  "old": "224x224 crop; gamma correction γ=2 for dark frames; FaceNet identifies consistency via 512-D embeddings and Euclidean distance.",
+  "new": "224x224 crop; FaceNet identity-consistency check via 512-D embeddings).",
+  "why": "Gamma disabled; metric unverified; restores \")\"."
+ },
+ {
+  "id": "C60",
+  "op": "replace",
+  "src": "M-41 (≈ S-C2)",
+  "old": "(random majority undersampling; 70-15-15 split; cross-dataset transfer evaluation)",
+  "new": "(class → source or identity group → video → clip training sampling; compatible official or 70-15-15 group-disjoint splits; cross-dataset transfer evaluation)",
+  "why": "Sampler is not undersampling."
+ },
+ {
+  "id": "C61",
+  "op": "replace",
+  "src": "M-42",
+  "old": "(RandomAugmentation training-only augmentation; Bayesian optimization)",
+  "new": "(training-only RandAugment augmentation; one fixed non-BO recipe for all three models; Bayesian optimization for SwinFusion++)",
+  "why": "Term; Option A."
+ },
+ {
+  "id": "C62",
+  "op": "replace",
+  "src": "A2 (S)",
+  "old": "For every dataset construction, compression or perturbation condition, optimization regime,",
+  "new": "For every dataset construction, compression condition, optimization regime,",
+  "why": "No perturbation stratum scored."
+ },
+ {
+  "id": "C63",
+  "op": "replace",
+  "src": "S-B4",
+  "old": "Each seed will be evaluated independently, and per-seed metrics plus mean and standard deviation will be reported.",
+  "new": "Each seed will be evaluated independently, and per-seed ROC-AUC plus mean and standard deviation will be reported.",
+  "why": "Table J1 is ROC-AUC only."
+ },
+ {
+  "id": "C64",
+  "op": "replace",
+  "src": "S-B5",
+  "old": "ECE with the declared binning method",
+  "new": "ECE with 15 equal-width bins",
+  "why": "Binning never stated."
+ },
+ {
+  "id": "C65",
+  "op": "replace",
+  "src": "A5 (S)",
+  "old": "Computational analysis will state total and trainable parameters, operations per clip, peak inference and training memory where feasible, preprocessing latency, clip inference latency, complete video latency, throughput, and checkpoint size under the declared hardware and software environment.",
+  "new": "Computational analysis will state total parameters, operations per clip and per video, peak training memory, training throughput, and checkpoint size under the declared hardware and software environment.",
+  "why": "Latency not measured (COMPUTE_COST.md); reverse if the group measures it (D3)."
+ },
+ {
+  "id": "C66",
+  "op": "replace",
+  "src": "S-B8",
+  "old": "error prevention/recovery, interpretability, consistency, transparency/help, and context",
+  "new": "error prevention/recovery, language/microcopy clarity, interpretability, consistency, transparency/help, and context",
+  "why": "Expert survey section omitted."
+ },
+ {
+  "id": "C67",
+  "op": "replace",
+  "src": "statistician R3 (pre-existing grammar)",
+  "old": "using a compatible official group-safe splits where available",
+  "new": "using compatible official group-safe splits where available",
+  "why": "Article/plural agreement."
+ },
+ {
+  "id": "C68",
+  "op": "replace",
+  "src": "methodologist R3 (grammar after C34)",
+  "old": "Help and transparency content in the surrounding pages further guide the user",
+  "new": "Help and transparency content in the surrounding pages further guides the user",
+  "why": "Subject–verb agreement."
+ },
+ {
+  "id": "F1",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "(Thakre et al., 2025;",
+  "new": "(Thakre et al., 2026;",
+  "ctx": "In direct relation to the present study, the literature also shows why transformer-based modeling has become especially important. Attention mechanisms enable direct modeling of long-range dependencies, which is valuable in deepfake forensics because authenticity cues may involve relationships among distant facial regions rather than only local defects (Vaswani et al., 2017). However, fully global attention is expensive at high resolutions and long sequence lengths, which are precisely the conditions needed to preserve subtle forensic traces. Hierarchical and window-based transformers address this limitation by balancing detail preservation and contextual reasoning. The Swin Transformer achieves this through shifted-window attention and multi-scale representations, while the Video Swin Transformer extends the same principle to spatio-temporal neighborhoods (Liu et al., 2021; Liu et al., 2022). Building on this direction, recent literature also emphasizes cross-attention fusion, where one feature stream conditions another so that spatial appearance cues and temporal dynamics can constrain and validate each other more effectively than in simple concatenation schemes (Thakre et al., 2025; Zhao et al., 2023; Zhang et al., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F2",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Kuang et al., 2022; ",
+  "new": "",
+  "ctx": "RQ3 requires recurrent evidence rather than only transformer comparisons. The preferred pair is the spatio- temporal-attention convolutional-LSTM family of Chen et al. and the optical-flow CNN–LSTM family of Saikia et al. The former emphasizes learned appearance-temporal attention, while the latter introduces explicit motion evidence. Published recurrent percentages remain literature-only unless the corresponding model is executed on the declared C23/C40 partitions with one video-level prediction (Chen et al., 2022; Kuang et al., 2022; Saikia et al., 2022; Liang et al., 2023).",
+  "why": ""
+ },
+ {
+  "id": "F3",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "family of Chen et al. and",
+  "new": "family of B. Chen et al. (2022) and",
+  "ctx": "RQ3 requires recurrent evidence rather than only transformer comparisons. The preferred pair is the spatio- temporal-attention convolutional-LSTM family of Chen et al. and the optical-flow CNN–LSTM family of Saikia et al. The former emphasizes learned appearance-temporal attention, while the latter introduces explicit motion evidence. Published recurrent percentages remain literature-only unless the corresponding model is executed on the declared C23/C40 partitions with one video-level prediction (Chen et al., 2022; Kuang et al., 2022; Saikia et al., 2022; Liang et al., 2023).",
+  "why": ""
+ },
+ {
+  "id": "F4",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "CNN–LSTM family of Saikia et al.",
+  "new": "CNN–LSTM family of Saikia et al. (2022)",
+  "ctx": "RQ3 requires recurrent evidence rather than only transformer comparisons. The preferred pair is the spatio- temporal-attention convolutional-LSTM family of Chen et al. and the optical-flow CNN–LSTM family of Saikia et al. The former emphasizes learned appearance-temporal attention, while the latter introduces explicit motion evidence. Published recurrent percentages remain literature-only unless the corresponding model is executed on the declared C23/C40 partitions with one video-level prediction (Chen et al., 2022; Kuang et al., 2022; Saikia et al., 2022; Liang et al., 2023).",
+  "why": ""
+ },
+ {
+  "id": "F5",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "(Nielsen, J., 2024)",
+  "new": "(Nielsen, 2024)",
+  "ctx": "The expert evaluation instrument is a 34‑item structured Likert questionnaire with open‑ended comment fields. It was designed using established usability frameworks that define usability as dependent on the user, their goals, and the context of use; therefore, several items include space for experts to comment on task flow, points of confusion, and whether the interface supports successful completion of the website’s main tasks (ISO, 2018). In addition, the items are aligned with the ISO/IEC 25010 family’s interaction‑capability sub‑characteristics—especially learnability, operability, and user error protection—so experts can evaluate whether users can learn the site quickly, control it easily, and avoid or recover from common errors (ISO/IEC 25000, n.d.). Finally, several item statements reflect heuristic evaluation principles (e.g., visibility of system status, consistency, error prevention, and help/documentation) to help experts identify usability issues and recommend concrete interface improvements (Nielsen, J., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F6",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "after one independent Optuna/TPE study for each condition.",
+  "new": "after one independent Bayesian optimization (BO) study for each condition, run in Optuna (Akiba et al., 2019) with its Tree-structured Parzen Estimator (TPE; Bergstra et al., 2011).",
+  "ctx": "SwinFusion++ will be fine-tuned and evaluated separately on four within-dataset conditions: the FaceForensics++ DeepFakes subset under C23/High Quality, the same subset under C40/Low Quality, Celeb-DF v2, and the approved DeeperForensics-1.0 binary construction. RQ1 will first compare fixed-recipe Swin-B, fixed-recipe Video Swin-B, and fixed-recipe SwinFusion++ on the same group-disjoint partitions; a separately labeled optimized-system analysis will then report SwinFusion++ after one independent Optuna/TPE study for each condition. Frozen cross-dataset transfer will remain a distinct experiment family in which source- selected checkpoints and decision parameters are applied unchanged to each target. The study will also use topology and capacity-matched controls, previously reported results for CNN–LSTM comparators on FaceForensics++ C23/C40 and for established baselines, component ablations, cluster-aware uncertainty intervals, calibration analysis, computational-efficiency measurement, and explicit preprocessing-failure reporting. The trained detector will later be operationalized through a web-based decision-support service whose observable interaction quality and privacy transparency are evaluated separately from predictive validity and technical security.",
+  "why": ""
+ },
+ {
+  "id": "F7",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "The automated policy will be identified by its standard name, RandAugment, and cited accordingly.",
+  "new": "The automated policy will be RandAugment (Cubuk et al., 2020).",
+  "ctx": "Training-only augmentation will be applied after group-disjoint partitioning and before backbone normalization. The automated policy will be identified by its standard name, RandAugment, and cited accordingly. For each selected clip, one sampled augmentation policy and its parameters will be held constant across all frames for geometric operations, color transformations, blur, and compression simulation so that augmentation does not create artificial frame-to-frame inconsistency. Validation videos, in-distribution test videos, and cross-dataset target videos will receive no stochastic augmentation. Because aggressive transformations can erase authentic forensic evidence or synthesize label-correlated artifacts, the same policy will be applied identically to authentic and manipulated training clips.",
+  "why": ""
+ },
+ {
+  "id": "F8",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Holm adjustment will be the default",
+  "new": "Holm adjustment (Holm, 1979) will be the default",
+  "ctx": "Confidence intervals will use at least 5,000 bootstrap replicates at the highest verified dependency-cluster level. Source-video groups will be the default resampling unit, and broader identity groups will be used when they subsume multiple related sources. All derivatives and videos in a sampled cluster will move together. Paired model differences will use paired cluster bootstrap or a predeclared cluster-level permutation test. McNemar’s test may be reported only as a secondary analysis when one independent paired binary decision per cluster can be justified. Effect sizes and interval bounds will be emphasized rather than p-values alone. Formal comparison families will be declared before test labels are examined. Holm adjustment will be the default multiplicity procedure for the RQ1 standalone comparisons, control comparisons, multiple datasets or targets, and repeated secondary endpoints unless a documented statistical decision selects another method. Single-seed exploratory ablations and incompatible literature-only values will be excluded from formal seed-stability and significance claims.",
+  "why": ""
+ },
+ {
+  "id": "F9",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "A validation ROC-AUC of at least",
+  "new": "A validation area under the receiver operating characteristic curve (ROC-AUC) of at least",
+  "ctx": "Before model training, a shortcut and lineage audit will compare real and fake distributions for codec, container, resolution, frame rate, duration, file size, and processing history. A metadata-only classifier will be trained on development partitions only. A validation ROC-AUC of at least 0.65, or a source/identity-clustered 95% lower bound above 0.55, will trigger a stop-and-review rather than silent continuation. Any reconstruction of the binary dataset will be versioned and justified; inconvenient test videos will not be deleted to suppress the warning.",
+  "why": ""
+ },
+ {
+  "id": "F10a",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "ctx": "Deepfake detection research sits at the intersection of synthetic media generation, digital video forensics, and deployable human-facing systems. Recent deepfake generators can produce photorealistic facial content under common online conditions such as compression, resizing, and re-encoding, which complicates authenticity judgments that historically relied on human perception and obvious editing artifacts (Dolhansky et al., 2020; Rössler et al., 2019). Consequently, contemporary detection must be framed not only as a classification task, but also as a robustness problem under distribution shift, where detectors must generalize across datasets, manipulation families, and post-processing pipelines (Jiang et al., 2020; Li et al., 2020). At the same time, practical solutions increasingly take the form of web-accessible tools, which means that software quality, usability, performance efficiency, and security become part of the overall research contribution (International Organization for Standardization [ISO], 2018; ISO, 2023).",
+  "why": ""
+ },
+ {
+  "id": "F10b",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "ctx": "This erosion of visual credibility becomes more serious as generative modeling continues to improve. GAN-based pipelines first raised the realism of facial synthesis and manipulation, while diffusion-based models further enhanced perceptual fidelity, texture realism, and visual coherence (Goodfellow et al., 2014; Ho et al., 2020; Li et al., 2020). As a result, many earlier artifact cues have become less stable across generator families and post-processing conditions. Thus, the literature increasingly argues that detectors must be evaluated not only against a fixed manipulation type, but also under conditions in which manipulation quality and generation pipelines vary substantially. In turn, this has encouraged the shift from narrow, hand-engineered signatures toward learning-based detectors that can exploit subtle, distributed, and evolving evidence (Dolhansky et al., 2020; Chen et al., 2022; Jiang et al., 2020).",
+  "why": ""
+ },
+ {
+  "id": "F10c",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "ctx": "Even with stronger architectures, the literature repeatedly warns that high accuracy within a single dataset can be misleading. FaceForensics++, Celeb-DF (v2), and DeeperForensics-1.0 are important not only because they are widely used, but also because each stresses a different aspect of the detection problem. FaceForensics++ highlights the effect of compression, Celeb-DF increases realism and reduces obvious artifacts, and DeeperForensics-1.0 introduces perturbations that reflect real-world degradation. Together, these datasets show that a detector may appear strong while actually relying on shortcuts tied to collection quirks, compression settings, or preprocessing routines. Thus, cross-dataset transfer testing and perturbation-stressed evaluation are now treated as necessary safeguards against overestimating real-world robustness (Rössler et al., 2019; Li et al., 2020; Jiang et al., 2020; Geirhos et al., 2020).",
+  "why": ""
+ },
+ {
+  "id": "F10d",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "ctx": "Model performance is reported primarily at the video level using Accuracy, Precision, Recall, F1-Score, and ROC-AUC, with confusion matrices, False Positive Rate (FPR), and False Negative Rate (FNR) used as diagnostic indicators when interpreting error tendencies. Accuracy alone is not treated as sufficient because a model may appear strong on a single dataset while still failing to generalize or while committing a problematic pattern of false positives or false negatives. Precision is important because a fake prediction should not be triggered too easily on authentic content; Recall is important because manipulated videos that evade detection directly weaken the practical value of the detector; F1-Score summarizes the Precision–Recall trade-off; and ROC-AUC evaluates discrimination behavior across thresholds rather than at a single operating point. Confusion matrices, ROC curves, FPR, and FNR are used to examine whether a model is conservative, over-sensitive, or brittle under quality degradation and dataset shift (Rössler et al., 2019; Li et al., 2020; Jiang et al., 2020; Kingra et al., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F10e",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Li et al., 2020",
+  "new": "Y. Li et al., 2020",
+  "ctx": "Evaluation is conducted under two complementary conditions. The first is in-distribution evaluation, where training, validation, and testing are performed within the same dataset using the declared compatible official group-safe splits where available; otherwise, a frozen 70% training, 15% validation, and 15% testing allocation at the highest verified dependency-group level and subject-disjoint partitioning where dataset structure permits. The second is cross-dataset transfer evaluation, in which a model trained on FaceForensics++ C23, Celeb-DF v2, or DeeperForensics-1.0 is tested on each of the remaining datasets to assess robustness under distribution shift. Because FaceForensics++ provides High Quality and Low Quality versions, results are also separated by compression level to test whether a model retains effectiveness when visible artifacts are weakened by re-encoding or degradation. Video-level aggregation is applied consistently across compared models so that the unit of analysis remains the whole video rather than an isolated frame (Rössler et al., 2019; Li et al., 2020; Jiang et al., 2020; Kingra et al., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F10f",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Wang et al., 2020",
+  "new": "R. Wang et al., 2020",
+  "ctx": "Foreign and local literature first converge on the idea that deepfakes weaken the traditional credibility of video as evidence. Deepfakes are commonly defined as AI-enabled media manipulations that synthesize or alter identity-relevant content, especially faces, in ways that can appear realistic to ordinary viewers. Because manipulated videos can now be created at scale and redistributed through heavily compressed platforms, visual plausibility alone is no longer a reliable indicator of authenticity. This concern is likewise reflected in the Philippine context, where local literature has begun to frame deepfakes as a practical threat to political discourse, public trust, and reputational safety, while educational studies note that users encounter AI-generated audio-visual content with varying levels of understanding and verification ability (Dolhansky et al., 2020; Rössler et al., 2019; Matern et al., 2019; Wang et al., 2020; Estrellado et al., 2025; Tadena et al., 2025).",
+  "why": ""
+ },
+ {
+  "id": "F10g",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Wang et al. (2020)",
+  "new": "R. Wang et al. (2020)",
+  "ctx": "Frame-level spatial studies remain valuable because they established that visually convincing deepfakes can still differ statistically from authentic content. Guo et al. (2020) argued that generators leave traces in the residual domain, Kumar et al. (2020) showed that ResNet-based models can detect reenactment cues, Wang et al. (2020) proposed FakeSpotter to distinguish real and synthetic faces through neuron behavior, and Kingra et al. (2023) used a Siamese design to emphasize source-camera-noise discrepancies. These studies prove that frame-based evidence matters, especially when manipulation introduces subtle spatial irregularities. Nevertheless, they also reveal a consistent limitation: strong frame-level accuracy does not guarantee that a detector can capture sequence-level inconsistency or generalize under realistic platform transformations such as compression, blur, and re-encoding.",
+  "why": ""
+ },
+ {
+  "id": "F10h",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Chen et al., 2022",
+  "new": "B. Chen et al., 2022",
+  "ctx": "This erosion of visual credibility becomes more serious as generative modeling continues to improve. GAN-based pipelines first raised the realism of facial synthesis and manipulation, while diffusion-based models further enhanced perceptual fidelity, texture realism, and visual coherence (Goodfellow et al., 2014; Ho et al., 2020; Li et al., 2020). As a result, many earlier artifact cues have become less stable across generator families and post-processing conditions. Thus, the literature increasingly argues that detectors must be evaluated not only against a fixed manipulation type, but also under conditions in which manipulation quality and generation pipelines vary substantially. In turn, this has encouraged the shift from narrow, hand-engineered signatures toward learning-based detectors that can exploit subtle, distributed, and evolving evidence (Dolhansky et al., 2020; Chen et al., 2022; Jiang et al., 2020).",
+  "why": ""
+ },
+ {
+  "id": "F10i",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Chen et al., 2022",
+  "new": "B. Chen et al., 2022",
+  "ctx": "Because of this shift, digital video forensics now treats authenticity as a multi-scale spatio-temporal problem rather than a purely visual one. Authentic videos are constrained not only by local texture statistics, but also by global facial structure, region-to-region coherence, lighting continuity, motion stability, and physiological behavior across time. Therefore, deepfake detection increasingly depends on combining local texture irregularities, higher-level semantic or geometric consistency, and sequence-level continuity. This perspective is important because a deepfake may appear realistic in isolated frames while still violating the relationships that should remain stable across the full clip. For this reason, the most relevant literature consistently presents detection as joint reasoning over appearance and motion rather than independent frame classification (Güera & Delp, 2018; Haliassos et al., 2021; Chen et al., 2022; Montserrat et al., 2020).",
+  "why": ""
+ },
+ {
+  "id": "F10j",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "(Chen et al., 2022;",
+  "new": "(B. Chen et al., 2022;",
+  "ctx": "RQ3 requires recurrent evidence rather than only transformer comparisons. The preferred pair is the spatio- temporal-attention convolutional-LSTM family of Chen et al. and the optical-flow CNN–LSTM family of Saikia et al. The former emphasizes learned appearance-temporal attention, while the latter introduces explicit motion evidence. Published recurrent percentages remain literature-only unless the corresponding model is executed on the declared C23/C40 partitions with one video-level prediction (Chen et al., 2022; Kuang et al., 2022; Saikia et al., 2022; Liang et al., 2023).",
+  "why": ""
+ },
+ {
+  "id": "F10k",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Chen et al. (2022)",
+  "new": "B. Chen et al. (2022)",
+  "ctx": "Earlier temporal studies also provide strong empirical support for the present research. Güera and Delp (2018) showed that recurrent neural networks can detect deepfakes from frame sequences, Masi et al. (2020) used a two-branch recurrent design to capture inter-frame dependencies, Montserrat et al. (2020) proposed Automatic Face Weighting to reduce the influence of irrelevant facial regions, and Haliassos et al. (2021) argued that realistic lip motion is difficult to synthesize consistently and therefore highly informative. Chen et al. (2022) further demonstrated that spatio-temporal attention and convolutional LSTMs can improve detection by reasoning jointly about spatial artifacts and temporal dependencies. Collectively, these studies show that authenticity must be assessed not only by whether each frame appears realistic, but also by whether the motion trajectory, identity continuity, and physiological behavior remain plausible across the entire sequence.",
+  "why": ""
+ },
+ {
+  "id": "F10l",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Chen et al., 2022",
+  "new": "B. Chen et al., 2022",
+  "ctx": "The first group consists of strong frame-level and spatial detectors, such as Xception-based detectors, EfficientNet-based detectors, Capsule-Forensics, LBPNet, and SiamNet. These models test whether local artifact cues, texture statistics, or source-camera-noise discrepancies are already sufficient for robust detection without explicit sequence reasoning (Chollet, 2017; Tan & Le, 2019; Nguyen et al., 2019; Kingra et al., 2022; Kingra et al., 2023). The second group consists of CNN-LSTM style or motion-aware spatio-temporal detectors, such as Xception-LSTM, EfficientNet-BiLSTM with optical flow, generic CNN-LSTM, facial-geometry CNN-LSTM, gaze-feature methods, and frame-temporality two-stream models. These models test whether any gain of SwinFusion++ can be explained simply by adding temporal recurrence or motion features to CNN-extracted spatial features (Güera & Delp, 2018; Chen et al., 2022; Liang et al., 2023). The third group consists of video and transformer-oriented comparators, such as I3D, SlowFast, TEI, STIL, FTCN, VTN, ViViT, VidTr, DFDT, ISTVT, VixNet, CViT, MSVT, and SFormer. These models provide a stronger comparison set because they examine whether global attention, multi-scale video reasoning, or hybrid CNN-transformer design can match or exceed the proposed model.",
+  "why": ""
+ },
+ {
+  "id": "F10m",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Chen et al., 2021",
+  "new": "C.-F. R. Chen et al., 2021",
+  "ctx": "Temporal alignment alone does not determine how the streams should exchange evidence. Global cross- attention at early high-resolution stages would create large attention matrices and permit unrelated facial regions to interact directly. Local matched-window attention offers a more controlled alternative: approximately co-located spatial and temporal regions interact first, while the shifted-window backbones provide broader contextual propagation across layers. Bidirectional cross-attention further allows appearance evidence to retrieve motion evidence and motion evidence to retrieve appearance evidence, which is relevant when either stream may contain the stronger manipulation cue. CrossViT and CAST provide precedents for learned interaction between complementary representations, although their stream definitions and fusion topology differ from the proposed configuration (Chen et al., 2021; Thakre et al., 2026).",
+  "why": ""
+ },
+ {
+  "id": "F10n",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Guo et al., 2017",
+  "new": "C. Guo et al., 2017",
+  "ctx": "These choices must be evaluated through group-safe video-level evidence. Deepfake comparisons are sensitive to preprocessing, source lineage, clip aggregation, threshold selection, and repeated derivatives from the same source or identity. Reproduced experiments should therefore use one prediction per video, preserve source/identity dependency groups, separate fixed-recipe, BO-selected, and literature-only evidence, and estimate uncertainty by resampling the highest available dependency cluster. In deployment, the sigmoid of a neural-network logit remains an uncalibrated model score unless validation-based calibration has been fitted and evaluated (Guo et al., 2017; Yan et al., 2023).",
+  "why": ""
+ },
+ {
+  "id": "F10o",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Guo et al. (2020)",
+  "new": "Z. Guo et al. (2020)",
+  "ctx": "Frame-level spatial studies remain valuable because they established that visually convincing deepfakes can still differ statistically from authentic content. Guo et al. (2020) argued that generators leave traces in the residual domain, Kumar et al. (2020) showed that ResNet-based models can detect reenactment cues, Wang et al. (2020) proposed FakeSpotter to distinguish real and synthetic faces through neuron behavior, and Kingra et al. (2023) used a Siamese design to emphasize source-camera-noise discrepancies. These studies prove that frame-based evidence matters, especially when manipulation introduces subtle spatial irregularities. Nevertheless, they also reveal a consistent limitation: strong frame-level accuracy does not guarantee that a detector can capture sequence-level inconsistency or generalize under realistic platform transformations such as compression, blur, and re-encoding.",
+  "why": ""
+ },
+ {
+  "id": "F10p",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Zhao et al., 2023",
+  "new": "C. Zhao et al., 2023",
+  "ctx": "In direct relation to the present study, the literature also shows why transformer-based modeling has become especially important. Attention mechanisms enable direct modeling of long-range dependencies, which is valuable in deepfake forensics because authenticity cues may involve relationships among distant facial regions rather than only local defects (Vaswani et al., 2017). However, fully global attention is expensive at high resolutions and long sequence lengths, which are precisely the conditions needed to preserve subtle forensic traces. Hierarchical and window-based transformers address this limitation by balancing detail preservation and contextual reasoning. The Swin Transformer achieves this through shifted-window attention and multi-scale representations, while the Video Swin Transformer extends the same principle to spatio-temporal neighborhoods (Liu et al., 2021; Liu et al., 2022). Building on this direction, recent literature also emphasizes cross-attention fusion, where one feature stream conditions another so that spatial appearance cues and temporal dynamics can constrain and validate each other more effectively than in simple concatenation schemes (Thakre et al., 2025; Zhao et al., 2023; Zhang et al., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F10q",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Zhao et al., 2023",
+  "new": "C. Zhao et al., 2023",
+  "ctx": "The studies closest to SwinFusion++ still differ materially in topology. SFormer applies a sequential transformer to frame-wise Swin features. ISTVT uses decomposed spatial-temporal self-attention with a self-subtract mechanism. CAST combines spatial and temporal representations through cross-attentive fusion. These studies establish relevant spatio-temporal comparators, but none is architecturally identical to a four-stage Swin-B and Video-Swin-B hierarchy with learned frame-to-tubelet alignment, local bidirectional exchange, 16 zero- initialized scalar gates, explicit agreement/disagreement evidence, and readout-only multi-level aggregation (Kingra et al., 2024; Zhao et al., 2023; Thakre et al., 2026).",
+  "why": ""
+ },
+ {
+  "id": "F10r",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Zhang et al., 2024",
+  "new": "H. Zhang et al., 2024",
+  "ctx": "In direct relation to the present study, the literature also shows why transformer-based modeling has become especially important. Attention mechanisms enable direct modeling of long-range dependencies, which is valuable in deepfake forensics because authenticity cues may involve relationships among distant facial regions rather than only local defects (Vaswani et al., 2017). However, fully global attention is expensive at high resolutions and long sequence lengths, which are precisely the conditions needed to preserve subtle forensic traces. Hierarchical and window-based transformers address this limitation by balancing detail preservation and contextual reasoning. The Swin Transformer achieves this through shifted-window attention and multi-scale representations, while the Video Swin Transformer extends the same principle to spatio-temporal neighborhoods (Liu et al., 2021; Liu et al., 2022). Building on this direction, recent literature also emphasizes cross-attention fusion, where one feature stream conditions another so that spatial appearance cues and temporal dynamics can constrain and validate each other more effectively than in simple concatenation schemes (Thakre et al., 2025; Zhao et al., 2023; Zhang et al., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F10s",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Zhang et al., 2024",
+  "new": "H. Zhang et al., 2024",
+  "ctx": "TSFF-Net should be interpreted separately. Its two streams represent spatial-domain and frequency-domain evidence extracted from facial frames rather than a frame-wise spatial branch and a video-temporal branch. Its cross-attention is relevant as learned interaction between complementary feature domains and as a study of compressed evidence, but it is not a direct test of temporal cross-attention between Swin and Video Swin representations. It therefore remains a named RQ4 comparator without being mislabeled as a temporal-stream architecture (Zhang et al., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F10t",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Zhang et al., 2016",
+  "new": "K. Zhang et al., 2016",
+  "ctx": "Furthermore, the literature highlights that robust detection is not only a matter of model architecture, but also of evidence quality. Because many deepfake manipulations are face-centered, face alignment and identity-consistency checks are commonly used to reduce background noise, stabilize the spatial reference frame, and prevent wrong-face drift across frames. Methods such as MTCNN support reliable face detection and landmark-based alignment, while FaceNet-style embeddings can help maintain within-video identity consistency. Accordingly, preprocessing becomes an operational requirement rather than a minor convenience, since weak or inconsistent facial evidence can distort both spatial representation learning and temporal reasoning (Zhang et al., 2016; Schroff et al., 2015; Jiang et al., 2020; Montserrat et al., 2020).",
+  "why": ""
+ },
+ {
+  "id": "F10u",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Li and Lyu (2018)",
+  "new": "Y. Li and Lyu (2018)",
+  "ctx": "Foundational artifact-based studies remain important because they first established deepfake detection as a problem of violated real-world constraints. Li and Lyu (2018) detected face-warping artifacts, Li et al. (2018) used abnormal eye blinking as a temporal cue, and Matern et al. (2019) showed that manipulated faces often contain visible inconsistencies in edges and facial details. These studies proved that deepfakes often fail not because a single frame looks implausible, but because blending, geometry, and physiological behavior are imperfectly enforced. Even so, later studies reveal the weakness of depending on a single signature, since improvements in generation quality and heavy post-processing can suppress or imitate those cues. Therefore, these early works are best understood as the starting point of a progression that later moved toward multi-scale and spatio-temporal learning.",
+  "why": ""
+ },
+ {
+  "id": "F10v",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Li et al. (2018)",
+  "new": "Y. Li et al. (2018)",
+  "ctx": "Foundational artifact-based studies remain important because they first established deepfake detection as a problem of violated real-world constraints. Li and Lyu (2018) detected face-warping artifacts, Li et al. (2018) used abnormal eye blinking as a temporal cue, and Matern et al. (2019) showed that manipulated faces often contain visible inconsistencies in edges and facial details. These studies proved that deepfakes often fail not because a single frame looks implausible, but because blending, geometry, and physiological behavior are imperfectly enforced. Even so, later studies reveal the weakness of depending on a single signature, since improvements in generation quality and heavy post-processing can suppress or imitate those cues. Therefore, these early works are best understood as the starting point of a progression that later moved toward multi-scale and spatio-temporal learning.",
+  "why": ""
+ },
+ {
+  "id": "F11a",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "cross- attention",
+  "new": "cross-attention",
+  "ctx": " To address this gap, this study proposes SwinFusion++, a face-aligned dual-stream framework that combines a Swin Transformer Base spatial stream with a Video Swin Transformer Base temporal stream. Its principal architectural contribution is Tubelet-Aligned, Local, Bidirectional, Gated Hierarchical Cross-Attention (TLBG-HCA). At each of the four matched backbone stages, TLBG-HCA first aligns the frame-wise spatial representation with the temporal indices produced by Video Swin’s tubelet embedding. It then performs cross- attention in both directions within approximately co-located 7 × 7 facial regions, allowing spatial appearance evidence to query temporal evidence and temporal evidence to query spatial evidence. Zero-initialized residual gates regulate the contribution of the new fusion paths so that the pretrained backbone representations are preserved at the start of optimization and cross-stream interaction is learned progressively",
+  "why": ""
+ },
+ {
+  "id": "F11b",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "corre- sponding",
+  "new": "corresponding",
+  "ctx": "The fusion module is hierarchical because the same fusion principle is applied independently to four corre- sponding representation levels of the two backbones. Each stage readout retains the enhanced spatial and temporal features together with explicit agreement and disagreement terms, summarizes distributed and localized evidence through mean and maximum pooling, and produces a 256-dimensional stage feature. The four stage features are concatenated for clip-level classification, while the logits obtained from multiple clips are averaged in logit space to obtain one video-level output. The fused tensors are used only by the final multi-scale classifier and do not replace the features passed to later backbone stages.",
+  "why": ""
+ },
+ {
+  "id": "F11c",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "source- selected",
+  "new": "source-selected",
+  "ctx": "SwinFusion++ will be fine-tuned and evaluated separately on four within-dataset conditions: the FaceForensics++ DeepFakes subset under C23/High Quality, the same subset under C40/Low Quality, Celeb-DF v2, and the approved DeeperForensics-1.0 binary construction. RQ1 will first compare fixed-recipe Swin-B, fixed-recipe Video Swin-B, and fixed-recipe SwinFusion++ on the same group-disjoint partitions; a separately labeled optimized-system analysis will then report SwinFusion++ after one independent Optuna/TPE study for each condition. Frozen cross-dataset transfer will remain a distinct experiment family in which source- selected checkpoints and decision parameters are applied unchanged to each target. The study will also use topology and capacity-matched controls, previously reported results for CNN–LSTM comparators on FaceForensics++ C23/C40 and for established baselines, component ablations, cluster-aware uncertainty intervals, calibration analysis, computational-efficiency measurement, and explicit preprocessing-failure reporting. The trained detector will later be operationalized through a web-based decision-support service whose observable interaction quality and privacy transparency are evaluated separately from predictive validity and technical security.",
+  "why": ""
+ },
+ {
+  "id": "F11d",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "cross- attention",
+  "new": "cross-attention",
+  "ctx": "Temporal alignment alone does not determine how the streams should exchange evidence. Global cross- attention at early high-resolution stages would create large attention matrices and permit unrelated facial regions to interact directly. Local matched-window attention offers a more controlled alternative: approximately co-located spatial and temporal regions interact first, while the shifted-window backbones provide broader contextual propagation across layers. Bidirectional cross-attention further allows appearance evidence to retrieve motion evidence and motion evidence to retrieve appearance evidence, which is relevant when either stream may contain the stronger manipulation cue. CrossViT and CAST provide precedents for learned interaction between complementary representations, although their stream definitions and fusion topology differ from the proposed configuration (Chen et al., 2021; Thakre et al., 2026).",
+  "why": ""
+ },
+ {
+  "id": "F11e",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "temporal- consistency",
+  "new": "temporal-consistency",
+  "ctx": "The established-baseline comparison for the present study is organized by evidence family rather than by copying every model listed in one survey table. Xception provides a widely used spatial anchor; I3D supplies a conventional 3D convolutional video model; STIL targets spatial-temporal inconsistency; FTCN with its long-term Temporal Transformer component targets temporal coherence; TALL-Swin reorganizes a clip into a thumbnail layout for efficient Swin-based video analysis; and SFormer combines a Swin spatial extractor with a transformer temporal encoder. These methods provide complementary spatial, 3D-CNN, temporal- consistency, and transformer-video coverage, but each must pass an implementation, license, input, split, and evaluation-unit audit before it is labeled reproduced (Chollet, 2017; Carreira & Zisserman, 2017; Gu et al., 2021; Zheng et al., 2021; Xu et al., 2023; Kingra et al., 2024).",
+  "why": ""
+ },
+ {
+  "id": "F11f",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "zero- initialized",
+  "new": "zero-initialized",
+  "ctx": "The studies closest to SwinFusion++ still differ materially in topology. SFormer applies a sequential transformer to frame-wise Swin features. ISTVT uses decomposed spatial-temporal self-attention with a self-subtract mechanism. CAST combines spatial and temporal representations through cross-attentive fusion. These studies establish relevant spatio-temporal comparators, but none is architecturally identical to a four-stage Swin-B and Video-Swin-B hierarchy with learned frame-to-tubelet alignment, local bidirectional exchange, 16 zero- initialized scalar gates, explicit agreement/disagreement evidence, and readout-only multi-level aggregation (Kingra et al., 2024; Zhao et al., 2023; Thakre et al., 2026).",
+  "why": ""
+ },
+ {
+  "id": "F11g",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "spatio- temporal-attention",
+  "new": "spatio-temporal-attention",
+  "ctx": "RQ3 requires recurrent evidence rather than only transformer comparisons. The preferred pair is the spatio- temporal-attention convolutional-LSTM family of Chen et al. and the optical-flow CNN–LSTM family of Saikia et al. The former emphasizes learned appearance-temporal attention, while the latter introduces explicit motion evidence. Published recurrent percentages remain literature-only unless the corresponding model is executed on the declared C23/C40 partitions with one video-level prediction (Chen et al., 2022; Kuang et al., 2022; Saikia et al., 2022; Liang et al., 2023).",
+  "why": ""
+ },
+ {
+  "id": "F11h",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "temperature- scaled",
+  "new": "temperature-scaled",
+  "ctx": "A calibrated estimated probability is the sigmoid of a temperature- scaled video logit, where the temperature is fitted using the corresponding source-validation videos only and then frozen. Without validated calibration, the displayed value is called a model score.",
+  "why": ""
+ },
+ {
+  "id": "F11i",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "FaceNet- style",
+  "new": "FaceNet-style",
+  "ctx": "The face-centered preprocessing pipeline will then be implemented and verified in small increments: temporal decoding; MTCNN detection and landmarks; universal confidence filtering; fixed-margin alignment; FaceNet- style identity association; missing-frame and insufficient-evidence logic; 16-frame clip construction; and clip- consistent augmentation. After pilot tests, the complete aligned-RGB crop, face-track, and clip-provenance cache will be materialized for all four dataset conditions. Coverage, failures, storage use, hashes, regeneration checks, and off-machine backup verification will be completed before HPO or principal training. Backbone normalization will remain model-specific and will not be baked into the shared cache.",
+  "why": ""
+ },
+ {
+  "id": "F11j",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "clip- consistent",
+  "new": "clip-consistent",
+  "ctx": "The face-centered preprocessing pipeline will then be implemented and verified in small increments: temporal decoding; MTCNN detection and landmarks; universal confidence filtering; fixed-margin alignment; FaceNet- style identity association; missing-frame and insufficient-evidence logic; 16-frame clip construction; and clip- consistent augmentation. After pilot tests, the complete aligned-RGB crop, face-track, and clip-provenance cache will be materialized for all four dataset conditions. Coverage, failures, storage use, hashes, regeneration checks, and off-machine backup verification will be completed before HPO or principal training. Backbone normalization will remain model-specific and will not be baked into the shared cache.",
+  "why": ""
+ },
+ {
+  "id": "F11k",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "materi- alize",
+  "new": "materialize",
+  "ctx": "Model Phase (Algorithmic Development and Evaluation). Officially obtained benchmark media will be indexed, lineage-audited, and divided through source-video- and, where possible, identity-disjoint partitions. The researchers will implement the universal face-aligned preprocessing policy and fully materi- alize a backbone-neutral aligned-RGB cache for C23/HQ, C40/LQ, Celeb-DF v2, and DeeperForensics-1.0 before training. They will then implement and verify Swin-B, Video Swin-B, TLBG-HCA, both non- attentive controls, the classifier, and video aggregation. The fixed-recipe RQ1 runs and the four independent Optuna/TPE studies will form separate campaigns. External models will not be retrained; their previously reported results will be reported separately with their original protocols. Thresholds and optional calibration will use the corresponding validation videos only. Final testing will report four within-dataset conditions, directional frozen transfer, clustered uncertainty, computational cost, calibration, and failures separately.",
+  "why": ""
+ },
+ {
+  "id": "F11l",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "non- attentive",
+  "new": "non-attentive",
+  "ctx": "Model Phase (Algorithmic Development and Evaluation). Officially obtained benchmark media will be indexed, lineage-audited, and divided through source-video- and, where possible, identity-disjoint partitions. The researchers will implement the universal face-aligned preprocessing policy and fully materi- alize a backbone-neutral aligned-RGB cache for C23/HQ, C40/LQ, Celeb-DF v2, and DeeperForensics-1.0 before training. They will then implement and verify Swin-B, Video Swin-B, TLBG-HCA, both non- attentive controls, the classifier, and video aggregation. The fixed-recipe RQ1 runs and the four independent Optuna/TPE studies will form separate campaigns. External models will not be retrained; their previously reported results will be reported separately with their original protocols. Thresholds and optional calibration will use the corresponding validation videos only. Final testing will report four within-dataset conditions, directional frozen transfer, clustered uncertainty, computational cost, calibration, and failures separately.",
+  "why": ""
+ },
+ {
+  "id": "F11m",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Cross- compression",
+  "new": "Cross-compression",
+  "ctx": "Within-dataset C23/HQ, C40/LQ, Celeb-DF, and DeeperForensics results will be reported separately. Cross- compression and every frozen source-to-target direction will also remain separate. Literature-only values will preserve their original dataset, subset, split, preprocessing, evaluation unit, and metric and will not be entered into paired tests against SwinFusion++.",
+  "why": ""
+ },
+ {
+  "id": "F12a",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Video-Swin-B hierarchy",
+  "new": "Video Swin-B hierarchy",
+  "ctx": "The studies closest to SwinFusion++ still differ materially in topology. SFormer applies a sequential transformer to frame-wise Swin features. ISTVT uses decomposed spatial-temporal self-attention with a self-subtract mechanism. CAST combines spatial and temporal representations through cross-attentive fusion. These studies establish relevant spatio-temporal comparators, but none is architecturally identical to a four-stage Swin-B and Video-Swin-B hierarchy with learned frame-to-tubelet alignment, local bidirectional exchange, 16 zero- initialized scalar gates, explicit agreement/disagreement evidence, and readout-only multi-level aggregation (Kingra et al., 2024; Zhao et al., 2023; Thakre et al., 2026).",
+  "why": ""
+ },
+ {
+  "id": "F12b",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "a Video-Swin-B stream",
+  "new": "a Video Swin-B stream",
+  "ctx": "Taken together, the related studies show a progression from isolated artifact detection to multi-cue spatial, temporal, and attention-based reasoning. Existing work already demonstrates frame-level forensic cues, recurrent sequence modeling, hierarchical visual transformers, temporal-coherence learning, spatial-temporal self-attention, cross-attention, frequency-domain fusion, and cross-dataset testing. The remaining architectural gap is therefore more specific than a general absence of attention-based detectors. Within the sources reviewed for this study, an architecturally identical configuration was not identified: a frame-wise Swin-B stream and a Video-Swin-B stream; learned alignment from frame indices to tubelet indices; approximately co-located local bidirectional exchange; four zero-initialized residual paths at each stage; explicit agreement and disagreement evidence; and independent readouts from four matched hierarchy levels. This observation is not proof of first-ever novelty and must remain subject to the documented literature audit.",
+  "why": ""
+ },
+ {
+  "id": "F12c",
+  "op": "replace",
+  "src": "final check (methodologist) MUST",
+  "old": "Video-Swin-B stages",
+  "new": "Video Swin-B stages",
+  "ctx": "TLBG-HCA is the proposed readout-only fusion mechanism applied independently to four matched Swin-B and Video-Swin-B stages. At each stage, it aligns temporal indices, partitions local windows, exchanges evidence in both directions, applies gated residual and feed-forward updates, constructs enhanced spatial, enhanced temporal, agreement, and disagreement evidence, and projects pooled features to a 256-dimensional stage representation.",
+  "why": ""
+ },
+ {
+  "id": "S1",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "Ties will be resolved by higher PR-AUC, lower validation BCE,",
+  "new": "Ties will be resolved by higher area under the precision–recall curve (PR-AUC), lower validation binary cross-entropy (BCE),",
+  "ctx": "The BO objective will maximize source-validation video-level ROC-AUC. Ties will be resolved by higher PR-AUC, lower validation BCE, and then lower trial number. Each trial may run for at most 24 epochs. Trial early stopping will use patience 5, minimum improvement 0.001, and no stop before epoch 10. A median pruner may act only after the four startup trials, after epoch 10, and after at least two validation evaluations following the trial’s first backbone unfreeze. This prevents a trial from being discarded while its pretrained backbones remain entirely frozen.",
+  "why": ""
+ },
+ {
+  "id": "S2",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "expected calibration error will be added",
+  "new": "expected calibration error (ECE) will be added",
+  "ctx": "One prediction per complete video will be used for all principal inferential analysis. For every dataset construction, compression condition, optimization regime, transfer direction, model variant, and random seed, the study will compute video-level ROC-AUC, precision-recall AUC, accuracy, precision, recall or sensitivity, specificity, F1-score, false-positive rate, and false-negative rate. Brier score and expected calibration error will be added when an estimated probability is reported. Threshold-independent and threshold-dependent outcomes will remain separate. The fixed-recipe architecture comparison and the BO-selected optimized-system comparison will be reported in separate tables. RQ1 formal architecture tests will use fixed-recipe SwinFusion++ versus fixed-recipe Swin-B and fixed-recipe Video Swin-B on the same held-out dependency clusters. The contribution analysis will compare full TLBG-HCA with the topology control and capacity-matched no-exchange control. BO-selected SwinFusion++ may be compared descriptively or through a separately declared configured-system family, but that family will not be used as the sole causal evidence for the architecture. Principal internal models will use three recorded seeds when feasible. Each seed will be evaluated independently, and per-seed ROC-AUC plus mean and standard deviation will be reported. A predeclared mean-video-logit ensemble may combine the three model outputs for the same video; it will still produce one observation per video. Predictions from different seeds will never be stacked or resampled as if they were additional independent videos.",
+  "why": ""
+ },
+ {
+  "id": "S3",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "may cause MTCNN or identity association to fail",
+  "new": "may cause the multi-task cascaded convolutional network (MTCNN) face detector or identity association to fail",
+  "ctx": "Detection and tracking failures. Occlusion, extreme pose, poor illumination, small faces, multiple competing faces, or abrupt motion may cause MTCNN or identity association to fail. These cases will be reported as preprocessing failures or insufficient evidence rather than silently dropped.",
+  "why": ""
+ },
+ {
+  "id": "S4a",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "Celeb-DF (v2),",
+  "new": "Celeb-DF v2,",
+  "ctx": "Even with stronger architectures, the literature repeatedly warns that high accuracy within a single dataset can be misleading. FaceForensics++, Celeb-DF (v2), and DeeperForensics-1.0 are important not only because they are widely used, but also because each stresses a different aspect of the detection problem. FaceForensics++ highlights the effect of compression, Celeb-DF increases realism and reduces obvious artifacts, and DeeperForensics-1.0 introduces perturbations that reflect real-world degradation. Together, these datasets show that a detector may appear strong while actually relying on shortcuts tied to collection quirks, compression settings, or preprocessing routines. Thus, cross-dataset transfer testing and perturbation-stressed evaluation are now treated as necessary safeguards against overestimating real-world robustness (Rössler et al., 2019; Li et al., 2020; Jiang et al., 2020; Geirhos et al., 2020).",
+  "why": ""
+ },
+ {
+  "id": "S4b",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "Celeb‑DF (v2)",
+  "new": "Celeb-DF v2",
+  "ctx": "In this study, benchmark datasets refer to the public datasets used as experimental sources of labeled authentic and deepfake videos: FaceForensics++ (HQ/LQ) deepfake subsets, Celeb‑DF (v2), and DeeperForensics‑1.0. Operationally, these datasets define the sample pool for training/testing and provide standardized conditions for comparative and robustness evaluation.",
+  "why": ""
+ },
+ {
+  "id": "S4c",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "Celeb-DF (v2)",
+  "new": "Celeb-DF v2",
+  "ctx": "Celeb-DF (v2)",
+  "why": ""
+ },
+ {
+  "id": "S5",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "Review of Related Literatures",
+  "new": "Review of Related Literature",
+  "ctx": "Review of Related Literatures",
+  "why": ""
+ },
+ {
+  "id": "S6",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "the number of distributed questionnaire may be adjusted",
+  "new": "the number of distributed questionnaires may be adjusted",
+  "ctx": "To account for possible nonresponse and incomplete survey forms, the researchers will distribute more questionnaires than the required minimum. As recommended by Bartlett et al. (2001), the number of distributed questionnaire may be adjusted using:",
+  "why": ""
+ },
+ {
+  "id": "S7a",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "remain visible.  Before",
+  "new": "remain visible. Before",
+  "ctx": "The experimental unit will be the complete video. Four separate within-dataset conditions will be constructed: FaceForensics++ DeepFakes C23/HQ, FaceForensics++ DeepFakes C40/LQ, Celeb-DF v2, and the approved DeeperForensics-1.0 binary dataset. The DeeperForensics fake class will be the exact manipulated-video manifest approved before splitting, while the real class will be the exact lineage-matched FaceForensics++ originals. Perturbation labels, source groups, identities, codecs, containers, resolution, frame rate, duration, and exclusion or preprocessing-failure reasons will remain visible.  Before any frames or clips are generated, the study will determine whether the dataset provides an official split that is compatible with the exact declared subset and the highest verified dependency grouping. A compatible official split will be used as provided. If no compatible official split exists, one frozen random seed and a documented deterministic allocation procedure will assign complete dependency groups to a target allocation of 70% training, 15% validation, and 15% test. The allocation will be stratified by class and will minimize deviation from the target video counts and class proportions without dividing source-video, identity, derivative, compression, or lineage groups. The final report will state the test-set counts and class prevalence for every condition. Frame-level and clip-level random splitting will not be permitted.  The same FaceForensics++ source-group assignment will be propagated to both C23 and C40 so that corresponding originals, manipulations, and compression versions cannot cross partitions. For every dataset, all clips, derivatives, and related videos from one dependency group will remain in one partition. Identity-disjoint grouping will be used when identity is the broader reliable dependency key. The split manifests, random seed, allocation algorithm, and file hashes will be frozen before preprocessing materialization, augmentation, Bayesian optimization, or training.  Training selection will follow the hierarchy class → source or identity group → video → clip. This prevents long videos, prolific identities, or derivative-rich sources from receiving disproportionate weight. Class-balanced sampling or loss weighting may affect training only. Validation and test prevalence will remain unchanged. Within-dataset fine-tuning, cross-compression testing, and frozen cross-dataset transfer will remain separate experiment families. A transfer model will select its hyperparameters, checkpoint, threshold, and optional calibration using only the source training and validation partitions and will then apply them unchanged to each target. FaceForensics++-to-DeeperForensics transfer will include the declared lineage-overlap analysis and, where possible, a strict source-disjoint target subset.",
+  "why": ""
+ },
+ {
+  "id": "S7b",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "not be permitted.  The same",
+  "new": "not be permitted. The same",
+  "ctx": "The experimental unit will be the complete video. Four separate within-dataset conditions will be constructed: FaceForensics++ DeepFakes C23/HQ, FaceForensics++ DeepFakes C40/LQ, Celeb-DF v2, and the approved DeeperForensics-1.0 binary dataset. The DeeperForensics fake class will be the exact manipulated-video manifest approved before splitting, while the real class will be the exact lineage-matched FaceForensics++ originals. Perturbation labels, source groups, identities, codecs, containers, resolution, frame rate, duration, and exclusion or preprocessing-failure reasons will remain visible.  Before any frames or clips are generated, the study will determine whether the dataset provides an official split that is compatible with the exact declared subset and the highest verified dependency grouping. A compatible official split will be used as provided. If no compatible official split exists, one frozen random seed and a documented deterministic allocation procedure will assign complete dependency groups to a target allocation of 70% training, 15% validation, and 15% test. The allocation will be stratified by class and will minimize deviation from the target video counts and class proportions without dividing source-video, identity, derivative, compression, or lineage groups. The final report will state the test-set counts and class prevalence for every condition. Frame-level and clip-level random splitting will not be permitted.  The same FaceForensics++ source-group assignment will be propagated to both C23 and C40 so that corresponding originals, manipulations, and compression versions cannot cross partitions. For every dataset, all clips, derivatives, and related videos from one dependency group will remain in one partition. Identity-disjoint grouping will be used when identity is the broader reliable dependency key. The split manifests, random seed, allocation algorithm, and file hashes will be frozen before preprocessing materialization, augmentation, Bayesian optimization, or training.  Training selection will follow the hierarchy class → source or identity group → video → clip. This prevents long videos, prolific identities, or derivative-rich sources from receiving disproportionate weight. Class-balanced sampling or loss weighting may affect training only. Validation and test prevalence will remain unchanged. Within-dataset fine-tuning, cross-compression testing, and frozen cross-dataset transfer will remain separate experiment families. A transfer model will select its hyperparameters, checkpoint, threshold, and optional calibration using only the source training and validation partitions and will then apply them unchanged to each target. FaceForensics++-to-DeeperForensics transfer will include the declared lineage-overlap analysis and, where possible, a strict source-disjoint target subset.",
+  "why": ""
+ },
+ {
+  "id": "S7c",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "or training.  Training selection",
+  "new": "or training. Training selection",
+  "ctx": "The experimental unit will be the complete video. Four separate within-dataset conditions will be constructed: FaceForensics++ DeepFakes C23/HQ, FaceForensics++ DeepFakes C40/LQ, Celeb-DF v2, and the approved DeeperForensics-1.0 binary dataset. The DeeperForensics fake class will be the exact manipulated-video manifest approved before splitting, while the real class will be the exact lineage-matched FaceForensics++ originals. Perturbation labels, source groups, identities, codecs, containers, resolution, frame rate, duration, and exclusion or preprocessing-failure reasons will remain visible.  Before any frames or clips are generated, the study will determine whether the dataset provides an official split that is compatible with the exact declared subset and the highest verified dependency grouping. A compatible official split will be used as provided. If no compatible official split exists, one frozen random seed and a documented deterministic allocation procedure will assign complete dependency groups to a target allocation of 70% training, 15% validation, and 15% test. The allocation will be stratified by class and will minimize deviation from the target video counts and class proportions without dividing source-video, identity, derivative, compression, or lineage groups. The final report will state the test-set counts and class prevalence for every condition. Frame-level and clip-level random splitting will not be permitted.  The same FaceForensics++ source-group assignment will be propagated to both C23 and C40 so that corresponding originals, manipulations, and compression versions cannot cross partitions. For every dataset, all clips, derivatives, and related videos from one dependency group will remain in one partition. Identity-disjoint grouping will be used when identity is the broader reliable dependency key. The split manifests, random seed, allocation algorithm, and file hashes will be frozen before preprocessing materialization, augmentation, Bayesian optimization, or training.  Training selection will follow the hierarchy class → source or identity group → video → clip. This prevents long videos, prolific identities, or derivative-rich sources from receiving disproportionate weight. Class-balanced sampling or loss weighting may affect training only. Validation and test prevalence will remain unchanged. Within-dataset fine-tuning, cross-compression testing, and frozen cross-dataset transfer will remain separate experiment families. A transfer model will select its hyperparameters, checkpoint, threshold, and optional calibration using only the source training and validation partitions and will then apply them unchanged to each target. FaceForensics++-to-DeeperForensics transfer will include the declared lineage-overlap analysis and, where possible, a strict source-disjoint target subset.",
+  "why": ""
+ },
+ {
+  "id": "S7d",
+  "op": "replace",
+  "src": "final check (methodologist) SHOULD",
+  "old": "representation  so that",
+  "new": "representation so that",
+  "ctx": "The first two terms preserve stream-specific evidence, the absolute difference encodes disagreement, and the elementwise product encodes agreement. A LayerNorm is applied before mean and maximum pooling. The pooled vectors are concatenated and projected to a fixed stage representation  so that distributed evidence and a small highly suspicious response can both influence the decision. ",
+  "why": ""
+ },
+ {
+  "id": "R3-1",
+  "op": "replace",
+  "src": "methodologist R3",
+  "old": "Security, Comments and/or Suggestions",
+  "new": "Security & Comments and/or Suggestions",
+  "why": "LoF title matches caption C8."
+ },
+ {
+  "id": "R3-2",
+  "op": "replace",
+  "src": "methodologist R3",
+  "old": " To address this gap",
+  "new": "To address this gap",
+  "ctx": " To address this gap, this study proposes SwinFusion++, a face-aligned dual-stream framework that combines a Swin Transformer Base spatial stream with a Video Swin Transformer Base temporal stream. Its principal architectural contribution is Tubelet-Aligned, Local, Bidirectional, Gated Hierarchical Cross-Attention (TLBG-HCA). At each of the four matched backbone stages, TLBG-HCA first aligns the frame-wise spatial representation with the temporal indices produced by Video Swin’s tubelet embedding. It then performs cross-attention in both directions within approximately co-located 7 × 7 facial regions, allowing spatial appearance evidence to query temporal evidence and temporal evidence to query spatial evidence. Zero-initialized residual gates regulate the contribution of the new fusion paths so that the pretrained backbone representations are preserved at the start of optimization and cross-stream interaction is learned progressively",
+  "why": "Leading space."
+ },
+ {
+  "id": "U1",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "(Albert et al., 2021; ISO, 2018; ISO, 2023; Urera & Balahadia, 2019).",
+  "new": "(Albert et al., 2021; ISO, 2018; ISO, 2023; Urera & Balahadia, 2019). The conceptual framework of the study is presented in Figure 1.",
+  "ctx": "The Philippine literature and standards-oriented sources add a complementary socio-technical requirement. A useful detector must not only produce reproducible predictive evidence; it must also communicate uncertainty, protect uploaded media, support error recovery, and remain understandable in an ordinary context of use. SwinFusion++ is therefore justified as two linked research artifacts: a precisely defined detector evaluated through fair and leakage-safe comparisons, and a web-based decision-support service whose observable interaction quality and privacy transparency are evaluated separately from model accuracy and technical security (Albert et al., 2021; ISO, 2018; ISO, 2023; Urera & Balahadia, 2019).",
+  "why": "MUST. Figure 1 callout. Last paragraph before the Conceptual Framework heading; "
+ },
+ {
+  "id": "U2",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "Help and transparency content in the surrounding pages further guides the user in interpreting the result responsibly.",
+  "new": "Help and transparency content in the surrounding pages further guides the user in interpreting the result responsibly. The process flow of the system is presented below as a HIPO chart (Figure 2) and a system flowchart (Figure 3).",
+  "ctx": "Help and transparency content in the surrounding pages further guides the user in interpreting the result responsibly.",
+  "why": "MUST. Figure 2 and 3 callouts. Last prose paragraph before the Process Flow (HIP"
+ },
+ {
+  "id": "U3",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "For this study, the alpha level was set to 0.05",
+  "new": "In applying Cochran’s formula for continuous data (Figure 4) to this study, the alpha level was set to 0.05",
+  "ctx": "For this study, the alpha level was set to 0.05 (95% confidence level), thus t = 1.96 for large populations. Following common practice cited by Bartlett et al. (2001), the acceptable margin of error for continuous data is set at 3%. Since the survey uses a 5-point Likert scale, the acceptable margin of error in scale points is computed as:11895475",
+  "why": "MUST. Figure 4 callout. The formula image directly follows the Determination of "
+ },
+ {
+  "id": "U4",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "the acceptable margin of error in scale points is computed as:",
+  "new": "the acceptable margin of error in scale points is computed as shown in Figure 5:",
+  "ctx": "For this study, the alpha level was set to 0.05 (95% confidence level), thus t = 1.96 for large populations. Following common practice cited by Bartlett et al. (2001), the acceptable margin of error for continuous data is set at 3%. Since the survey uses a 5-point Likert scale, the acceptable margin of error in scale points is computed as:11895475",
+  "why": "MUST. Figure 5 lead-in."
+ },
+ {
+  "id": "U5",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "Thus, the estimated standard deviation is:",
+  "new": "Thus, the estimated standard deviation is as shown in Figure 6:",
+  "ctx": "In the absence of pilot data, Bartlett et al. (2001) recommend estimating the standard deviation of a rating scale by dividing the inclusive range of the scale by 6. Thus, the estimated standard deviation is:",
+  "why": "MUST. Figure 6 lead-in."
+ },
+ {
+  "id": "U6",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "Substituting these values into Cochran’s continuous-data formula yields:",
+  "new": "Substituting these values into Cochran’s continuous-data formula yields the result shown in Figure 7:",
+  "ctx": "Substituting these values into Cochran’s continuous-data formula yields:1947863495300",
+  "why": "MUST. Figure 7 lead-in."
+ },
+ {
+  "id": "U7",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "distributed equally as:",
+  "new": "distributed equally as shown in Figure 8:",
+  "ctx": "The computed value is rounded up to the next whole number; therefore, the minimum required number of completed survey responses is 119. For practicality and to support equal representation across the two age strata, the study will target 120 completed responses, distributed equally as:6000751552575",
+  "why": "MUST. Figure 8 lead-in."
+ },
+ {
+  "id": "U8",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "the number of distributed questionnaires may be adjusted using:",
+  "new": "the number of distributed questionnaires may be adjusted using the formula in Figure 9:",
+  "ctx": "To account for possible nonresponse and incomplete survey forms, the researchers will distribute more questionnaires than the required minimum. As recommended by Bartlett et al. (2001), the number of distributed questionnaires may be adjusted using:",
+  "why": "MUST. Figure 9 lead-in."
+ },
+ {
+  "id": "U9",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "the required number of distributed questionnaires is calculated as follows:",
+  "new": "the required number of distributed questionnaires is calculated as shown in Figure 10:",
+  "ctx": "For instance, assuming an anticipated response/completion rate of 80%, the required number of distributed questionnaires is calculated as follows:1933575847725",
+  "why": "MUST. Figure 10 lead-in."
+ },
+ {
+  "id": "U10",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "In this respect, local findings support evaluating SwinFusion++ as a public-facing decision-support tool rather than as an isolated technical model.",
+  "new": "In this respect, local findings support evaluating SwinFusion++ as a public-facing decision-support tool rather than as an isolated technical model. Local detection research is also emerging: Esperanza et al. (2025) combined a pre-trained convolutional network with an attention-based recurrent network, tuned by particle swarm optimization, for deepfake video detection, and Laureta et al. (2025) developed a web-based CNN–LSTM system that distinguishes AI-generated from real voices in English and Tagalog.",
+  "ctx": "Local studies and Philippine-based evidence make the deployment side of the present study more concrete. Albert et al. (2021) show that access to computers and internet use vary widely across age groups in the Philippines, which directly affects how realistic a web-based deepfake detection platform can be under ordinary conditions. This evidence matters because system success cannot be measured by model accuracy alone. The platform must also remain understandable, efficient, and usable across mixed devices, internet conditions, and levels of digital familiarity. In this respect, local findings support evaluating SwinFusion++ as a public-facing decision-support tool rather than as an isolated technical model.",
+  "why": "MUST. Cites the two uncited references (one sentence, local-studies paragraph of"
+ },
+ {
+  "id": "U11",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "Esperanza, J., Marquez, J. F., & Sy, R. A. (2025).",
+  "new": "Esperanza, J. C., Marquez, J. F. E., & Sy, R. A. A. (2025).",
+  "ctx": "Esperanza, J., Marquez, J. F., & Sy, R. A. (2025). Hybrid convolutional-recurrent neural networks (CNN-RNN) model with temporal attention and particle swarm optimization for deepfake video detection. Isabela State University Linker: Journal of Engineering, Computing and Technology, 2(1), 99–115. https://doi.org/10.65141/ject.v2i1.n8",
+  "why": "MUST. Initials as printed in the article byline (Jeremias C. Esperanza, Jean Fid"
+ },
+ {
+  "id": "U12",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "(B. Chen et al., 2022; Saikia et al., 2022; Liang et al., 2023)",
+  "new": "(B. Chen et al., 2022; Kuang et al., 2022; Liang et al., 2023; Saikia et al., 2022)",
+  "ctx": "RQ3 requires recurrent evidence rather than only transformer comparisons. The preferred pair is the spatio-temporal-attention convolutional-LSTM family of B. Chen et al. (2022) and the optical-flow CNN–LSTM family of Saikia et al. (2022) The former emphasizes learned appearance-temporal attention, while the latter introduces explicit motion evidence. Published recurrent percentages remain literature-only unless the corresponding model is executed on the declared C23/C40 partitions with one video-level prediction (B. Chen et al., 2022; Saikia et al., 2022; Liang et al., 2023).",
+  "why": "SHOULD. Restores Kuang et al. (2022), verified on Crossref (first author Liang K"
+ },
+ {
+  "id": "U14",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "Saikia et al. (2022) The former",
+  "new": "Saikia et al. (2022). The former",
+  "ctx": "RQ3 requires recurrent evidence rather than only transformer comparisons. The preferred pair is the spatio-temporal-attention convolutional-LSTM family of B. Chen et al. (2022) and the optical-flow CNN–LSTM family of Saikia et al. (2022) The former emphasizes learned appearance-temporal attention, while the latter introduces explicit motion evidence. Published recurrent percentages remain literature-only unless the corresponding model is executed on the declared C23/C40 partitions with one video-level prediction (B. Chen et al., 2022; Saikia et al., 2022; Liang et al., 2023).",
+  "why": "MUST. Missing full stop introduced by my round-1 edit F4 (the original period af"
+ },
+ {
+  "id": "U15",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "Turnitin Results - Similarity Report",
+  "new": "TURNITIN RESULTS – SIMILARITY REPORT",
+  "ctx": "Turnitin Results - Similarity Report",
+  "why": "MUST. Matches Appendix A–G title lines (caps, en dash). Paragraph is already bol"
+ },
+ {
+  "id": "U16",
+  "op": "replace",
+  "src": "user items (methodologist)",
+  "old": "Turnitin Results - AI Report",
+  "new": "TURNITIN RESULTS – AI REPORT",
+  "ctx": "Turnitin Results - AI Report",
+  "why": "MUST. As U15."
+ },
+ {
+  "id": "D1",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 6836–6846).",
+  "new": "(pp. 6836–6846). https://openaccess.thecvf.com/content/ICCV2021/html/Arnab_ViViT_A_Video_Vision_Transformer_ICCV_2021_paper.html",
+  "ctx": "Arnab, A., Dehghani, M., Heigold, G., Sun, C., Lučić, M., & Schmid, C. (2021). ViViT: A video vision transformer. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 6836–6846).",
+  "why": "Arnab et al. (2021), ViViT. Verified on the CVF open-access page (HTTP 200, 2026"
+ },
+ {
+  "id": "D2",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 6299–6308).",
+  "new": "(pp. 6299–6308). https://openaccess.thecvf.com/content_cvpr_2017/html/Carreira_Quo_Vadis_Action_CVPR_2017_paper.html",
+  "ctx": "Carreira, J., & Zisserman, A. (2017). Quo vadis, action recognition? A new model and the Kinetics dataset. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 6299–6308).",
+  "why": "Carreira & Zisserman (2017). Verified on the CVF open-access page: title, both a"
+ },
+ {
+  "id": "D3",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 357–366).",
+  "new": "(pp. 357–366). https://openaccess.thecvf.com/content/ICCV2021/html/Chen_CrossViT_Cross-Attention_Multi-Scale_Vision_Transformer_for_Image_Classification_ICCV_2021_paper.html",
+  "ctx": "Chen, C.-F. R., Fan, Q., & Panda, R. (2021). CrossViT: Cross-attention multi-scale vision transformer for image classification. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 357–366).",
+  "why": "C.-F. R. Chen et al. (2021), CrossViT. Verified on the CVF open-access page: tit"
+ },
+ {
+  "id": "D4",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 702–703).",
+  "new": "(pp. 702–703). https://openaccess.thecvf.com/content_CVPRW_2020/html/w40/Cubuk_Randaugment_Practical_Automated_Data_Augmentation_With_a_Reduced_Search_Space_CVPRW_2020_paper.html",
+  "ctx": "Cubuk, E. D., Zoph, B., Shlens, J., & Le, Q. V. (2020). RandAugment: Practical automated data augmentation with a reduced search space. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (pp. 702–703).",
+  "why": "Cubuk et al. (2020), RandAugment. Verified on the CVF open-access page: title, a"
+ },
+ {
+  "id": "D5",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 5039–5049).",
+  "new": "(pp. 5039–5049). https://openaccess.thecvf.com/content/CVPR2021/html/Haliassos_Lips_Dont_Lie_A_Generalisable_and_Robust_Approach_To_Face_CVPR_2021_paper.html",
+  "ctx": "Haliassos, A., Vougioukas, K., Petridis, S., & Pantic, M. (2021). Lips don’t lie: A generalisable and robust approach to face forgery detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 5039–5049).",
+  "why": "Haliassos et al. (2021), Lips don't lie. Verified on the CVF open-access page: t"
+ },
+ {
+  "id": "D6",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 2307–2311). IEEE.",
+  "new": "(pp. 2307–2311). IEEE. https://doi.org/10.1109/ICASSP.2019.8682602",
+  "ctx": "Nguyen, H. H., Yamagishi, J., & Echizen, I. (2019). Capsule-forensics: Using capsule networks to detect forged images and videos. In 2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 2307–2311). IEEE.",
+  "why": "Nguyen et al. (2019), Capsule-forensics. Verified on Crossref: DOI 10.1109/icass"
+ },
+ {
+  "id": "D7",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 6105–6114). PMLR.",
+  "new": "(Vol. 97, pp. 6105–6114). PMLR. https://proceedings.mlr.press/v97/tan19a.html",
+  "ctx": "Tan, M., & Le, Q. V. (2019). EfficientNet: Rethinking model scaling for convolutional neural networks. In Proceedings of the 36th International Conference on Machine Learning (pp. 6105–6114). PMLR.",
+  "why": "Tan & Le (2019), EfficientNet. Verified on the PMLR page: title, both authors, I"
+ },
+ {
+  "id": "D8",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 32–42).",
+  "new": "(pp. 32–42). https://openaccess.thecvf.com/content/ICCV2021/html/Touvron_Going_Deeper_With_Image_Transformers_ICCV_2021_paper.html",
+  "ctx": "Touvron, H., Cord, M., Sablayrolles, A., Synnaeve, G., & Jégou, H. (2021). Going deeper with image transformers. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 32–42).",
+  "why": "Touvron et al. (2021), Going deeper with image transformers. Verified on the CVF"
+ },
+ {
+  "id": "D9",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 22658–22668).",
+  "new": "(pp. 22658–22668). https://openaccess.thecvf.com/content/ICCV2023/html/Xu_TALL_Thumbnail_Layout_for_Deepfake_Video_Detection_ICCV_2023_paper.html",
+  "ctx": "Xu, Y., Liang, J., Jia, G., Yang, Z., Zhang, Y., & He, R. (2023). TALL: Thumbnail layout for deepfake video detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 22658–22668).",
+  "why": "Xu et al. (2023), TALL. Verified on the CVF open-access page: title, all six aut"
+ },
+ {
+  "id": "D10",
+  "op": "replace",
+  "src": "user items (statistician)",
+  "old": "(pp. 15044–15054).",
+  "new": "(pp. 15044–15054). https://openaccess.thecvf.com/content/ICCV2021/html/Zheng_Exploring_Temporal_Coherence_for_More_General_Video_Face_Forgery_Detection_ICCV_2021_paper.html",
+  "ctx": "Zheng, Y., Bao, J., Chen, D., Zeng, M., & Wen, F. (2021). Exploring temporal coherence for more general video face forgery detection. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 15044–15054).",
+  "why": "Zheng et al. (2021), FTCN. Verified on the CVF open-access page: title, all five"
+ },
+ {
+  "id": "DATE",
+  "op": "replace",
+  "src": "lead (user item)",
+  "old": "MARCH 2026",
+  "new": "NOVEMBER 2026",
+  "why": "Title-page date set to the current month."
+ }
+]

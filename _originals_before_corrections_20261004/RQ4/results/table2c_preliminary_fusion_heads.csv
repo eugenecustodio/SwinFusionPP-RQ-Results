@@ -1,0 +1,4 @@
+model,train_condition,test_condition,roc_auc,f1,accuracy,location
+Full TLBG-HCA head (preliminary),FF++ C23 (HQ),FF++ C23 (HQ),0.9964,0.9857,0.9857,Table 8
+Late concatenation head (preliminary),FF++ C23 (HQ),FF++ C23 (HQ),0.9952,0.9892,0.9893,Table 8
+No-exchange head (capacity-matched) (preliminary),FF++ C23 (HQ),FF++ C23 (HQ),0.9964,0.9857,0.9857,Table 8

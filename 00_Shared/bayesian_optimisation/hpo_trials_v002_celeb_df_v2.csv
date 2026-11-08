@@ -1,0 +1,9 @@
+number,state,params,best_val_auc
+0,COMPLETE,"{""backbone_lr"": 8.533972024262373e-06, ""effective_batch"": 16, ""new_lr"": 0.00017595125667446555, ""schedule"": ""C"", ""weight_decay"": 0.002047024996915366}",0.9914478138474148
+1,COMPLETE,"{""backbone_lr"": 2.640256673207667e-05, ""effective_batch"": 8, ""new_lr"": 7.519551663703056e-05, ""schedule"": ""C"", ""weight_decay"": 0.00011960511813673799}",0.9977372340804618
+2,COMPLETE,"{""backbone_lr"": 2.183147879507217e-05, ""effective_batch"": 8, ""new_lr"": 3.3953765996559895e-05, ""schedule"": ""A"", ""weight_decay"": 0.0063305092057411175}",0.9993051348751025
+3,COMPLETE,"{""backbone_lr"": 1.1419012091368967e-06, ""effective_batch"": 8, ""new_lr"": 0.0002571513301765581, ""schedule"": ""A"", ""weight_decay"": 0.0036103929454046214}",0.9872385347254392
+4,PRUNED,"{""backbone_lr"": 4.2791045212017955e-06, ""effective_batch"": 8, ""new_lr"": 3.056909504291824e-05, ""schedule"": ""A"", ""weight_decay"": 0.08508792338573713}",
+5,PRUNED,"{""backbone_lr"": 3.2253350769556597e-07, ""effective_batch"": 16, ""new_lr"": 3.085394349418348e-05, ""schedule"": ""B"", ""weight_decay"": 0.010190652093139104}",
+6,COMPLETE,"{""backbone_lr"": 2.707854744299532e-05, ""effective_batch"": 8, ""new_lr"": 6.871490233593605e-05, ""schedule"": ""A"", ""weight_decay"": 0.00042069221027598046}",0.9979243131525496
+7,PRUNED,"{""backbone_lr"": 7.541777937036586e-06, ""effective_batch"": 8, ""new_lr"": 5.096897673030498e-05, ""schedule"": ""B"", ""weight_decay"": 0.03175548864444891}",

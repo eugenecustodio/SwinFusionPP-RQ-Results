@@ -1,0 +1,29 @@
+Afchar, D., Nozick, V., Yamagishi, J., & Echizen, I. (2018). MesoNet: A compact facial video forgery detection network. In 2018 IEEE International Workshop on Information Forensics and Security (WIFS) (pp. 1–7). IEEE. https://doi.org/10.1109/WIFS.2018.8630761
+
+Cao, J., Ma, C., Yao, T., Chen, S., Ding, S., & Yang, X. (2022). End-to-end reconstruction-classification learning for face forgery detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 4103–4112). https://doi.org/10.1109/CVPR52688.2022.00408
+
+Khormali, A., & Yuan, J.-S. (2022). DFDT: An end-to-end DeepFake detection framework using vision transformer. Applied Sciences, 12(6), Article 2953. https://doi.org/10.3390/app12062953
+
+Li, J., Xie, H., Li, J., Wang, Z., & Zhang, Y. (2021). Frequency-aware discriminative feature learning supervised by single-center loss for face forgery detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 6454–6463). https://doi.org/10.1109/CVPR46437.2021.00639
+
+Li, L., Bao, J., Zhang, T., Yang, H., Chen, D., Wen, F., & Guo, B. (2020). Face X-ray for more general face forgery detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 5000–5009). https://doi.org/10.1109/CVPR42600.2020.00505
+
+Neimark, D., Bar, O., Zohar, M., & Asselmann, D. (2021). Video transformer network. In Proceedings of the IEEE/CVF International Conference on Computer Vision Workshops (pp. 3156–3165). https://doi.org/10.1109/ICCVW54120.2021.00355
+
+Qian, Y., Yin, G., Sheng, L., Chen, Z., & Shao, J. (2020). Thinking in frequency: Face forgery detection by mining frequency-aware clues. In A. Vedaldi, H. Bischof, T. Brox, & J.-M. Frahm (Eds.), Computer vision—ECCV 2020 (pp. 86–103). Springer. https://doi.org/10.1007/978-3-030-58610-2_6
+
+Tran, D., Bourdev, L., Fergus, R., Torresani, L., & Paluri, M. (2015). Learning spatiotemporal features with 3D convolutional networks. In Proceedings of the IEEE International Conference on Computer Vision (pp. 4489–4497). https://doi.org/10.1109/ICCV.2015.510
+
+Wang, J., Wu, Z., Ouyang, W., Han, X., Chen, J., Jiang, Y.-G., & Li, S.-N. (2022). M2TR: Multi-modal multi-scale transformers for deepfake detection. In Proceedings of the 2022 International Conference on Multimedia Retrieval (pp. 615–623). Association for Computing Machinery. https://doi.org/10.1145/3512527.3531415
+
+Wang, L., Xiong, Y., Wang, Z., Qiao, Y., Lin, D., Tang, X., & Van Gool, L. (2016). Temporal segment networks: Towards good practices for deep action recognition. In B. Leibe, J. Matas, N. Sebe, & M. Welling (Eds.), Computer vision—ECCV 2016 (pp. 20–36). Springer. https://doi.org/10.1007/978-3-319-46484-8_2
+
+Wang, P., Liu, K., Zhou, W., Zhou, H., Liu, H., Zhang, W., & Yu, N. (2022). ADT: Anti-deepfake transformer. In ICASSP 2022 – 2022 IEEE International Conference on Acoustics, Speech and Signal Processing (pp. 2899–2903). IEEE. https://doi.org/10.1109/ICASSP43922.2022.9746888
+
+Zhang, Y., Li, X., Liu, C., Shuai, B., Zhu, Y., Brattoli, B., Chen, H., Marsic, I., & Tighe, J. (2021). VidTr: Video transformer without convolutions. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 13557–13567). https://doi.org/10.1109/ICCV48922.2021.01332
+
+Zhao, H., Zhou, W., Chen, D., Wei, T., Zhang, W., & Yu, N. (2021). Multi-attentional deepfake detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 2185–2194). https://doi.org/10.1109/CVPR46437.2021.00222
+
+Zi, B., Chang, M., Chen, J., Ma, X., & Jiang, Y.-G. (2020). WildDeepfake: A challenging real-world dataset for deepfake detection. In Proceedings of the 28th ACM International Conference on Multimedia (pp. 2382–2390). Association for Computing Machinery. https://doi.org/10.1145/3394171.3413769
+
+[Verification: every entry above was matched on api.crossref.org (title, authors, venue, pages, DOI) on 2026-10-31. Author order for Zhao, H. et al. (2021) follows the CVF paper (Crossref lists a different order). Pages follow the IEEE/ACM/Springer records behind the DOIs; CVF open-access page numbers can differ by a few pages. ECCV editors follow the existing Masi et al. (2020) entry style; the ECCV 2016 editors (Leibe, Matas, Sebe, Welling) are not in the Crossref record and should be confirmed on the Springer page. Already in References and not repeated: Arnab et al. (2021), Carreira & Zisserman (2017), Chollet (2017), Haliassos et al. (2021), Jiang et al. (2020), Masi et al. (2020), Xu et al. (2023), Zhao, C. et al. (2023). The WildDeepfake title in Crossref is truncated to "WildDeepfake"; the full title is from the paper and the TALL reference list.]

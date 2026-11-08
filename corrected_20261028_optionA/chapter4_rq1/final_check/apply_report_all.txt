@@ -1,0 +1,155 @@
+C1: applied in block 184
+C2: applied in block 209
+C3: applied in block 209
+C4: applied in block 209
+C5: applied in block 210
+C6: applied in block 211
+C7: applied in block 211
+C8: applied in block 211
+C9: applied in block 211
+C10: applied in block 211
+C11: applied in block 220
+C12: applied in block 224
+C13: applied in block 226
+C14: applied in block 229
+C15: applied in block 232
+C16: applied in block 234
+C17: paragraph deleted (block 246)
+C18: paragraph deleted (block 247)
+C19: paragraph deleted (block 248)
+C20: paragraph deleted (block 249)
+C21: applied in block 264
+C22: applied in block 271
+C23: applied in block 282
+C24: applied in block 282
+C25: applied in block 284
+C26: applied in block 285
+C27: applied in block 305
+C28: applied in block 345
+C29: applied in block 349
+C30: applied in block 361
+C31: applied in block 361
+C32: applied in block 362
+C33: applied in block 370
+C34: applied in block 372
+C35: applied in block 403
+C36: applied in block 403
+C37: applied in block 403
+C38: applied in block 440
+C39: applied in block 458
+C40: applied in block 476
+C41: applied in block 477
+C42: applied in block 478
+C43: paragraph deleted (block 479)
+C44: paragraph deleted (block 480)
+C45: applied in block 489
+C46: applied in block 491
+C47: applied in block 493
+C48: applied in block 494
+C49: applied in block 534
+C50: applied in block 540
+C51: applied in block 550
+C52: applied in block 550
+C53: applied in block 552
+C54: applied in block 553
+C55: applied in block 556
+C56: applied in block 563
+C57: applied in block 566
+C58: applied in block 574
+C59: applied in block 599
+C60: applied in block 600
+C61: applied in block 601
+C62: applied in block 650
+C63: applied in block 650
+C64: applied in block 653
+C65: applied in block 653
+C66: applied in block 662
+C67: applied in block 284
+C68: applied in block 372
+F1: applied in block 245 (by context)
+F2: applied in block 264 (by context)
+F3: applied in block 264 (by context)
+F4: applied in block 264 (by context)
+F5: applied in block 595 (by context)
+F6: applied in block 184 (by context)
+F7: applied in block 491 (by context)
+F8: applied in block 651 (by context)
+F9: applied in block 469 (by context)
+F10a: applied in block 241 (by context)
+F10b: applied in block 243 (by context)
+F10c: applied in block 255 (by context)
+F10d: applied in block 555 (by context)
+F10e: applied in block 556 (by context)
+F10f: applied in block 242 (by context)
+F10g: applied in block 267 (by context)
+F10h: applied in block 243 (by context)
+F10i: applied in block 244 (by context)
+F10j: applied in block 264 (by context)
+F10k: applied in block 266 (by context)
+F10l: applied in block 551 (by context)
+F10m: applied in block 251 (by context)
+F10n: applied in block 254 (by context)
+F10o: applied in block 267 (by context)
+F10p: applied in block 245 (by context)
+F10q: applied in block 262 (by context)
+F10r: applied in block 245 (by context)
+F10s: applied in block 263 (by context)
+F10t: applied in block 256 (by context)
+F10u: applied in block 269 (by context)
+F10v: applied in block 269 (by context)
+F11a: applied in block 182 (by context)
+F11b: applied in block 183 (by context)
+F11c: applied in block 184 (by context)
+F11d: applied in block 251 (by context)
+F11e: applied in block 261 (by context)
+F11f: applied in block 262 (by context)
+F11g: applied in block 264 (by context)
+F11h: applied in block 340 (by context)
+F11i: applied in block 359 (by context)
+F11j: applied in block 359 (by context)
+F11k: applied in block 403 (by context)
+F11l: applied in block 403 (by context)
+F11m: applied in block 652 (by context)
+F12a: applied in block 262 (by context)
+F12b: applied in block 273 (by context)
+F12c: applied in block 327 (by context)
+S1: applied in block 541 (by context)
+S2: applied in block 650 (by context)
+S3: applied in block 227 (by context)
+S4a: applied in block 255 (by context)
+S4b: applied in block 299 (by context)
+S4c: applied in block 454 (by context)
+S5: applied in block 240 (by context)
+S6: applied in block 430 (by context)
+S7a: applied in block 440 (by context)
+S7b: applied in block 440 (by context)
+S7c: applied in block 440 (by context)
+S7d: applied in block 523 (by context)
+R3-1: applied in block 133 (single-text-node path)
+R3-2: applied in block 182 (by context)
+U1: applied in block 275 (by context)
+U2: applied in block 372 (by context)
+U3: applied in block 414 (by context)
+U4: applied in block 414 (by context)
+U5: applied in block 417 (by context)
+U6: applied in block 420 (by context)
+U7: applied in block 425 (by context)
+U8: applied in block 430 (by context)
+U9: applied in block 433 (by context)
+U10: applied in block 270 (by context)
+U11: applied in block 797 (by context)
+U12: applied in block 264 (by context)
+U14: applied in block 264 (by context)
+U15: applied in block 1180 (by context)
+U16: applied in block 1183 (by context)
+D1: applied in block 765 (by context)
+D2: applied in block 779 (by context)
+D3: applied in block 783 (by context)
+D4: applied in block 787 (by context)
+D5: applied in block 817 (by context)
+D6: applied in block 887 (by context)
+D7: applied in block 911 (by context)
+D8: applied in block 915 (by context)
+D9: applied in block 933 (by context)
+D10: applied in block 947 (by context)
+DATE: applied in block 25

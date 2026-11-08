@@ -1,0 +1,5 @@
+Test set,Videos (fake / real),Clusters,Coverage,Preprocessing failures,Test videos sharing lineage with another condition,"Strict lineage-free subset, by transfer source"
+FF++ C23 (HQ),280 (140 / 140),70,100.0%,0,260 (92.9%),from Celeb-DF v2: 280; from DeeperForensics-1.0: 20
+FF++ C40 (LQ),280 (140 / 140),70,100.0%,0,260 (92.9%),from FF++ C23: 280; from Celeb-DF v2: 280; from DeeperForensics-1.0: 20
+Celeb-DF v2,978 (843 / 135),54 (all fakes in 9),100.0%,0,0 (0.0%),from FF++ C23: 978; from DeeperForensics-1.0: 978
+DeeperForensics-1.0,402 (201 / 201),201,100.0%,0,382 (95.0%),from FF++ C23: 60; from Celeb-DF v2: 402

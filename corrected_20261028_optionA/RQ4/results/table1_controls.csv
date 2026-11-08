@@ -1,0 +1,3 @@
+family,training,test,model_a,model_b,delta_auc,ci_low,ci_high,permutation_p_rank,holm_p,family_size,videos,clusters
+RQ4_controls,FF++ C23 (HQ),FF++ C23 (HQ),SwinFusion++ (fixed recipe),Capacity control,-0.00030612244897954,-0.0019387755102041604,0.0008673469387755484,0.8446310737852429,0.8446310737852429,2,280,70
+RQ4_controls,FF++ C23 (HQ),FF++ C23 (HQ),SwinFusion++ (fixed recipe),Topology control,-0.0019387755102040494,-0.005970663265306216,0.00010204081632647632,0.2349530093981204,0.4699060187962408,2,280,70

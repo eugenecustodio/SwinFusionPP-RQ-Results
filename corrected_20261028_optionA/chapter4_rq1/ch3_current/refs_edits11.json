@@ -1,0 +1,37 @@
+{
+ "INS_Memon": {
+  "find": "Montserrat, D. M., Hao, H.",
+  "repl": "Memon, M. A., Ting, H., Cheah, J.-H., Ramayah, T., Chuah, F., & Cham, T. H. (2020). Sample size for survey research: Review and recommendations. Journal of Applied Structural Equation Modeling, 4(2), i–xx. https://doi.org/10.47263/jasem.4(2)01\nMontserrat, D. M., Hao, H.",
+  "regex": false
+ },
+ "INS_Nielsen": {
+  "find": "Philippine Health Research Ethics Board. (2022).",
+  "repl": "Nielsen, J., & Landauer, T. K. (1993). A mathematical model of the finding of usability problems. In Proceedings of the INTERACT ’93 and CHI ’93 Conference on Human Factors in Computing Systems (pp. 206–213). Association for Computing Machinery. https://doi.org/10.1145/169059.169166\nPhilippine Health Research Ethics Board. (2022).",
+  "regex": false
+ },
+ "INS_Roscoe": {
+  "find": "^Rössler, A\\., Cozzolino",
+  "repl": "Roscoe, J. T. (1975). Fundamental research statistics for the behavioral sciences (2nd ed.). Holt, Rinehart and Winston.\nRössler, A., Cozzolino",
+  "regex": true
+ },
+ "INS_Pressman": {
+  "find": "^Republic Act No\\. 10173, ",
+  "repl": "Pressman, R. S., & Maxim, B. R. (2020). Software engineering: A practitioner’s approach (9th ed.). McGraw-Hill Education.\nRepublic Act No. 10173, ",
+  "regex": true
+ },
+ "DEL_Pressman": {
+  "find": "REFERENCE: Pressman, R. S., & Maxim, B. R. (2020). Software engineering: A practitioner’s approach (9th ed.). McGraw-Hill Education. \n",
+  "repl": "",
+  "regex": false
+ },
+ "DEL_block": {
+  "find": "References: \nRoscoe, J. T. (1975). Fundamental research statistics for the behavioral sciences (2nd ed.). Holt, Rinehart and Winston. \nMemon, M. A., Ting, H., Cheah, J.-H., Ramayah, T., Chuah, F., & Cham, T. H. (2020). Sample size for survey research: Review and recommendations. Journal of Applied Structural Equation Modeling, 4(2), i–xx. https://doi.org/10.47263/jasem.4(2)01 \n",
+  "repl": "",
+  "regex": false
+ },
+ "DEL_Nielsen": {
+  "find": "Reference: Nielsen, J., & Landauer, T. K. (1993). A mathematical model of the finding of usability problems. In Proceedings of the INTERACT ‘93 and CHI ‘93 Conference on Human Factors in Computing Systems (pp. 206–213). Association for Computing Machinery. https://doi.org/10.1145/169059.169166\n",
+  "repl": "",
+  "regex": false
+ }
+}

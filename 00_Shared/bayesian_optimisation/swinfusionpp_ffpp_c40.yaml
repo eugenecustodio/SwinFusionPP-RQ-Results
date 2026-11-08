@@ -1,0 +1,60 @@
+optimizer: AdamW
+betas:
+- 0.9
+- 0.999
+eps: 1.0e-08
+loss: BCEWithLogitsLoss
+precision: bfloat16
+gradient_clip_norm: 1.0
+effective_batch: 8
+new_lr: 0.0002863921844293367
+backbone_lr: 2.7291963180075902e-05
+weight_decay: 0.0826278062566691
+warmup_fraction: 0.1
+scheduler: linear_warmup_cosine
+max_epochs: 30
+patience: 6
+min_delta: 0.001
+min_stop_epoch: 8
+unfreeze_stage4_epoch: 5
+unfreeze_stage3_epoch: 10
+seed_slots:
+- 260901
+- 260902
+- 260903
+selection:
+- roc_auc
+- pr_auc
+- negative_bce
+- negative_epoch
+weight_decay_exclusions:
+- bias
+- LayerNorm
+- scalar_gates
+sampler: class_group_video_clip
+epoch_size: ceil(analyzed_training_videos/effective_batch)*effective_batch
+augmentation: configs/data/randaugment_v001.yaml
+model: full
+condition: ffpp_c40
+optimization_regimen: dataset_specific_bo
+purpose: principal_retrain
+data_protocol: recipe_v020
+partition_access:
+- train
+- validation
+schedule: C
+selected_trial_provenance:
+  study: swinfusionpp_ffpp_c40_v002
+  trial_number: 4
+  trial_seed: 1212135974
+  config_sha256: 00069d23bb34e5804450c6d45e98965db3a14b7b79bd6819c10d416f64925b7a
+  result_sha256: 4cdc68e875577ff1f6cd85955c55a19ee33907f08e4d5e4638c349ebe125da0b
+  selected_checkpoint: checkpoints/hpo_v020/ffpp_c40/trial_004/epoch_018.pt
+  selected_checkpoint_sha256: 263811b15a6405d0b8c12e7c9befabbd1a006a9c3474960a9b3c2d5b1c231120
+  source_validation_metrics:
+    roc_auc: 0.9977903391572455
+    pr_auc: 0.997825606458408
+    bce: 0.12196138555152425
+    pr_auc_definition: average_precision
+    analyzed_videos: 279
+initialization: original_official_pretrained_backbones_and_seeded_new_modules_not_trial_checkpoint

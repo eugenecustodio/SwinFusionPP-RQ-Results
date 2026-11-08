@@ -1,0 +1,5 @@
+model,train_condition,test_condition,roc_auc,f1,accuracy,location
+Xception (reproduced),Celeb-DF v2,Celeb-DF v2,0.648,0.914,0.8417,Table 7
+Xception (reproduced),DeeperForensics-1.0,DeeperForensics-1.0,0.9978,0.5821,0.46,Table 7
+Xception (reproduced),FF++ C23 (HQ),FF++ C23 (HQ),0.7725,0.6886,0.6964,Table 7
+Xception (reproduced),FF++ C40 (LQ),FF++ C40 (LQ),0.8109,0.7429,0.7429,Table 7

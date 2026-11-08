@@ -1,0 +1,29 @@
+[
+ {
+  "id": "C8x",
+  "applies_to": "C8 (block 175, current accepted text)",
+  "op": "replace",
+  "old": "with previously reported results for Xception, I3D, STIL, FTCN with its Temporal Transformer component, TALL-Swin, and SFormer.",
+  "new": "with previously reported results for established frame-level, recurrent, 3D-convolutional, and spatio-temporal detectors, including Xception, I3D, STIL, FTCN with its Temporal Transformer component, TALL-Swin, and SFormer.",
+  "why": "RQ2 now compares against the expanded set of previously reported detectors (Tables 10–11).",
+  "result_preview": "RQ2 will compare BO-selected SwinFusion++, with the fixed-recipe result alongside, with previously reported results for established frame-level, recurrent, 3D-convolutional, and spatio-temporal detectors, including Xception, I3D, STIL, FTCN with its Temporal Transformer component, TALL-Swin, and SFormer. RQ3 will compare SwinFusion++ on C23 and C40 with previously reported CNN–LSTM results."
+ },
+ {
+  "id": "C52x",
+  "applies_to": "C52 (block 514, current accepted text)",
+  "op": "replace",
+  "old": "Previously reported results will be given for the subset with values on the datasets of this study: Xception, I3D, STIL, FTCN, ISTVT, TALL-Swin, SFormer, CAST, TSFF-Net, and CNN–LSTM models.",
+  "new": "Previously reported results will be given for the subset with values on the datasets of this study: frame-level detectors (Xception, MesoNet, Face X-ray, F3-Net, FDFL, Multi-attention, RECCE, and the face-warping-artifact detectors D-FWA and DSP-FWA); recurrent models (CNN–LSTM models, ResNet+LSTM, CNN–GRU, and Two-branch); 3D-convolutional and video-recognition models (C3D, I3D, TSN, TEI, and ADDNet-3D); spatio-temporal detectors (S-MIL, STIL, FTCN, and LipForensics); and transformer-based and fusion models (ViViT, VTN, VidTr, DFDT, ADT, M2TR, ISTVT, TALL-Swin, SFormer, CAST, and TSFF-Net).",
+  "why": "Lists every model in Tables 10 and 11 plus CAST and TSFF-Net (RQ4) and the CNN–LSTM models (RQ3), grouped by family.",
+  "result_preview": "they are grouped according to the kind of evidence they emphasize and the kind of comparison they make possible. Previously reported results will be given for the subset with values on the datasets of this study: frame-level detectors (Xception, MesoNet, Face X-ray, F3-Net, FDFL, Multi-attention, RECCE, and the face-warping-artifact detectors D-FWA and DSP-FWA); recurrent models (CNN–LSTM models, ResNet+LSTM, CNN–GRU, and Two-branch); 3D-convolutional and video-recognition models (C3D, I3D, TSN, TEI, and ADDNet-3D); spatio-temporal detectors (S-MIL, STIL, FTCN, and LipForensics); and transformer-based and fusion models (ViViT, VTN, VidTr, DFDT, ADT, M2TR, ISTVT, TALL-Swin, SFormer, CAST, and TSFF-Net)."
+ },
+ {
+  "id": "C31x",
+  "applies_to": "C31 (block 325, current accepted text)",
+  "op": "replace",
+  "old": "CNN–LSTM models, CAST, and TSFF-Net)",
+  "new": "CNN–LSTM models, CAST, TSFF-Net, and the other previously reported detectors listed in Chapter 4)",
+  "why": "Keeps the “will not be retrained” statement complete for the expanded set.",
+  "result_preview": "External baselines (Xception, I3D, STIL, FTCN with Temporal Transformer, TALL-Swin, SFormer, CNN–LSTM models, CAST, TSFF-Net, and the other previously reported detectors listed in Chapter 4) will not be retrained in this study; their previously reported results will be recorded with their datasets, protocols, and evaluation units."
+ }
+]

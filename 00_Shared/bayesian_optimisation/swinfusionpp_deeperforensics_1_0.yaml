@@ -1,0 +1,60 @@
+optimizer: AdamW
+betas:
+- 0.9
+- 0.999
+eps: 1.0e-08
+loss: BCEWithLogitsLoss
+precision: bfloat16
+gradient_clip_norm: 1.0
+effective_batch: 8
+new_lr: 3.0090099897514246e-05
+backbone_lr: 2.1819508282434458e-05
+weight_decay: 0.0001224637740754539
+warmup_fraction: 0.1
+scheduler: linear_warmup_cosine
+max_epochs: 30
+patience: 6
+min_delta: 0.001
+min_stop_epoch: 8
+unfreeze_stage4_epoch: 3
+unfreeze_stage3_epoch: 7
+seed_slots:
+- 260901
+- 260902
+- 260903
+selection:
+- roc_auc
+- pr_auc
+- negative_bce
+- negative_epoch
+weight_decay_exclusions:
+- bias
+- LayerNorm
+- scalar_gates
+sampler: class_group_video_clip
+epoch_size: ceil(analyzed_training_videos/effective_batch)*effective_batch
+augmentation: configs/data/randaugment_v001.yaml
+model: full
+condition: deeperforensics_1_0
+optimization_regimen: dataset_specific_bo
+purpose: principal_retrain
+data_protocol: recipe_v020
+partition_access:
+- train
+- validation
+schedule: A
+selected_trial_provenance:
+  study: swinfusionpp_deeperforensics_1_0_v002
+  trial_number: 4
+  trial_seed: 782631618
+  config_sha256: 7dea96fa3b0763e7dd9188cd45c0ceaf0d8be49761b9c47a59cca3ffcd8ad47d
+  result_sha256: e718f2f81ead3f9b3e4cf8bd7e08ecacd9ac158c44ef041b3382e6b510dcffc9
+  selected_checkpoint: checkpoints/hpo_v020/deeperforensics_1_0/trial_004/epoch_014.pt
+  selected_checkpoint_sha256: 8a22f73758b0dd5b5216fd077d34eb5af7a1b91661cfec6c7dd1dc3fa14d517d
+  source_validation_metrics:
+    roc_auc: 0.9977213541666666
+    pr_auc: 0.997986694677871
+    bce: 0.05236994143276107
+    pr_auc_definition: average_precision
+    analyzed_videos: 192
+initialization: original_official_pretrained_backbones_and_seeded_new_modules_not_trial_checkpoint

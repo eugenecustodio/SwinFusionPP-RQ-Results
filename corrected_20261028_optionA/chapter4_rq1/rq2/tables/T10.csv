@@ -1,0 +1,11 @@
+Model,FF++ C23,FF++ C40,Celeb-DF v2,DeeperForensics-1.0
+__SPAN__,"This study: three-seed ensembles, thresholds frozen on source validation",,,
+SwinFusion++ (BO-selected),Acc 98.21; AUC 0.9964,Acc 96.07; AUC 0.9941,Acc 98.36; AUC 0.9983,Acc 98.51; AUC 0.9954
+SwinFusion++ (fixed recipe),Acc 97.86; AUC 0.9942,Acc 94.64; AUC 0.9878,Acc 97.75; AUC 0.9951,Acc 98.76; AUC 0.9974
+__SPAN__,"Previously reported (each paper’s own split, frame sampling, and operating point)",,,
+Xception,Acc 98.93–100.00 (A)ᵃᵇ,Acc 96.78–97.14 (A)ᵃᵇ,Acc 99.44 (A)ᵇ,Acc 100.00 (B)ᶜ
+I3D,Acc 92.86 (A)ᵇ,Acc 91.07 (A)ᵇ,Acc 99.23 (A)ᵇ,Acc 100.00 (B)ᶜ
+STIL,Acc 99.64 (A)ᵃ,Acc 98.21; AUC 0.9712 (A)ᵃ,Acc 99.78 (A)ᵃ,—
+FTCN with Temporal Transformer,Acc 99.1; AUC 0.998 (B)ᵉ,AUC 0.983 (B)ᵉ,—,AUC 1.000 (B)ᵉ
+TALL-Swin,Acc 98.65; AUC 0.9987 (B)ᵈ,Acc 92.82; AUC 0.9457 (B)ᵈ,—,—
+SFormer,Acc 98.50–99.90 (A)ᶠ,Acc 94.82–98.15 (A)ᶠ,Acc 95.04–99.10 (A)ᶠ,Acc 99.67–100.00 (A)ᶠ

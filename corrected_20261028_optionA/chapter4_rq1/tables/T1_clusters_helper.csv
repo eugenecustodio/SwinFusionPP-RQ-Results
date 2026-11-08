@@ -1,0 +1,5 @@
+test_set,videos,fake,real,dependency_clusters,clusters_containing_fakes,coverage_min,preprocessing_failures_max,global_lineage_clusters
+FF++ C23,280,140,140,70,70,1.0,0,70
+FF++ C40,280,140,140,70,70,1.0,0,70
+Celeb-DF v2,978,843,135,54,9,1.0,0,54
+DeeperForensics-1.0,402,201,201,201,201,1.0,0,175

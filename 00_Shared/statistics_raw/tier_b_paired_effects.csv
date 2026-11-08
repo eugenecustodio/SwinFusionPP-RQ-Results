@@ -1,0 +1,5 @@
+family_rq,model_a,model_b,training_dataset,test_dataset,auc_difference,ci_low,ci_high,bootstrap_two_sided_p,valid_draws,permutation_p,clusters,eligible_videos,evidence_level,holm_adjusted_p
+RQ4_tier_b,tierb_one_directional,swinfusionpp_full,ffpp_c23,ffpp_c23,-0.0005867346938774887,-0.0020153061224489344,0.00010204081632658735,0.2888,5000,1.0,70,280,exploratory_single_seed,1.0
+RQ4_tier_b,tierb_no_gate,swinfusionpp_full,ffpp_c23,ffpp_c23,0.0006632653061225957,-0.0005102040816327147,0.003137755102040729,0.7488,5000,0.5158968206358728,70,280,exploratory_single_seed,1.0
+RQ4_tier_b,tierb_no_agreement,swinfusionpp_full,ffpp_c23,ffpp_c23,-7.6530612244885e-05,-0.0011734693877550884,0.0014540816326530398,0.9656,5000,1.0,70,280,exploratory_single_seed,1.0
+RQ4_tier_b,tierb_stages_34_only,swinfusionpp_full,ffpp_c23,ffpp_c23,-0.000688775510204076,-0.0021938775510204067,0.0001020408163264791,0.1764,5000,1.0,70,280,exploratory_single_seed,1.0

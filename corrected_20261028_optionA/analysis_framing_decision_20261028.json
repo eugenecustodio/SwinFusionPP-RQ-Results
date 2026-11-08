@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "decided_at": "2026-10-28",
+  "decided_by": "user (explicit instruction in session: 'For No. 1, I want it to be Option A')",
+  "decision": "Report results according to the manuscript's Chapter 3 plan and decision D-25: the fixed-recipe comparison (SwinFusion++, Swin-B, Video Swin-B, identical non-BO recipe) is the principal architecture evidence; the BO-selected SwinFusion++ is reported separately as a configured system; external comparisons (RQ2, RQ3, published context) use the BO-selected configuration with the fixed-recipe value alongside.",
+  "supersedes_for_reporting": "presented_model_decision_v020.json (2026-10-02), which had made the BO-selected model primary",
+  "test_results_known_at_decision": true,
+  "nothing_dropped": "All 73 paired comparisons under both regimens remain reported; only the principal/configured-system labelling and the Holm family grouping changed.",
+  "holm_families": {"RQ1_architecture": 8, "RQ6_architecture": 18, "RQ1_configured_system": 8, "RQ6_configured_system": 18, "RQ1_optimization_effect": 4, "RQ6_optimization_effect": 9, "RQ4_controls": 2, "RQ4_controls_transfer": 6},
+  "sensitivity": "Only one conclusion depends on grouping: BO vs fixed SwinFusion++ within Celeb-DF (p_Holm 0.021 in its own family; 0.077 when pooled as on 2026-10-04).",
+  "required_disclosure": "Results follow the Chapter 3 analysis plan; an interim decision to present the BO-selected configuration as primary was reverted to the approved plan after test scoring; all comparisons under both regimens are reported."
+}

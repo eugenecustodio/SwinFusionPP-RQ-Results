@@ -1,0 +1,11 @@
+Analysis,Models (regimen),Family (m),Grouping status,Section
+Within-dataset architecture comparison,"SwinFusion++, Swin-B, Video Swin-B (all fixed recipe)",Within-dataset architecture family (8),Regrouped after scoring; same decisions under the pre-scoring and pooled groupings,"RQ1, in-distribution"
+Frozen-transfer architecture comparison,"SwinFusion++, Swin-B, Video Swin-B (all fixed recipe)",Frozen-transfer architecture family (18),Regrouped after scoring; same decisions under the pre-scoring and pooled groupings,"RQ1, frozen transfer; cited in RQ6"
+Threshold-dependent transfer metrics,"SwinFusion++, Swin-B, Video Swin-B (all fixed recipe)",None (descriptive; supplementary paired intervals in Appendix J),Not applicable,"RQ1, threshold-dependent metrics"
+"Configured system, within datasets",BO-selected SwinFusion++ vs fixed-recipe Swin-B and Video Swin-B,"Configured-system family, within (8)",Primary family before scoring; relabeled after scoring; same decisions,"RQ1, configured system and optimization effect"
+"Configured system, frozen transfer",BO-selected SwinFusion++ vs fixed-recipe Swin-B and Video Swin-B,"Configured-system family, transfer (18)",Primary family before scoring; relabeled after scoring; same decisions,"RQ1, configured system and optimization effect"
+"Optimization effect, within datasets",BO-selected minus fixed-recipe SwinFusion++,"Optimization-effect family, within (4)",Separated after scoring; one decision depends on grouping (Celeb-DF v2: Holm p 0.021 vs 0.077),"RQ1, configured system and optimization effect"
+"Optimization effect, frozen transfer",BO-selected minus fixed-recipe SwinFusion++,"Optimization-effect family, transfer (9)",Regrouped after scoring; same decisions under the pre-scoring and pooled groupings,"RQ1, configured system and optimization effect"
+Matched controls,Fixed-recipe SwinFusion++ vs topology and capacity controls (FF++ C23 training),Controls families (2 within; 6 transfer),"Unchanged since before scoring",RQ4
+Component ablations (Tier B),"One-change variants of BO-selected SwinFusion++, one seed, FF++ C23",None (descriptive),Not applicable,RQ4
+Calibration and computational cost,All internal models,None (descriptive),Not applicable,Section after RQ6

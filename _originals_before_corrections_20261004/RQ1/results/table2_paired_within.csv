@@ -1,0 +1,9 @@
+training,test,comparison,delta_auc,ci_low,ci_high,permutation_p,holm_p,videos
+Celeb-DF v2,Celeb-DF v2,swinfusionpp__dataset_specific_bo vs swin_b__fixed_no_bo,0.002407627081411179,0.00015228324387682736,0.005697659381088512,0.6324735052989402,1.0,978
+DeeperForensics-1.0,DeeperForensics-1.0,swinfusionpp__dataset_specific_bo vs swin_b__fixed_no_bo,-0.0012004653350163874,-0.004084057325313806,0.0006689190861613952,0.9982003599280144,1.0,402
+FF++ C23 (HQ),FF++ C23 (HQ),swinfusionpp__dataset_specific_bo vs swin_b__fixed_no_bo,-0.00010204081632647632,-0.002705357142857306,0.001683673469387803,1.0,1.0,280
+FF++ C40 (LQ),FF++ C40 (LQ),swinfusionpp__dataset_specific_bo vs swin_b__fixed_no_bo,0.005816326530612148,0.0009693877551020247,0.012397959183673368,0.15036992601479704,1.0,280
+Celeb-DF v2,Celeb-DF v2,swinfusionpp__dataset_specific_bo vs video_swin_b__fixed_no_bo,0.002438381441940085,0.0001434102362822404,0.0057978869664874,0.9032193561287742,1.0,978
+DeeperForensics-1.0,DeeperForensics-1.0,swinfusionpp__dataset_specific_bo vs video_swin_b__fixed_no_bo,0.0008415633276404044,-0.003032412564045517,0.005024628103264653,0.7616476704659069,1.0,402
+FF++ C23 (HQ),FF++ C23 (HQ),swinfusionpp__dataset_specific_bo vs video_swin_b__fixed_no_bo,0.001377551020408263,0.0,0.0037244897959183313,1.0,1.0,280
+FF++ C40 (LQ),FF++ C40 (LQ),swinfusionpp__dataset_specific_bo vs video_swin_b__fixed_no_bo,0.0025510204081631294,-0.0025510204081632404,0.00897959183673458,0.33653269346130776,1.0,280

@@ -1,0 +1,2 @@
+tier,model,train_condition,test_condition,metric_std,value,level,source_citation,location,notes
+A,"Swin-B (baseline, context only)",ffpp_c23,celeb_df_v2,roc_auc,0.8313,video,"Xu, Y., Liang, J., Jia, G., Yang, Z., Zhang, Y., He, R. (2023). TALL: Thumbnail Layout for Deepfake Video Detection. ICCV 2023 (arXiv:2307.07494v3)",Table 1 (PDF p.5),Context for thesis standalone Swin-B; DFDC 73.01. Not one of the requested comparators.

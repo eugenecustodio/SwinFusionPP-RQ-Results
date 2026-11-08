@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "decided_at_utc": "2026-10-02T11:03:28Z",
+  "decided_by": "user (explicit instruction, 2026-10-02 ~19:00 PHT)",
+  "user_statement": "WHAT WE WILL BE PRESENTING IS THE SWINFUSION++ BAYESIAN OPTIMIZED, THAT IS THE SWINFUSION++",
+  "supersedes": "docs/decisions/D-25-rq1-fairness-v020.md (primary claim = fixed-recipe architecture comparison)",
+  "presented_model": "swinfusionpp__dataset_specific_bo (three-seed mean-logit ensemble)",
+  "primary_families": {
+    "RQ1": "within-dataset: SwinFusion++ (BO) vs Swin-B (fixed) and vs Video Swin-B (fixed); Holm within family",
+    "RQ6": "transfer: SwinFusion++ (BO) vs Swin-B (fixed) and vs Video Swin-B (fixed); Holm within family"
+  },
+  "secondary_families": {
+    "RQ1_secondary": "within: SwinFusion++ fixed vs baselines fixed (recipe-matched), BO vs fixed SwinFusion++",
+    "RQ6_secondary": "transfer: same as RQ1_secondary",
+    "RQ4_controls": "SwinFusion++ fixed vs topology/capacity controls fixed (recipe-matched ablation; FF++ C23)"
+  },
+  "required_disclosure": "SwinFusion++ training parameters were selected by Bayesian optimisation on source validation; Swin-B and Video Swin-B use the shared fixed recipe without per-dataset tuning. Recipe-matched (fixed vs fixed) results are reported as supplementary evidence.",
+  "test_scoring_state_at_decision": "no held-out test inference or scoring had run (evaluation service still waiting for M5_COMPLETE)",
+  "unchanged": [
+    "training runs",
+    "operating-point rules (D-11/D-12)",
+    "test sets",
+    "TTA pre-declaration (A-13)",
+    "Tier B definitions"
+  ]
+}

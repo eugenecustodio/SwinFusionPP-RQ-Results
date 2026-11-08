@@ -1,0 +1,59 @@
+AFTER: (start of reference list)
+NEW: Afchar, D., Nozick, V., Yamagishi, J., & Echizen, I. (2018). MesoNet: A compact facial video forgery detection network. In 2018 IEEE International Workshop on Information Forensics and Security (WIFS) (pp. 1–7). IEEE. https://doi.org/10.1109/WIFS.2018.8630761
+
+AFTER: Bergstra, J. S., Bardenet, R., Bengio, Y., & Kégl, B. (2011). Algorithms for hyp
+NEW: Cao, J., Ma, C., Yao, T., Chen, S., Ding, S., & Yang, X. (2022). End-to-end reconstruction-classification learning for face forgery detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 4103–4112). https://doi.org/10.1109/CVPR52688.2022.00408
+
+AFTER: Haliassos, A., Vougioukas, K., Petridis, S., & Pantic, M. (2021). Lips don’t lie
+NEW: He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 770–778). https://doi.org/10.1109/CVPR.2016.90
+
+AFTER: Ho, J., Jain, A., & Abbeel, P. (2020). Denoising diffusion probabilistic models 
+NEW: Hochreiter, S., & Schmidhuber, J. (1997). Long short-term memory. Neural Computation, 9(8), 1735–1780. https://doi.org/10.1162/neco.1997.9.8.1735
+
+AFTER: Khan, S. A., & Dai, H. (2021). Video transformer for deepfake detection with inc
+NEW: Khormali, A., & Yuan, J.-S. (2022). DFDT: An end-to-end DeepFake detection framework using vision transformer. Applied Sciences, 12(6), Article 2953. https://doi.org/10.3390/app12062953
+
+AFTER: Laureta, M. P., Atienza, J. M. M., & Tapel, J. L. B. (2025). Deepfake speech det
+NEW: Li, J., Xie, H., Li, J., Wang, Z., & Zhang, Y. (2021). Frequency-aware discriminative feature learning supervised by single-center loss for face forgery detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 6454–6463). https://doi.org/10.1109/CVPR46437.2021.00639
+
+AFTER: Laureta, M. P., Atienza, J. M. M., & Tapel, J. L. B. (2025). Deepfake speech det
+NEW: Li, L., Bao, J., Zhang, T., Yang, H., Chen, D., Wen, F., & Guo, B. (2020). Face X-ray for more general face forgery detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 5000–5009). https://doi.org/10.1109/CVPR42600.2020.00505
+
+AFTER: Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S., & Guo, B. (2021)
+NEW: Liu, Z., Luo, D., Wang, Y., Wang, L., Tai, Y., Wang, C., Li, J., Huang, F., & Lu, T. (2020). TEINet: Towards an efficient architecture for video recognition. Proceedings of the AAAI Conference on Artificial Intelligence, 34(07), 11669–11676. https://doi.org/10.1609/aaai.v34i07.6836
+
+AFTER: Montserrat, D. M., Hao, H., Yarlagadda, S. K., Baireddy, S., Shao, R., Horvath, 
+NEW: Neimark, D., Bar, O., Zohar, M., & Asselmann, D. (2021). Video transformer network. In Proceedings of the IEEE/CVF International Conference on Computer Vision Workshops (pp. 3156–3165). https://doi.org/10.1109/ICCVW54120.2021.00355
+
+AFTER: Philippine Health Research Ethics Board. (2022). National ethical guidelines for
+NEW: Qi, H., Guo, Q., Juefei-Xu, F., Xie, X., Ma, L., Feng, W., Liu, Y., & Zhao, J. (2020). DeepRhythm: Exposing DeepFakes with attentional visual heartbeat rhythms. In Proceedings of the 28th ACM International Conference on Multimedia (pp. 4318–4327). Association for Computing Machinery. https://doi.org/10.1145/3394171.3413707
+
+AFTER: Philippine Health Research Ethics Board. (2022). National ethical guidelines for
+NEW: Qian, Y., Yin, G., Sheng, L., Chen, Z., & Shao, J. (2020). Thinking in frequency: Face forgery detection by mining frequency-aware clues. In A. Vedaldi, H. Bischof, T. Brox, & J.-M. Frahm (Eds.), Computer vision—ECCV 2020 (pp. 86–103). Springer. https://doi.org/10.1007/978-3-030-58610-2_6
+
+AFTER: Rössler, A., Cozzolino, D., Verdoliva, L., Riess, C., Thies, J., & Nießner, M. (
+NEW: Sabir, E., Cheng, J., Jaiswal, A., AbdAlmageed, W., Masi, I., & Natarajan, P. (2019). Recurrent convolutional strategies for face manipulation detection in videos. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops. https://openaccess.thecvf.com/content_CVPRW_2019/html/Media_Forensics/Sabir_Recurrent_Convolutional_Strategies_for_Face_Manipulation_Detection_in_Videos_CVPRW_2019_paper.html
+
+AFTER: Touvron, H., Cord, M., Sablayrolles, A., Synnaeve, G., & Jégou, H. (2021). Going
+NEW: Tran, D., Bourdev, L., Fergus, R., Torresani, L., & Paluri, M. (2015). Learning spatiotemporal features with 3D convolutional networks. In Proceedings of the IEEE International Conference on Computer Vision (pp. 4489–4497). https://doi.org/10.1109/ICCV.2015.510
+
+AFTER: Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Ka
+NEW: Wang, J., Wu, Z., Ouyang, W., Han, X., Chen, J., Jiang, Y.-G., & Li, S.-N. (2022). M2TR: Multi-modal multi-scale transformers for deepfake detection. In Proceedings of the 2022 International Conference on Multimedia Retrieval (pp. 615–623). Association for Computing Machinery. https://doi.org/10.1145/3512527.3531415
+
+AFTER: Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Ka
+NEW: Wang, L., Xiong, Y., Wang, Z., Qiao, Y., Lin, D., Tang, X., & Van Gool, L. (2016). Temporal segment networks: Towards good practices for deep action recognition. In B. Leibe, J. Matas, N. Sebe, & M. Welling (Eds.), Computer vision—ECCV 2016 (pp. 20–36). Springer. https://doi.org/10.1007/978-3-319-46484-8_2
+
+AFTER: Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Ka
+NEW: Wang, P., Liu, K., Zhou, W., Zhou, H., Liu, H., Zhang, W., & Yu, N. (2022). ADT: Anti-deepfake transformer. In ICASSP 2022 – 2022 IEEE International Conference on Acoustics, Speech and Signal Processing (pp. 2899–2903). IEEE. https://doi.org/10.1109/ICASSP43922.2022.9746888
+
+AFTER: Zhang, K., Zhang, Z., Li, Z., & Qiao, Y. (2016). Joint face detection and alignm
+NEW: Zhang, Y., Li, X., Liu, C., Shuai, B., Zhu, Y., Brattoli, B., Chen, H., Marsic, I., & Tighe, J. (2021). VidTr: Video transformer without convolutions. In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 13557–13567). https://doi.org/10.1109/ICCV48922.2021.01332
+
+AFTER: Zhao, C., Wang, C., Hu, G., Chen, H., Liu, C., & Tang, J. (2023). ISTVT: Interpr
+NEW: Zhao, H., Zhou, W., Chen, D., Wei, T., Zhang, W., & Yu, N. (2021). Multi-attentional deepfake detection. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 2185–2194). https://doi.org/10.1109/CVPR46437.2021.00222
+
+AFTER: Zheng, Y., Bao, J., Chen, D., Zeng, M., & Wen, F. (2021). Exploring temporal coh
+NEW: Zi, B., Chang, M., Chen, J., Ma, X., & Jiang, Y.-G. (2020). WildDeepfake: A challenging real-world dataset for deepfake detection. In Proceedings of the 28th ACM International Conference on Multimedia (pp. 2382–2390). Association for Computing Machinery. https://doi.org/10.1145/3394171.3413769
+
+AFTER: Kohli, N., & Gupta, S. (2021). Detecting DeepFake, FaceSwap and Face2Face facial forgeries using frequency CNN. Multimedia Tools and Applications, 80(21–22), 33589–33616. https://doi.org/10.1007/s11042-020-10420-8
+NEW: Kuang, L., Wang, Y., Hang, T., Chen, B., & Zhao, G. (2022). A dual-branch neural network for DeepFake video detection by detecting spatial and temporal inconsistencies. Multimedia Tools and Applications, 81(29), 42591–42606. https://doi.org/10.1007/s11042-021-11539-y

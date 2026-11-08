@@ -1,0 +1,1335 @@
+                      SwinFusion++: Face-Aligned Spatio-Temporal
+                        Swin Transformer for Deepfake Detection
+                               Eugene T. Custodio Mary Kristine Degamo Keith Roger C. Escueta
+                                        Dei Andrea E. San Diego Melie Jim F. Sarmiento
+                                  College of Computer Studies and Systems, University of the East–Manila
+
+
+Abstract– Combining spatial and temporal representations does not establish that cross-attention improves deepfake detection. This
+study evaluates SwinFusion++, a face-aligned dual-stream detector integrating Swin-B and Video Swin-B through tubelet-aligned, lo-
+cal, bidirectional, gated hierarchical cross-attention (TLBG-HCA). Evaluation covers FaceForensics++ DeepFakes C23/C40, Celeb-DF
+v2, and an audited DeeperForensics-1.0 binary construction. Video-level comparisons distinguish documented training cohorts, indi-
+vidual models, homogeneous seed ensembles, and a single-seed frozen-backbone fusion experiment. Uncertainty analysis accounts for
+recorded dependency groups; frozen transfer retains source-trained weights, calibration, and thresholds. Fusion ensembles achieved
+ROC-AUCs of 0.9965, 0.9854, 0.9724, and 0.9990 across the four respective conditions, without consistent superiority over stan-
+dalone encoders. Against the representative CNN–LSTM on C40, seed-1701 fusion improved AUC by 0.1846 (95% paired interval
+0.1503–0.2165; Holm-adjusted p = 0.0003999). However, full TLBG-HCA and the capacity-matched no-exchange head had identical
+observed AUC and F1 in the controlled experiment; no incremental exchange advantage was established. Frozen transfer to the full
+DeeperForensics construction yielded AUC 0.8021 but fake recall only 13.41%; strict lineage filtering yielded AUC 0.7682 and recall
+17.90%. Calibration limitations and additional computational cost further qualify practical interpretation. These findings support bench-
+mark discrimination more strongly than exchange-specific benefit or reliable transfer, demonstrating why architectural performance,
+mechanism attribution, and operating-point validity require separate evidence.
+Keywords– deepfake detection; Swin Transformer; Video Swin Transformer; cross-attention; spatio-temporal fusion; cross-dataset
+evaluation
+1. Introduction                                                           nevertheless presents a correspondence problem. In the con-
+1.1. Context and Motivation                                               figuration studied here, framewise Swin processes a 16-frame
+                                                                          clip at 16 temporal positions, whereas Video Swin’s stride-two
+A deepfake detector must do more than recognize the artifacts             tubelets produce eight. Intermediate features must be tempo-
+of a familiar dataset: its decisions must remain informative              rally aligned before corresponding local regions can exchange
+when video quality and data source change. FaceForensics++                information. Combining only the final pooled representations
+demonstrates the importance of evaluating facial manipula-                provides a useful baseline, but leaves the value of interaction
+tions under compression, while Celeb-DF challenges detectors              across earlier hierarchy levels untested.
+with higher-quality face swaps that reduce conspicuous synthe-               Prior work establishes a basis for this inquiry. CAST
+sis artifacts (Y. Li et al., 2020; Rössler et al., 2019). Strong          couples CNN-derived spatial features with Transformer-based
+discrimination within a benchmark is therefore only one part              temporal representations through cross-attention (Thakre et al.,
+of the problem. Generalization to unfamiliar manipulations                2026b). For the present dual-Swin design, the question is
+and resilience to ordinary post-processing are distinct require-          more specific: does temporally aligned, multilevel exchange
+ments, as the LipForensics study illustrates (Haliassos et al.,           between Swin-B and Video Swin-B add discriminative value
+2021). Benchmark success must therefore be distinguished                  beyond the individual backbones, late concatenation, and a
+from reliable detection under distribution shift.                         capacity-matched control without cross-attention? This fram-
+   This challenge motivates joint consideration of facial ap-             ing separates the usefulness of a dual-stream system from the
+pearance and temporal behavior. Spatial analysis can exam-                incremental contribution of its exchange mechanism.
+ine localized image structure, whereas temporal analysis can                 A second issue is the validity of the comparison. Deep-
+reveal irregularities in how facial movements evolve (Halias-             fakeBench identifies inconsistent preprocessing, experimental
+sos et al., 2021; Rössler et al., 2019). Aggregating indepen-             settings, and evaluation protocols as sources of misleading per-
+dent frame predictions cannot explicitly represent interactions           formance comparisons (Yan et al., 2023). Accordingly, shared
+between frames; conversely, using a video encoder does not                video-level evaluation is necessary but not sufficient: differ-
+establish that an additional spatial stream contributes useful in-        ences in training budgets, data partitions, and decision thresh-
+formation. A dual-stream detector must therefore justify both             olds must remain visible. Published results obtained under in-
+the complementarity of its representations and the mechanism              compatible protocols provide context, not a common leader-
+used to combine them.                                                     board or a basis for paired statistical inference.
+1.2. Problem Statement and Research Gap                                   1.3. Objective
+Swin Transformer constructs multiscale image representa-                  This study evaluates SwinFusion++, a face-aligned dual-
+tions through hierarchical shifted-window attention (Liu et al.,          stream detector combining Swin-B and Video Swin-B through
+2021); Video Swin Transformer extends this local-attention de-            Tubelet-Aligned, Local, Bidirectional, Gated Hierarchical
+sign to space and time (Liu et al., 2022). Their combination              Cross-Attention (TLBG-HCA). At four matched hierarchy
+
+                                                                      1
+                                                                                                    SWINFUSION++ DEEPFAKE DETECTION
+
+
+stages, learned temporal adapters align frame-indexed spatial           2.1. Spatial Evidence, Frequency Cues, and Training Data
+features with video tubelets, after which local cross-attention         Xception separates spatial filtering from channel mixing, and
+exchanges information in both directions. Zero-initialized              its use in FaceForensics++ establishes an important frame-
+scalar residual gates regulate the added updates. Each stage            based reference (Chollet, 2017; Rössler et al., 2019). Averag-
+contributes the two enhanced representations, their absolute            ing independent frame predictions does not explicitly model
+difference, and their elementwise product to classification. Fu-        their order, but this limitation does not make spatial detec-
+sion is readout-only: these enhanced features do not replace            tors intrinsically inadequate. Face X-ray emphasizes blend-
+the representations propagated through either backbone.                 ing boundaries, while Self-Blended Images (SBI) constructs
+   The general objective is to characterize the detector’s dis-         training examples by blending transformed versions derived
+crimination, transfer behavior, calibration, and computational          from pristine images (L. Li et al., 2020; Shiohara & Yamasaki,
+demands while distinguishing architectural performance from             2022). Both challenge an architecture-only account of transfer:
+mechanism-specific evidence.                                            supervision and positive-example construction can encourage
+1.4. Scope and Contributions                                            more generic inconsistency detection without adding a video
+                                                                        encoder. Their evidence remains bounded by the manipulation
+Evaluation is restricted to visual, face-centered binary deep-
+                                                                        traces available, particularly when blending boundaries are ab-
+fake detection using FaceForensics++ DeepFakes C23/C40,
+                                                                        sent or obscured.
+Celeb-DF v2, and the study’s audited DeeperForensics-1.0 bi-
+                                                                           F3-Net investigates frequency-aware clues through decom-
+nary construction. These benchmarks provide compression,
+                                                                        posed image components and local frequency statistics (Qian
+higher-realism synthesis, and perturbation-oriented evaluation
+                                                                        et al., 2020). TSFF-Net combines spatial cues, including
+contexts, respectively (Jiang et al., 2020; Y. Li et al., 2020;
+                                                                        chrominance and edges, with wavelet-based frequency infor-
+Rössler et al., 2019). The project uses declared group-disjoint
+                                                                        mation (H. Zhang et al., 2024). Such spatial–frequency sys-
+partitions, aligned facial clips, one prediction per analyzed
+                                                                        tems differ from spatial–temporal fusion; a shared two-stream
+video, and uncertainty estimates that account for shared source
+                                                                        label does not imply equivalent inputs or reasoning. Frequency
+or identity groups. Frozen transfer carries the C23-trained
+                                                                        sensitivity also does not establish invariance to compression
+model, calibration, and threshold to C40, Celeb-DF, and Deep-
+                                                                        or resizing. LAA-Net’s artifact-oriented attention and feature
+erForensics without target-label fitting. Ranking metrics are
+                                                                        pyramid further show that local evidence and multiscale inte-
+interpreted alongside calibration, class-sensitive decision mea-
+                                                                        gration are established concerns (Nguyen et al., 2024). The un-
+sures, and preprocessing coverage rather than accuracy alone.
+                                                                        resolved issue is not whether retaining detail is desirable, but
+   The scope excludes audio, body-only synthesis, full-scene
+                                                                        whether a particular fusion arrangement improves discrimina-
+generation, and FaceForensics++ manipulation categories
+                                                                        tion beyond alternative supervision and simpler joint represen-
+other than DeepFakes. Training-budget differences in some
+                                                                        tations.
+comparisons, class imbalance, concentrated test dependen-
+cies, and a single-seed frozen-backbone fusion ablation con-            2.2. Temporal Modeling and Representation Learning
+strain attribution and generalization. In particular, the no-           Convolutional–recurrent detection and attention-based convo-
+exchange control still combines both streams; it isolates cross-        lutional LSTM processing establish temporal modeling before
+attention rather than all forms of fusion. Hyperparameter               video Transformers (B. Chen et al., 2022; Güera & Delp, 2018).
+search and deployment validation are outside the completed              I3D supplies a related representational precedent through three-
+evaluation. Within these boundaries, the study contributes an           dimensional convolution for action recognition, rather than
+implementation-grounded dual-stream architecture, controlled            direct evidence of forensic transfer (Carreira & Zisserman,
+comparisons of fusion alternatives, and an auditable assess-            2017). These approaches remain relevant comparators, but ar-
+ment of performance and transfer. Its significance lies in estab-       chitecture, pretraining, and evaluation protocol must be distin-
+lishing what the evidence supports about spatial–temporal in-           guished when interpreting their reported performance.
+tegration, including its limitations, rather than equating bench-          Temporal-focused studies also question whether additional
+mark success with forensic reliability.                                 spatial capacity is necessarily helpful. FTCN restricts spatial
+                                                                        convolutional kernels while retaining temporal filtering and a
+2. Review of Related Literature                                         temporal Transformer (Zheng et al., 2021). This counterpoint
+Deepfake detection literature offers competing explanations             motivates testing whether a spatial branch contributes useful
+for generalization: recovering manipulation traces, learning            evidence or reintroduces dataset-specific cues. LipForensics
+facial dynamics, shaping training data, and combining rep-              instead uses visual-speech pretraining and mouth dynamics;
+resentations. For SwinFusion++, both encoders observe the               RealForensics develops representations through audio-visual
+same RGB facial clips; different architectures do not guar-             self-supervision on real talking faces (Haliassos et al., 2021,
+antee independent evidence or complementary errors. The                 2022). Their transferable information is shaped by learning
+shortcut-learning account explains why successful predictors            objectives and external supervision, not backbone topology
+can fail when incidental correlations change (Geirhos et al.,           alone.
+2020). This review therefore distinguishes the performance                 AltFreezing alternates the freezing of spatial and temporal
+of a complete detector from evidence that its cross-stream ex-          weights to encourage use of both cue families (Wang et al.,
+change contributes additional value.                                    2023). It is distinct from fixing both encoders while com-
+
+
+                                                                    2
+                                                                                                     SWINFUSION++ DEEPFAKE DETECTION
+
+
+paring fusion heads: one changes representation learning, the            can exclude useful distant relationships and does not establish
+other tests readouts of fixed representations. Together, these           low total system cost.
+studies separate architectural access to temporal information               ReZero’s zero-initialized residual coefficient and Layer-
+from learned reliance on it and from its ability to transfer. Ta-        Scale’s small channelwise scaling provide related, distinct mo-
+ble 1 summarizes the competing explanations that inform the              tivations for controlled residual adaptation (Bachlechner et al.,
+present controls.                                                        2021; Touvron et al., 2021). They do not establish that gating
+                                                                         improves forensic transfer. In SwinFusion++, directly learned
+2.3. Hierarchical Transformers and Cross-Stream Fusion
+                                                                         scalar gates are not input-dependent reliability probabilities.
+Scaled dot-product attention supplies a mechanism for token              Enhanced features feed classification without replacing maps
+interaction (Vaswani et al., 2017). Swin Transformer uses                propagated between backbone stages. This readout-only de-
+patch merging and shifted local windows to construct hierar-             sign differs from recursively coupled expert exchange and does
+chical image features; Video Swin extends local attention to             not imply gradient isolation when encoders are unfrozen. Like-
+space and time (Liu et al., 2021, 2022). Within deepfake detec-          wise, absolute-difference and product features are candidate
+tion, ISTVT uses decomposed spatial–temporal attention and a             predictors, not uncertainty estimates. These distinctions de-
+self-subtract mechanism, while SFormer provides another spa-             limit the hypothesis without attributing benefits to mechanisms
+tiotemporal Transformer precedent (Kingra et al., 2024; Zhao             that require separate interventions.
+et al., 2023). These studies preclude a novelty claim based sim-
+ply on applying Transformers to facial video.                            2.5. Generalization and Comparative Validity
+   TALL arranges sampled frames into a thumbnail layout for              FaceForensics++ supplies manipulation and compression con-
+an image backbone, including Swin (Xu et al., 2023). Tem-                ditions, Celeb-DF emphasizes higher-quality face swaps, and
+poral evidence can therefore be exposed through input design             DeeperForensics-1.0 includes extensive perturbations (Jiang et
+rather than a separate video stream. CrossViT exchanges in-              al., 2020; Y. Li et al., 2020; Rössler et al., 2019). They are
+formation between image branches at different patch scales,              not a universal progression of difficulty. The present study re-
+while the action-recognition CAST uses bidirectional bottle-             tains only FF++ DeepFakes C23/C40 and an audited Deeper-
+neck cross-attention between spatial and temporal experts                Forensics binary construction, not every released manipulation
+(C.-F. Chen et al., 2021; Lee et al., 2023). These are architec-         or official benchmark protocol. Within-dataset testing, frozen
+tural precedents, not demonstrations of deepfake robustness.             source-to-target transfer, and target adaptation answer differ-
+   The distinct deepfake CAST combines CNN spatial features              ent questions. Deepfake-Eval-2024’s revised preprint further
+with Transformer temporal features through cross-attention               documents degradation on collected contemporary media, but
+(Thakre et al., 2026b). Its revised preprint reports that a mul-         its acquisition process and multimodal scope do not establish
+tiscale CNN-feature variant underperforms the main config-               prevalence or error rates for all online content (Chandra et al.,
+uration (Thakre et al., 2026a, Section 5.5.4). This cautions             2026).
+against assuming that additional hierarchy levels improve fu-               Preprocessing determines which evidence reaches a
+sion. The authors’ representational-mismatch explanation mo-             model. MTCNN addresses face detection/alignment, whereas
+tivates alignment, but does not establish that using two Swin            FaceNet represents faces for recognition and clustering
+encoders resolves mismatch automatically. A nonlinear late-              (Schroff et al., 2015; K. Zhang et al., 2016). Neither function
+concatenation classifier already integrates both descriptors; the        validates authenticity. Cropping, track selection, and sampling
+stronger question is whether structured intermediate exchange            can remove or alter useful evidence; failed inputs must remain
+contributes beyond that joint readout.                                   visible through coverage. Image augmentation methods such
+   Hierarchy presents a related trade-off. Earlier stages pre-           as RandAugment also require explicit temporal-consistency
+serve finer spatial detail, whereas later stages offer more aggre-       choices when applied to video (Cubuk et al., 2020). Equal
+gated representations. Combining stages may retain evidence              tensor dimensions alone do not establish equal observed video
+lost through terminal pooling, but can also increase redun-              content.
+dancy, trainable capacity, and sensitivity to dataset-specific de-          DeepfakeBench identifies inconsistent preprocessing and
+tail. A multilevel design therefore requires controls that distin-       experimental protocols as obstacles to reliable comparison
+guish access to additional features from the particular mecha-           (Yan et al., 2023). Shared test videos do not remove differ-
+nism used to exchange them.                                              ences in pretraining, training budgets, or checkpoint selection.
+                                                                         Structured-validation principles additionally require recorded
+2.4. Alignment, Residual Adaptation, and Readout
+                                                                         source and identity dependencies to inform partitioning and
+The present dual-Swin configuration retains 16 spatial frame             uncertainty (Roberts et al., 2017). A capacity-matched no-
+positions but eight video tubelets, motivating a learned tempo-          exchange control reduces a competing explanation for fusion
+ral adapter before corresponding local regions exchange infor-           gains, but does not equalize all optimization dynamics. A
+mation. Attention itself permits unequal query and key lengths;          frozen-backbone comparison narrows attribution while leav-
+alignment here specifies the intended local correspondence,              ing end-to-end co-adaptation and training-seed sensitivity un-
+not a universal attention requirement (Liu et al., 2022; Vaswani         resolved.
+et al., 2017). Matching temporal and spatial coordinates also               Evaluation must separate ranking, decisions, and probabil-
+does not guarantee identical semantics across encoders. Local-           ity quality. Precision-related measures depend on prevalence
+ity constrains interactions and attention-pair computation, but          and the operating point (Saito & Rehmsmeier, 2015); temper-
+
+                                                                     3
+                                                                                                                   SWINFUSION++ DEEPFAKE DETECTION
+
+      Table 1. Literature synthesis for aligned dual-Swin fusion. The final column states this review’s interpretation, not a common numerical ranking.
+
+Evidence and examples                   Contribution to present knowledge                  Unresolved implication for this study
+Artifact-oriented learning: Face        Blending supervision and synthetic training        Separate training-information benefits from architectural
+X-ray; SBI                              examples can support generalization.               effects.
+Temporal learning: FTCN; Lip-           Temporal emphasis and learned facial dy-           Test complementarity rather than infer it from encoder
+Forensics; RealForensics                namics offer alternatives to added spatial         names.
+                                        capacity.
+Alternative integration: TALL;          Layout design and cross-attention provide          Generic multiscale or bidirectional fusion is not itself novel.
+CrossViT; both CAST models              established routes to combining representa-
+                                        tions.
+SwinFusion++ (present study)            Tubelet-aligned local exchange with gated,         Compare against individual encoders, late concatenation, and
+                                        hierarchical, readout-only fusion.                 capacity-matched no-exchange fusion.
+
+
+
+ature scaling can adjust confidence without changing binary                      3.1. Representational Complementarity
+score ordering, and source calibration need not survive distri-                  Swin Transformer supplies hierarchical image features, while
+bution shift (Guo et al., 2017; Ovadia et al., 2019). Nonsignif-                 Video Swin extends local attention to space and time (Liu et
+icance also does not establish equivalence, which requires a                     al., 2021, 2022). These architectures motivate retaining both
+justified margin and suitable analysis (Lakens, 2017). These                     localized appearance and temporally contextualized represen-
+principles support reporting uncertainty, coverage, and com-                     tations at matched scales. LipForensics provides evidence that
+putational boundaries alongside accuracy rather than using one                   learned facial dynamics can support generalization, whereas
+favorable metric as evidence of reliability.                                     FTCN shows that restricting spatial processing can also im-
+2.6. Synthesis and Unresolved Gap                                                prove transfer (Haliassos et al., 2021; Zheng et al., 2021). To-
+                                                                                 gether, these studies motivate a conditional account: extra spa-
+The literature supports conditional, not automatic, benefits
+                                                                                 tial information can support relevant discrimination or intro-
+from combining spatial and temporal representations. Artifact-
+                                                                                 duce additional shortcuts.
+oriented learning favors local detail; temporal-focused ap-
+                                                                                    Both streams observe the same RGB clips; their errors need
+proaches caution against spatial shortcuts; synthetic and self-
+                                                                                 not be independent. Different receptive fields and pretraining
+supervised training show that generalization gains need not
+                                                                                 can expose complementary relationships or shared nuisance
+originate in fusion. Multiscale and cross-attention precedents
+                                                                                 correlations. The shortcut-learning account explains why pre-
+make the proposed mechanism plausible while leaving its in-
+                                                                                 dictive relationships may fail outside their training distribution
+cremental value uncertain.
+                                                                                 (Geirhos et al., 2020). Complementarity is therefore an empiri-
+   The unresolved question is whether tubelet-aligned, local
+                                                                                 cal property of a trained system under specified conditions, not
+bidirectional exchange at matched Swin-B and Video Swin-
+                                                                                 a theorem about the encoder names. A performance gain does
+B stages improves video-level discrimination or transfer be-
+                                                                                 not itself identify learned manipulation cues.
+yond the individual encoders and strong joint-readout controls.
+SwinFusion++’s distinctive contribution is the specified com-                    3.2. Aligned Exchange and Residual Adaptation
+bination of temporal alignment, hierarchical local exchange,                     CrossViT and the action-recognition CAST motivate interac-
+scalar residual gates, and readout-only aggregation, not the in-                 tion before terminal pooling without establishing forensic ef-
+vention of those components. The working hypothesis predicts                     fectiveness (C.-F. Chen et al., 2021; Lee et al., 2023). In
+useful cross-stream relationships beyond pooled or indepen-                      the present design, a learned depthwise stride-two temporal
+dent processing; rival explanations include redundant repre-                     adapter maps 16 spatial time indices to eight video-tubelet in-
+sentations, extra capacity, pretraining, and unequal optimiza-                   dices at each stage i ∈ {1, 2, 3, 4}. Let Ai and Bi denote corre-
+tion budgets. Testing these alternatives permits positive, null,                 sponding spatial and video windows after alignment and chan-
+and condition-dependent findings to develop the thesis with-                     nel projection. Shared coordinates supply a correspondence
+out equating benchmark performance with exchange-specific                        for exchange, not a guarantee of semantic equivalence.
+benefit or deployment readiness.                                                    For corresponding windows, the attention residuals are
+
+3. Theoretical Framework                                                                            Aai = Ai + γiS CiS←V (Ai , Bi ),
+                                                                                                                                                          (1)
+This study synthesizes hierarchical representation learning,                                        Bia = Bi + γiV CiV ←S (Bi , Ai ).
+cross-attention, residual adaptation, and distribution-shift anal-
+                                                                                 Here C denotes separately parameterized multi-head cross-
+ysis into an account of conditional representational comple-
+                                                                                 attention with streamwise normalization, based on scaled dot-
+mentarity: aligned interaction may improve detection when it
+                                                                                 product attention (Vaswani et al., 2017). Both directions use
+exposes label-relevant relationships beyond either encoder or
+                                                                                 the original normalized inputs in parallel. Each interaction
+a simpler joint readout. Complementarity, exchange benefit,
+                                                                                 set comprises 49 spatial tokens within a 7 × 7 window at one
+and transferability are separate empirical claims.
+                                                                                 aligned tubelet index; temporal context comes from the video
+                                                                                 backbone and adapter, not unrestricted cross-attention across
+
+                                                                             4
+                                                                                                       SWINFUSION++ DEEPFAKE DETECTION
+
+
+all tubelets. Locality is therefore a constraint on possible inter-       3.4. Research Questions
+actions, whose usefulness remains testable.                               Five questions connect these propositions to the implemented
+   ReZero motivates zero-initialized residual coefficients                comparisons:
+(Bachlechner et al., 2021). In SwinFusion++, the attention                 RQ1: What within-dataset discrimination and seed-stability
+gates in Equation (1) and separate feed-forward gates are di-                     profile does SwinFusion++ exhibit relative to stan-
+rect scalars: four per stage, initialized to zero. Initially the                  dalone Swin-B and Video Swin-B across the retained
+added paths vanish, while projection and classification remain                    dataset conditions?
+active. This motivates cautious adaptation, not guaranteed
+convergence or useful exchange. Gate values are not input-                 RQ2: How does SwinFusion++ compare with verified repro-
+dependent reliability probabilities.                                              duced cross-family baselines, with protocol-qualified
+   The enhanced streams, their absolute difference, and their el-                 literature evidence kept separate from matched exper-
+ementwise product enter normalized, mean/max-pooled stage                         imental comparisons?
+readouts. These are candidate predictors, not uncertainty es-              RQ3: What differences in video-level ROC-AUC and F1
+timates. Fusion is readout-only: enhanced maps inform clas-                       arise against the selected CNN–LSTM baseline under
+sification without replacing features passed to later backbone                    C23 and C40, and which comparisons support formal
+stages. This does not prevent gradients reaching unfrozen                         paired inference?
+backbones.                                                                 RQ4: Under fixed C23 backbone features and a common
+3.3. Empirical Propositions and Competing Explanations                            head-training budget, what incremental value does
+                                                                                  full TLBG-HCA provide over late concatenation and
+The complementarity proposition predicts useful joint discrimi-                   the capacity-matched no-exchange control?
+nation beyond the standalone encoders. The stronger exchange
+proposition predicts an incremental advantage over a joint                 RQ5: How do compression and frozen cross-dataset trans-
+model that lacks cross-attention. For the controlled C23 frozen-                  fer affect discrimination, calibration, and thresholded
+backbone comparison, let F , L, and N denote full TLBG-                           decisions, and what seed-stability, preprocessing-
+HCA, late concatenation, and capacity-matched no-exchange                         coverage, and computational constraints qualify their
+fusion. Define                                                                    interpretation?
+
+              ∆exchange = AUC(F ) − AUC(N ),                              3.5. Contributions and Boundaries of Inference
+                                                               (2)        The study contributes an implementation-grounded configu-
+                ∆pooled = AUC(F ) − AUC(L).
+                                                                          ration of aligned hierarchical dual-Swin fusion; a controlled
+These video-level contrasts use common test videos. Support               distinction between system-level performance and exchange-
+for an exchange advantage requires a positive ∆exchange with un-          specific evidence; and an auditable account of transfer, calibra-
+certainty addressed; ∆pooled > 0 alone is insufficient because            tion, coverage, and cost. Its contribution is the specified com-
+stage access and readout capacity also differ. The N control re-          bination and assessment, not the invention of attention or gat-
+tains alignment, hierarchy, gates, and difference/product read-           ing. The existing controls do not separately establish effects of
+out, replacing cross-attention with independent self-attention.           alignment, locality, stage selection, or gate initialization; these
+The contrast therefore concerns cross-stream attention versus             require distinct interventions.
+that alternative, not fusion versus no fusion.                               The scope remains the retained face-centered visual bench-
+   The rival explanation is that independent processing and               marks. Unequal training cohorts, concentrated dependency
+joint readout already account for useful predictions. An un-              groups, and single-seed ablation constrain attribution and gen-
+supported exchange advantage limits the stronger proposition              eralization. Positive, null, and condition-dependent findings
+without disproving spatial–temporal integration. Equal met-               are informative only relative to their comparator, population,
+rics or nonsignificant differences do not establish equivalence           and training regime: the framework makes fusion’s value an
+(Lakens, 2017). The single-seed frozen-feature comparison                 empirical question rather than an architectural assumption.
+also cannot establish training-run robustness or the benefit
+of end-to-end co-adaptation. These propositions organize the              4. Methodology/Research Design
+documented evaluation; they are not claims of prospective reg-
+                                                                          4.1. Design, Experimental Units, and Hypotheses
+istration.
+   The transfer proposition asks whether useful relationships             The study used a quantitative computational experimental de-
+persist when the observation distribution changes. Source dis-            sign for face-centered binary deepfake detection. Architecture,
+crimination, target discrimination, and probability calibration           fusion readout, and source–target condition were the experi-
+are distinct outcomes. Temperature scaling can adjust confi-              mental factors; the recorded training cohort constrained inter-
+dence without improving binary score ordering, and source                 pretation. A video was the prediction and evaluation unit, a
+calibration need not survive shift (Guo et al., 2017; Ovadia              16-frame clip was the training input, and a dependency group
+et al., 2019). Frozen transfer therefore retains source-trained           represented related videos for splitting and resampling. Manip-
+weights, calibration, and threshold. DeepfakeBench’s stan-                ulated videos were positive (y = 1). A preprocessing failure
+dardization concerns further require training budgets, prepro-            remained in the coverage denominator without an invented pre-
+cessing, and evaluation units to remain visible when interpret-           diction. Pre-existing benchmark videos and labels were used;
+ing contrasts (Yan et al., 2023).                                         no participants were recruited, surveyed, or recorded.
+
+                                                                      5
+                                                                                                     SWINFUSION++ DEEPFAKE DETECTION
+
+
+   The five questions in Section 3 were operationalized through          eage intersecting C23 development identifiers. Removing tar-
+36 principal model–condition–seed cells (three models, four              gets linked to C23 training/validation target or donor iden-
+conditions, and seeds 1701, 2203, and 3109); six reproduced-             tifiers left a strict 360-video transfer subset, with 354 suc-
+baseline cells; three controlled fusion-head cells; and 27               cessfully analyzed. Full, overlap-qualified and strict views
+frozen-transfer evaluations using existing source checkpoints.           were reported separately. C23-to-Celeb-DF had no recorded
+RQ1 concerns principal discrimination and seed variation;                exact development-to-target hash overlap, but lacked a veri-
+RQ2 concerns verified cross-family baselines; RQ3 isolates               fied cross-dataset identity correspondence; an identity-disjoint
+the selected recurrent comparison; RQ4 concerns incremental              transfer claim is not made.
+exchange; and RQ5 concerns transfer, calibration, coverage,
+                                                                         4.3. Face Processing, Sampling, and Augmentation
+and cost. Blocked implementation cells were not counted as
+completed experiments.                                                   A frozen common RGB cache was constructed before train-
+   The working hypothesis was that aligned hierarchical ex-              ing. For duration D, 64 candidate timestamps were placed uni-
+change could improve discrimination beyond individual en-                formly from 0.02D to 0.98D; PyAV decoded the first avail-
+coders and simpler joint readouts. For an eligible compar-               able frame at or after each request. Sampling was normalized
+ison j and metric m ∈ {AUC, F1 }, the observed contrast                  by duration, not a fixed frame rate. The facenet_pytorch
+was ∆ b j,m = m(Aj ) − m(Bj ), with statistical hypotheses               MTCNN detector used minimum face size 40, cascade thresh-
+H0,j,m : ∆j,m = 0 and H1,j,m : ∆j,m ̸= 0. The implemented                olds (0.6, 0.7, 0.7), scale factor 0.709, and accepted confi-
+test was two-sided despite the directional scientific expectation.       dence at least 0.90 (K. Zhang et al., 2016). Detection batches
+Complete-system comparisons do not isolate architecture from             were 16 frames, or 32 for frames of at least two million pixels.
+training, whereas RQ4 holds backbone features fixed. These                  The highest-confidence accepted face initialized a primary
+hypotheses organize the documented analysis; no prospective              track. VGGFace2-pretrained InceptionResnetV1 embeddings
+registration or retrospective power calculation is claimed.              supported association, not manipulation classification (Schroff
+                                                                         et al., 2015). Candidates required cosine distance at most 0.55
+4.2. Materials, Partitioning, and Source Lineage                         or intersection-over-union (IoU) at least 0.10, and were ranked
+The retained materials were FaceForensics++ (FF++)                       by cosine distance plus 0.15(1 − IoU). The ambiguity margin
+DeepFakes C23/C40, Celeb-DF v2, and the project’s                        was 0.05 and embedding exponential-moving-average weight
+DeeperForensics-1.0 binary construction (Jiang et al., 2020;             0.90. Ambiguous or unmatched observations were skipped.
+Y. Li et al., 2020; Rössler et al., 2019). FF++ contributed              Five-landmark similarity alignment used the fixed canonical
+1,000 authentic and 1,000 manipulated logical videos per com-            112-pixel template scaled by two to 224 × 224, linear interpo-
+pression condition. Celeb-DF contained 890 authentic and                 lation, and reflected borders; the exact template and tracking
+5,639 manipulated videos after excluding two exact notebook-             implementation remain in the retained preprocessing configu-
+checkpoint duplicates. DeeperForensics contained 11,000                  ration.
+manipulated videos across 11 retained variants and 1,000                    At least 48 accepted observations were required. Longer
+authentic logical inputs reused from FF++ C23 originals. It              tracks were deterministically reduced to 48 evenly spaced ob-
+is therefore neither the complete DeeperForensics release nor            servations and stored as unsigned 8-bit RGB banks. Evaluation
+an intrinsically independent target domain. Audio, body-only             used three disjoint 16-position anchors starting at 0, 16, and
+edits, full-scene synthesis, and other FF++ manipulation                 32. Decode, face-confidence, track-association, insufficient-
+categories were outside scope.                                           evidence, and cache-integrity failures remained explicit. No
+   Read-only inventory manifests linked video identifiers, la-           missing track was filled with synthetic evidence. Because
+bels, relative paths, hashes, source/derivative relations, avail-        failed detections and variable video duration alter temporal
+able identities, and acquisition metadata. FF++ followed its             spacing, a 16-position input is not necessarily 16 consecutive
+recorded source-pair split, shared across C23/C40. Celeb-                frames.
+DF used a custom identity-component-disjoint split targeting                A seeded hierarchical distributed sampler alternated labels,
+70/15/15 proportions: assignments of four known components               cycled through shuffled dependency groups, and drew a video
+were enumerated, remaining provisional assignments retained,             within the chosen group. Draw counts were rounded for dis-
+and deviations from target overall and class proportions mini-           tributed sharding; sampling could repeat videos rather than vis-
+mized. DeeperForensics used recorded target/source-actor as-             iting each exactly once. Hashes of seed, epoch, video iden-
+signments. The realized counts in Table 2, not nominal propor-           tifier, and sampling purpose selected a training start among
+tions, define the experiment. Validation and test class imbal-           0–32 and its augmentation. Horizontal flip probability was
+ance was retained; only training sampling balanced classes.              0.5; shared clipwise intensity gain was uniform on [0.92, 1.08]
+   Audits checked one row per logical video, valid partition             and additive bias on [−6, 6], followed by clipping. Transforms
+labels, and disjoint recorded dependency, derivative, exact-             were identical across a clip’s frames, with no general RandAug-
+hash, identity, and source groups within each condition. These           ment search. Principal tensors were B ×16×3×224×224, di-
+checks support separation under available metadata, not dis-             vided by 255 and normalized with means (0.485, 0.456, 0.406)
+covery of every latent relationship (Roberts et al., 2017).              and standard deviations (0.229, 0.224, 0.225). Evaluation had
+The cross-dataset audit recorded 1,000 exact reuse edges be-             no augmentation.
+tween DeeperForensics authentic inputs and C23 originals. Of
+2,412 DeeperForensics target-test rows, 2,052 had target lin-
+
+                                                                     6
+                                                                                                                       SWINFUSION++ DEEPFAKE DETECTION
+
+           Table 2. Frozen partitions and analyzed test populations. Pairs are authentic/fake; train, validation, and test counts precede preprocessing.
+
+Condition                                                                                        Train Validation               Test Analyzed test Groups
+FF++ DeepFakes C23                                                                             720/720        140/140  140/140                140/140         70
+FF++ DeepFakes C40                                                                             720/720        140/140  140/140                140/140         70
+Celeb-DF v2                                                                                  609/4,188       145/728   136/723                136/723         46
+DeeperForensics binary                                                                       703/7,733       96/1,056 201/2,211             200/2,185         20
+Groups refer to highest-level recorded test dependencies. Strict DeeperForensics transfer uses a separate 360-video manifest and 354 analyzed videos, not a fifth
+training condition.
+
+
+4.4. Encoder and Fusion Specification                                                channels were candidate predictors, not uncertainty estimates.
+The spatial encoder was torchvision Swin-B with                                      The head had 6,506,897 parameters and the complete detector
+IMAGENET1K_V1 weights; the video encoder was Video                                   180,889,105.
+Swin-B with KINETICS400_V1 weights (Liu et al., 2021,                                4.5. Comparison Models and Controlled Intervention
+2022). Registered checkpoint identities preceded matrix
+                                                                                     Xception supplied four seed-1701 reproduced baseline cells us-
+execution. The standalone spatial model averaged frame em-
+                                                                                     ing the verified FF++ implementation and registered weights
+beddings before a binary clip head; the video model classified
+                                                                                     (Chollet, 2017; Rössler et al., 2019). Shared crops were bi-
+its pooled video embedding. Both fusion branches observed
+                                                                                     linearly resized to 299 × 299 with align_corners=False,
+the same normalized RGB clip, rather than separate sensing
+                                                                                     normalized by mean/standard deviation 0.5, and the 16 frame
+modalities.
+                                                                                     logits averaged. This common-cache adaptation differs from
+   At     the     four    stages,      channel widths    were
+                                                                                     the original release’s crop pipeline. Blocks 8–12 and the exit
+(128, 256, 512, 1024) and spatial resolutions (56, 28, 14, 7)2 .
+                                                                                     flow became trainable at zero-based epoch 4.
+Framewise features retained 16 positions; video tubelets re-
+                                                                                        The two recurrent cells used ImageNet-initialized ResNet-
+tained eight. A learned depthwise convolution with kernel and
+                                                                                     18 embeddings (512 dimensions), a one-layer unidirectional
+stride (2, 1, 1) aligned the spatial stream:
+                                                                                     LSTM (256 hidden units), and a final-timestep binary classifier
+          Sei,t,k = ai,k,0 Si,2t,k + ai,k,1 Si,2t+1,k + bi,k .             (3)       with dropout 0.30. ResNet layer 4 was eligible for unfreezing
+                                                                                     at epoch 4; both retained checkpoints were selected at epoch
+Separate channel projections used dimensions di               =                      3. This was a representative CNN–LSTM, not an exact repro-
+(64, 128, 256, 256) and (2, 4, 8, 8) attention heads, each of                        duction of every cited recurrent detector (B. Chen et al., 2022;
+dimension 32. Nonoverlapping 7 × 7 windows contained                                 Güera & Delp, 2018). I3D and SFormer remained blocked at
+49 tokens at one aligned tubelet position. For queries                               the experiment freeze because compatible checkpoint conver-
+                                                         √ Q,
+keys K, and values U , attention was softmax(QK ⊤ / 32)U ,                           sion or pinned author-controlled implementation/weight prove-
+normalized over keys (Vaswani et al., 2017). Spatial queries                         nance was unavailable. CAST and TSFF-Net were literature
+used video keys/values and vice versa. Separately parameter-                         context, not numerical local reproductions.
+ized directions consumed the original normalized windows in                             RQ4 fixed the selected C23 seed-1701 standalone en-
+parallel. Fusion windows were not shifted and did not jointly                        coder checkpoints in evaluation/inference mode and trained
+attend across all tubelets.                                                          three new heads on deterministically replayed stage fea-
+   The attention residuals follow Equation (1); each is followed                     tures. Late concatenation normalized each pooled 1,024-
+by its own pre-normalized, gated di → 4di → di feed-forward                          dimensional descriptor, projected each to 512 with GELU,
+residual with GELU. Attention and feed-forward dropout were                          and classified their concatenation through a normalized 512-
+0.10. Four directly learned scalar gates per stage were initial-                     unit GELU/dropout-0.30 head (1,581,057 trainable parame-
+ized to zero: no sigmoid or tanh was applied in the executed                         ters). The capacity-matched no-exchange head retained align-
+implementation. This specifies the actual residual mechanism                         ment, stages, gates, pooling, and difference/product readout,
+rather than importing a bounded-gate interpretation from re-                         replacing MHA(A, B, B) by MHA(A, A, A) in each stream.
+lated work (Bachlechner et al., 2021).                                               Full TLBG-HCA and no-exchange each had 6,506,897 train-
+   After reversing the window partition, enhanced grids en-                          able parameters. Thus, RQ4 tests cross-attention versus in-
+tered                                                                                dependent attention with joint readout, not fusion versus no
+                                                                                     fusion. Feature addresses linked source hashes, split/cache
+           Ei = LN4di [Sbi ; Vbi ; |Sbi − Vbi |; Sbi ⊙ Vbi ],                        hashes, video, epoch, start, and augmentation; fingerprints
+                                                                           (4)
+            ri = Wir [meant,h,w Ei ; maxt,h,w Ei ] + bri .                           checked replay across alternatives.
+
+The 8di pooled descriptor was projected to 256 dimensions                            4.6. Optimization, Checkpoint Selection, and Cohorts
+per stage. Four readouts formed 1,024 features, followed by                          All models minimized unweighted binary cross-entropy on
+layer normalization, a 512-unit GELU layer, dropout 0.30, and                        clip logits; balancing occurred in the sampler rather than an
+a scalar logit. Fusion was readout-only: enhanced maps did                           additional class-weighted loss. AdamW used (β1 , β2 ) =
+not replace features passed between backbone stages, although                        (0.9, 0.999), ϵ = 10−8 , weight decay 0.05, and maximum
+gradients could reach unfrozen encoders. Difference/product                          global gradient norm 1.0 (Loshchilov & Hutter, 2019). New
+
+                                                                                 7
+                                                                                                      SWINFUSION++ DEEPFAKE DETECTION
+
+
+modules used learning rate 10−4 and unfrozen pretrained mod-             ity and decision metrics used the calibrated output. Calibration
+ules 10−5 . Biases, normalization terms, scalar gates, and               does not alter binary score ordering in exact arithmetic.
+other one-dimensional parameters were exempt from decay.                    Blinded test manifests omitted label fields during inference;
+Warmup occupied 10% of the cohort’s planned optimizer steps,             logits and hashes were sealed before joining labels for evalu-
+followed by cosine decay. No auxiliary identity, flow, con-              ation. Training guards excluded test-partition access. Frozen
+trastive, or gate-regularization loss and no hyperparameter              transfer retained C23 weights, ensemble membership, temper-
+search were used.                                                        ature, and threshold unchanged for C40, Celeb-DF, and Deep-
+   Two GPU workers and accumulation gave effective batch                 erForensics, with no target-label fitting. Target-trained mod-
+size 16. The principal runtime changed from one clip/GPU                 els answered a separate within-dataset question. DeeperForen-
+with eight accumulation steps to four clips/GPU with two; val-           sics full and strict lineage views were not pooled. Cover-
+idation used four. Bfloat16 autocasting was used. The amend-             age was analyzed videos divided by manifest videos; inven-
+ment preserved batch size, not a claim of identical stochastic           tory exclusions, preprocessing failures, lineage exclusions, and
+trajectories. Optimizer groups were rebuilt upon unfreezing              prediction-join failures remained distinct.
+while preserving state for previously active parameters. Ear-
+                                                                         4.8. Outcomes, Uncertainty, and Statistical Eligibility
+lier encoder stages stayed frozen. Table 3 retains the schedule
+distinctions essential to interpreting the results.                      Video ROC-AUC was primary.               The archived pr_auc
+   Checkpoint ranking maximized validation video ROC-                    field was average precision, not trapezoidal precision–recall
+AUC, then average precision, then lower binary cross-entropy,            area. Secondary outcomes were accuracy, positive-class pre-
+then earlier epoch. Patience reset required AUC improvement              cision/recall/F1, specificity, confusion counts, binary cross-
+of at least 0.001, so checkpoint selection and stopping were             entropy, Brier score, and calibration error. Undefined positive
+not identical rules. The C23 correction froze unused termi-              ratios used the implementation’s zero-division value of zero.
+nal backbone normalization parameters outside the distributed            ECE used 15 equal-width fake-probability bins, weighted ab-
+loss graph and reset checkpoint selection at resumed epoch 4.            solute differences between mean probability and observed fake
+Its amended stage-4/3 thresholds were already reached at that            frequency, ignored empty bins, and included probability one
+boundary; both later stages were then trainable. These eight-            in the last bin. Brier score was mean (pv − yv )2 . Secondary
+completed-epoch runs retained the resource-correction desig-             descriptive checks added balanced accuracy and an always-
+nation rather than being relabeled full-budget.                          fake reference: for fake prevalence π, its accuracy is π, F1 is
+   Baselines used the common loss/optimizer, a 15-epoch max-             2π/(1 + π), and balanced accuracy is 0.5. These contextualize
+imum, patience four, and at least six completed epochs; Xcep-            imbalance without retroactively becoming primary endpoints
+tion used two clips/GPU with four accumulation steps and                 (Saito & Rehmsmeier, 2015).
+CNN–LSTM four with two. RQ4 used effective batch 16, head                   The uncertainty analysis sampled the highest-level depen-
+learning rate 10−4 , maximum eight epochs, patience three, and           dency groups with replacement and retained all their videos
+at least three completed epochs. All three heads completed four          with sampled multiplicities; metrics remained video-weighted.
+epochs and selected epoch 0. This single-seed, fixed-feature             It used 5,000 valid bootstrap replicates, seed 481516, 14 work-
+experiment does not test end-to-end co-adaptation. Principal             ers with spawned NumPy substreams, and 2.5th/97.5th per-
+ensembles used three same-cohort seeds except Celeb-DF fu-               centile limits. One-class draws were rejected and redrawn.
+sion, whose primary ensemble used only full-budget seeds                 Temperature and threshold were fixed, so intervals concern
+1701/2203; resource-bounded seed 3109 was reported sepa-                 test-sample variation conditional on a fitted system, not retrain-
+rately.                                                                  ing, checkpoint selection, or calibration refitting. Cluster con-
+                                                                         centration and conditioning on both classes limit interpretation
+4.7. Video Decisions, Calibration, and Frozen Transfer                   (Roberts et al., 2017). The 70/46/20 group counts in Table 2
+Three unaugmented anchor logits were averaged per video. El-             must not be confused with numbers of independent people.
+igible seed ensembles then averaged video logits, not probabil-             Paired comparisons joined common video identifiers and
+ities, votes, or seed metric values:                                     checked labels/groups, then used identical bootstrap groups for
+                                                                         both models. Separate marginal intervals were not subtracted.
+                     1 XX
+                        K      3
+                                                                         Permutation independently swapped complete prediction bun-
+            z̄v =           zv,c,k ,
+                    3K                                        (5)        dles (logit, probability, and class decision) within groups with
+                        c=1
+                       k=1
+                                                  ∗
+                                                                         probability 0.5, with no recalibration. For 5,000 swaps,
+            pv = σ(z̄v /T ),       ybv = I[pv ≥ q ].                                              P5000
+                                                                                            1 + r=1 I{|∆r | ≥ |∆obs |}
+Here K = 1 for a single model. Temperature scaling min-                                 p=                                 .            (6)
+                                                                                                          5001
+imized validation binary cross-entropy by bounded optimiza-
+tion of log T ∈ [−5, 5]; sigmoid inputs were clipped to                  The plus-one procedure avoids zero Monte Carlo probabili-
+[−80, 80] for stability (Guo et al., 2017). The validation thresh-       ties (Phipson & Smyth, 2010). It assumes exchangeability un-
+old q ∗ maximized Youden’s J = TPR−FPR, choosing the low-                der the cluster-swap null, not merely equality of two marginal
+est finite threshold within the implementation’s tie tolerance.          AUC values.
+Ensemble operating points were fitted on ensemble validation                Of 58 candidate pairs, 31 were protocol-eligible and 27 ex-
+logits. ROC-AUC and average precision used logits; probabil-             ploratory. Holm correction covered three fixed families: 56
+                                                                         metric-level internal hypotheses, two C40 seed-1701 fusion–
+
+                                                                     8
+                                                                                                                 SWINFUSION++ DEEPFAKE DETECTION
+
+         Table 3. Training cohorts retained in all comparisons. Epoch indices are zero-based; maximum and completed epochs are not interchangeable.
+
+Cohort                          Cells and schedule                                                 Interpretation
+Full-budget principal           23 cells: C23 standalone models; all C40 models; Celeb-DF          Eligible within-cohort comparisons; realized dura-
+                                standalone models and fusion seeds 1701/2203. Maximum              tions can differ.
+                                30 epochs; unfreeze stages 4/3 at epochs 4/8; patience 6;
+                                minimum 8 completed epochs.
+Fresh resource-bounded          10 cells: all nine DeeperForensics principal runs and Celeb-       Matched DeeperForensics cohort; the Celeb-DF run
+                                DF fusion seed 3109. Four epochs; unfreeze stages 4/3 at           remains separate.
+                                epochs 1/2.
+C23 fusion correction           Three runs: epochs 0–3 followed by corrected epochs 4–7,           Eight completed epochs; cross-cohort architec-
+                                with checkpoint selection reset at the boundary.                   ture/transfer differences are exploratory.
+Reproduced baselines            Six seed-1701 cells; maximum 15 epochs, patience 4, mini-          Verification does not match their capacity or budget
+                                mum 6 completed; architecture-specific unfreezing.                 to principal models.
+Frozen-feature heads            Three C23 seed-1701 heads; maximum 8 epochs, patience 3,           One controlled head-training regime, not a multi-
+                                minimum 3 completed. All completed 4 and selected epoch            seed end-to-end experiment.
+                                0.
+All cohorts used effective batch size 16. AUC patience improvement was 0.001. The resource-correction label follows the recorded amendment rather than the
+run-name suffix.
+
+
+CNN–LSTM hypotheses, and four RQ4 full-versus-control hy-                        5. Presentation and Discussion of Results
+potheses (Holm, 1979). Effect intervals were not multiplicity-                   5.1. Evidence Base and Analyzed Population
+adjusted; significance used the adjusted probabilities, with
+0.05 as the reporting threshold. C23 fusion–CNN–LSTM                             The results support a narrower conclusion than universal supe-
+and fusion-versus-standalone transfer contrasts remained ex-                     riority: SwinFusion++ achieved strong within-dataset discrim-
+ploratory because source cohorts differed. The eligible C40 re-                  ination and a positive comparison against the selected C40 re-
+current comparison still compares systems with different nomi-                   current baseline, but did not consistently exceed its constituent
+nal budgets. Equal metrics or nonsignificance did not establish                  Transformers, demonstrate an incremental cross-attention ben-
+equivalence; no equivalence margin or test was supplied (Lak-                    efit in the controlled experiment, or preserve its source oper-
+ens, 2017).                                                                      ating behavior under transfer. The distinction between these
+                                                                                 findings is central to assessing the thesis. A useful complete
+4.9. Computational Measurement and Audit Trail                                   detector and a demonstrably useful exchange mechanism are
+The recorded platform used two RTX 5090 GPUs, Python                             different empirical achievements.
+3.12, PyTorch 2.12.1/CUDA 13.0, and torchvision 0.27.1 in                           All 280 C23, 280 C40, and 859 Celeb-DF test videos pro-
+the locked training environment. Inference profiling used                        duced valid predictions. The DeeperForensics construction
+evaluation/inference mode, bfloat16, one clip per worker, 20                     yielded 2,385/2,412 analyzed test videos (98.88%); its strict
+warmups, 100 timed iterations, and CUDA synchronization.                         transfer subset yielded 354/360 (98.33%). Analyzed class
+The first eligible input was reused; video timing included three                 counts were 140 authentic/140 fake for each FF++ condition,
+sequential anchors. Latency remained a per-device measure,                       136/723 for Celeb-DF, 200/2,185 for full DeeperForensics,
+while dual-GPU throughput used combined completions di-                          and 30/324 for the strict subset. These denominators, rather
+vided by the slower worker’s elapsed time. Decoding, face pro-                   than all-partition inventory totals, apply to the reported perfor-
+cessing, host-to-device preparation, and seed-ensemble execu-                    mance. They also explain why accuracy and fake-class F1 can-
+tion were excluded. Peak allocated/reserved memory, parame-                      not be interpreted without prevalence.
+ter counts, and checkpoint size were separate measurements.                         For context, all-partition preprocessing succeeded for
+   Immutable identifiers connected source inventory, split,                      1,989/2,000 C23, 1,988/2,000 C40, 6,526/6,529 Celeb-DF, and
+cache policy, configuration, pretrained weights, training                        11,847/12,000 DeeperForensics videos. The last condition lost
+amendments, selected checkpoint, and predictions. The re-                        153 videos overall (150 fake and three authentic), but only 27
+view archive retained code, configurations, manifests, reports,                  from the held-out test set. Failures outside the test set must not
+and predictions, but not raw videos, complete caches, or large                   be subtracted again from its denominator. Likewise, lineage
+learned checkpoints needed for independent retraining. Nu-                       filtering is a change of target population, not a detection fail-
+merical verification during manuscript preparation recalcu-                      ure. The high coverage establishes the reach of the retained
+lated point metrics from saved predictions and checked Holm                      face-processing policy on these inputs; it does not validate per-
+arithmetic; stored bootstrap intervals and permutation runs                      formance on videos without a usable primary face.
+were not regenerated. This is an auditable evidence record, not                     During preparation, saved predictions reproduced the stored
+a claim that training or benchmark labels were independently                     ROC-AUC, average precision, accuracy, F1, Brier score, cov-
+revalidated.                                                                     erage, and counts for 72 individual evaluations and 21 ensem-
+                                                                                 bles. Three strict-transfer ensemble views were checked sepa-
+                                                                                 rately by applying their retained manifest identifiers, and Holm
+
+
+                                                                             9
+                                                                                                     SWINFUSION++ DEEPFAKE DETECTION
+
+
+adjustments were checked against the saved raw probabilities.           observed false positives into a guarantee of zero population
+This establishes numerical consistency, not independent re-             risk.
+training or label validation. Confidence intervals and permu-              Across the four conditions, no model had the largest ob-
+tation probabilities below are the retained dependency-aware            served value for every metric. The strongest evidence for a
+analysis. New class-balance and cluster-composition checks              useful decision function is therefore the joint profile of rank-
+are descriptive and do not replace that analysis.                       ing, errors, and uncertainty, not selection of a favorable met-
+                                                                        ric after seeing the outcome. Near-ceiling AUC also limits
+5.2. Within-Dataset Discrimination and Operating Deci-
+                                                                        how informative small numerical separations can be, particu-
+      sions
+                                                                        larly when the test population contains few independent groups.
+Table 4 presents homogeneous mean-logit ensembles. AUC                  RQ1 is answered by condition-dependent performance, not by
+summarizes ranking, whereas F1 and accuracy use each                    an across-the-board fusion advantage.
+model’s validation-derived operating point. On C23, Swin-
+Fusion++ obtained AUC 0.9965, F1 0.9712, and accuracy                   5.3. Seed Variation and Formal Internal Comparisons
+97.14%. Video Swin-B had the largest observed AUC                       Table 5 separates variation across training runs from uncer-
+(0.9972), while Swin-B had higher F1 (0.9856) and accu-                 tainty over test observations. For fusion, same-cohort seed
+racy (98.57%). Thus, the fusion model’s improvement in                  AUC was 0.9959 ± 0.0006 on C23, 0.9822 ± 0.0014 on C40,
+AUC over Swin-B did not translate into improvement in fixed-            0.9684 ± 0.0006 for the two full-budget Celeb-DF seeds, and
+threshold decisions. Because C23 fusion used the correction             0.9990 ± 0.0001 on DeeperForensics. These standard devia-
+cohort while the standalone encoders used the full-budget co-           tions describe only two or three runs on the same split; they
+hort, these are descriptive system comparisons, not controlled          do not quantify variation over new datasets, identities, or al-
+evidence that fusion changed performance by the observed                ternative training recipes. The low Celeb-DF AUC of 0.7740
+amount.                                                                 for resource-bounded seed 3109 belongs to another cohort and
+   C40 provides a same-principal-cohort comparison. Fusion              was not averaged into the full-budget result.
+reached AUC 0.9854, below Swin-B (0.9917) and Video Swin-                  The ensembles are separate fitted decision systems, not arith-
+B (0.9930), and its F1 of 0.9420 was also below both stan-              metic averages of these seed metrics. For example, full-budget
+dalone values. All three remained strong rankers on the re-             Celeb-DF fusion had mean seed F1 0.9326 and ensemble F1
+tained DeepFakes population. The result does not support a              0.9561, whereas DeeperForensics fusion had mean seed F1
+general claim that introducing an additional spatial–temporal           0.9904 and ensemble F1 0.9844. Averaging logits and fitting
+stream improves compressed-video detection. It instead shows            the ensemble operating point can change which videos cross
+that the principal dual-stream system can be less effective than        the threshold. The second example is direct evidence that en-
+a constituent encoder under the evaluated training procedure.           sembling did not uniformly improve thresholded performance.
+Differences between C23 and C40 alone cannot be attributed              The archive does not separate the contribution of score averag-
+solely to compression sensitivity because those conditions also         ing from operating-point fitting, so neither component alone is
+used different fusion training cohorts.                                 assigned responsibility.
+   On Celeb-DF, fusion’s two-member full-budget ensemble                   The internal Holm family contained 56 metric-level tests. At
+reached AUC 0.9724, compared with 0.9824 for Swin-B and                 an adjusted probability below 0.05, two rejected null hypothe-
+0.9749 for Video Swin-B. Nevertheless, fusion obtained higher           ses were both unfavorable to the video-containing systems: on
+fake-class F1 (0.9561) and accuracy (92.78%) than either stan-          Celeb-DF seed 2203, fusion minus Swin-B AUC was −0.0152
+dalone ensemble. This is not a contradiction: ranking and the           (95% paired interval [−0.0198, −0.0119]), and Video Swin-B
+chosen decision boundary measure different properties. Fu-              minus Swin-B was −0.0098 ([−0.0131, −0.0072]); each had
+sion identified 675 of 723 fake videos, with 14 false positives         pHolm = 0.0112. These are specific seed-level comparisons,
+among 136 authentic videos; Swin-B identified 649 fakes with            not significance labels for Table 4’s ensembles. No eligible in-
+only four false positives. Fusion’s greater fake recall there-          ternal test established a positive fusion AUC/F1 advantage at
+fore accompanied weaker authentic specificity. Its balanced             that adjusted threshold. Non-rejection in the remaining tests is
+accuracy was 91.53%, versus 93.41% for Swin-B. The favor-               not evidence that their models are equivalent.
+able accuracy/F1 result on a fake-majority test set should con-            Table 6 places those negative results alongside the princi-
+sequently not be described as dominance across operating re-            pal positive baseline result and the controlled fusion contrasts.
+quirements.                                                             This avoids treating statistical analysis as a search only for fa-
+   In the DeeperForensics construction, all three principal en-         vorable findings. The intervals are percentile intervals and the
+sembles were near ceiling in AUC: 0.9989 for Swin-B, 0.9989             probabilities are family-adjusted swap-test outputs; an interval
+for Video Swin-B, and 0.9990 for fusion. The fusion–Swin                excluding zero need not imply rejection after multiplicity cor-
+AUC difference was approximately 0.0001, not a practically es-          rection. Their interpretation is further limited by the cluster
+tablished advantage. At the retained thresholds, Swin-B had F1          structure discussed below.
+0.9940 and accuracy 98.91%, compared with fusion’s 0.9844
+                                                                        5.4. Reproduced Cross-Family Baselines
+and 97.19%. Fusion made no false-positive decisions on the
+200 analyzed authentic videos but missed 67 of 2,185 fake               The verified local baselines are reported in Table 7. Xception
+videos; Swin-B missed 25 and produced one false positive.               reached AUC 0.7725 on C23 and 0.8109 on C40; the represen-
+These counts make the trade-off visible without turning zero            tative CNN–LSTM reached 0.7876 and 0.7984. The princi-
+
+                                                                   10
+                                                                                                                                    SWINFUSION++ DEEPFAKE DETECTION
+
+                  Table 4. Within-dataset principal ensembles: video-level discrimination, retained operating decisions, and training cohort.
+
+Condition                                             Model                                       K Cohort                  AUC 95% AUC interval Fake F1 Acc. (%)
+C23                                                   Swin-B                                             3             F   0.9930   [0.9824, 1.0000]      0.9856          98.57
+C23                                                   Video Swin-B                                       3             F   0.9972   [0.9923, 0.9999]      0.9784          97.86
+C23                                                   SwinFusion++                                       3             C   0.9965   [0.9921, 0.9994]      0.9712          97.14
+C40                                                   Swin-B                                             3             F   0.9917   [0.9817, 0.9987]      0.9712          97.14
+C40                                                   Video Swin-B                                       3             F   0.9930   [0.9864, 0.9979]      0.9577          95.71
+C40                                                   SwinFusion++                                       3             F   0.9854   [0.9727, 0.9952]      0.9420          94.29
+Celeb-DF                                              Swin-B                                             3             F   0.9824   [0.9785, 0.9835]      0.9433          90.92
+Celeb-DF                                              Video Swin-B                                       3             F   0.9749   [0.9710, 0.9770]      0.9414          90.57
+Celeb-DF                                              SwinFusion++                                       2             F   0.9724   [0.9680, 0.9746]      0.9561          92.78
+DeeperForensics                                       Swin-B                                             3             R   0.9989   [0.9974, 0.9999]      0.9940          98.91
+DeeperForensics                                       Video Swin-B                                       3             R   0.9989   [0.9970, 0.9999]      0.9861          97.48
+DeeperForensics                                       SwinFusion++                                       3             R   0.9990   [0.9970, 1.0000]      0.9844          97.19
+K is the number of same-cohort seed members; F = full-budget, R = fresh four-epoch resource cohort, C = C23 corrected continuation. Intervals are stored
+cluster-percentile intervals. No ensemble rank is a paired significance claim. The analyzed denominators are those in Table 2.
+
+
+  Table 5. Fusion seed means and sample standard deviations within each                                       1
+                            retained cohort.
+
+Condition                    K                  AUC                Fake F1
+                                                                                                             0.8
+C23                          3    0.9959 ± 0.0006       0.9703 ± 0.0071             True-positive rate
+C40                          3    0.9822 ± 0.0014       0.9347 ± 0.0032
+                                                                                                             0.6
+Celeb-DF                     2    0.9684 ± 0.0006       0.9326 ± 0.0194
+DeeperForensics              3    0.9990 ± 0.0001       0.9904 ± 0.0052
+Celeb-DF includes seeds 1701/2203 only. Resource seed 3109 has AUC                                           0.4
+0.7740 and F1 0.8191 and is not part of that mean. SD is training-run vari-
+                                                                                                                                                              Swin-B
+ation, not a test-set confidence interval.
+                                                                                                                                                           Video Swin-B
+                                                                                                             0.2
+pal Transformer systems had substantially larger point AUCs                                                                                                SwinFusion++
+                                                                                                                                                            CNN–LSTM
+on those test sets. This supports a comparison against these
+particular reproduced systems, not a statement that convolu-                                                  0
+                                                                                                                   0        0.2      0.4          0.6       0.8             1
+tional or recurrent methods are intrinsically unsuitable. The
+                                                                                                                                    False-positive rate
+baselines differ from the principal models in pretrained infor-
+                                                                                    Figure 1. C40 seed-1701 ROC curves reconstructed from the stored video
+mation, nominal epoch budget, unfreezing schedule, and ca-
+                                                                                   logits on 280 common test videos. The recurrent comparison concerns these
+pacity, despite sharing accepted facial inputs and video-level                     single models, not the principal ensembles. Curves summarize all thresholds,
+evaluation.                                                                              whereas reported decisions retain validation-selected thresholds.
+   The protocol-eligible RQ3 test compared seed-1701 C40 fu-
+sion, not its three-member ensemble, with the selected CNN–                        an unsuitable retained operating point, even without changing
+LSTM on 280 common videos in 70 dependency groups. Fu-                             dataset between training and testing. The recorded tempera-
+sion AUC was 0.9830 versus 0.7984, giving +0.1846 (95% in-                         ture/threshold procedure is part of the evaluated system, not
+terval [0.1503, 0.2165]). F1 was 0.9382 versus 0.7515, giving                      an optional correction applied afterward using test labels.
++0.1867 ([0.1503, 0.2201]). Both adjusted probabilities were                          I3D and SFormer contributed no verified local numerical re-
+0.0003999. This is the clearest retained positive paired com-                      sults; their blocked cells are not counted as detection failures.
+parison. It remains a difference between the specified trained                     RQ2 is consequently supported by four Xception and two rep-
+systems: eligibility under the archived analysis does not erase                    resentative recurrent evaluations, with other methods supply-
+their distinct budgets or establish a causal architecture-only ef-                 ing literature context only. Figure 1 visualizes the seed-1701
+fect. The C23 recurrent contrast remained exploratory and is                       C40 scores used for that setting, rather than borrowing pub-
+not assigned an equivalent formal claim.                                           lished curves from a different evaluation population.
+   Two baseline outcomes demonstrate why F1 alone is insuf-                        5.5. What the Controlled Fusion Experiment Establishes
+ficient. On Celeb-DF, Xception’s F1 of 0.9140 accompanied
+                                                                                   The C23 frozen-backbone comparison is the direct test of the
+predictions of fake for all 859 videos: it recovered every fake
+                                                                                   exchange proposition in Section 3. Table 8 shows that full
+but rejected every authentic input, giving balanced accuracy
+                                                                                   TLBG-HCA and the capacity-matched no-exchange head both
+0.5000. Nonconstant scores still produced AUC 0.6480. On
+                                                                                   obtained AUC 0.9964, F1 0.9857, and accuracy 98.57%. Late
+DeeperForensics, Xception achieved AUC 0.9978 yet F1 only
+                                                                                   concatenation obtained AUC 0.9952, F1 0.9892, and accuracy
+0.5821 and accuracy 46.00%, with 1,288 false negatives and
+                                                                                   98.93%. Full minus late AUC was +0.0012 (95% paired inter-
+no false positives. Strong ordering can therefore coexist with
+
+                                                                              11
+                                                                                                                      SWINFUSION++ DEEPFAKE DETECTION
+
+              Table 6. Selected protocol-eligible paired effects, including every metric-level rejection at adjusted p < 0.05 and all RQ4 contrasts.
+
+Comparison (A − B)                                                                                   Metric       Effect 95% paired interval               pHolm
+Celeb-DF: fusion − Swin-B (seed 2203)                                                                 AUC       -0.0152         [-0.0198, -0.0119]   0.0112
+Celeb-DF: Video Swin-B − Swin-B (2203)                                                                AUC       -0.0098         [-0.0131, -0.0072]   0.0112
+C40: fusion − CNN–LSTM (seed 1701)                                                                    AUC       +0.1846       [+0.1503, +0.2165] 0.0003999
+C40: fusion − CNN–LSTM (seed 1701)                                                                     F1       +0.1867       [+0.1503, +0.2201] 0.0003999
+C23 fixed features: full − late concatenation                                                         AUC       +0.0012        [-0.0005, +0.0040]    1.0000
+C23 fixed features: full − late concatenation                                                          F1       -0.0035        [-0.0141, +0.0075]   1.0000
+C23 fixed features: full − no-exchange                                                                AUC       +0.0000       [+0.0000, +0.0000]     1.0000
+C23 fixed features: full − no-exchange                                                                 F1       +0.0000       [+0.0000, +0.0000]    1.0000
+Internal, recurrent, and RQ4 families contain 56, 2, and 4 hypotheses, respectively. Intervals are not multiplicity-adjusted; probabilities are. Internal Celeb-DF
+effects are qualified by concentrated cluster support. RQ4 uses seed 1701 and fixed features; recurrent effects use individual models, not an ensemble. The other
+54 internal tests did not reject at adjusted p < 0.05.
+
+
+            Table 7. Verified local baseline results (seed 1701).                   equivalence test, nor evidence that a practically meaningful dif-
+Condition             Model                   AUC Fake F1 Acc. (%)                  ference is impossible in another sample or training run (Lakens,
+                                                                                    2017).
+C23                   Xception               0.7725      0.6886        69.64
+                                                                                       Several explanations remain compatible with the evidence.
+C40                   Xception               0.8109      0.7429        74.29
+                                                                                    Frozen representations may already make the C23 distinction
+Celeb-DF              Xception               0.6480      0.9140        84.17
+                                                                                    nearly separable, leaving little room for the exchange head.
+DeeperForensics       Xception               0.9978      0.5821        46.00
+                                                                                    The streams may provide redundant information, or the com-
+C23                   CNN–LSTM               0.7876      0.7452        71.43
+                                                                                    mon short head-training schedule may not exploit the added
+C40                   CNN–LSTM               0.7984      0.7515        70.71
+                                                                                    interaction. All three heads selected their epoch-0 checkpoint
+Xception uses the shared aligned cache; CNN–LSTM is the representative              and completed four epochs, which makes later training an un-
+ResNet-18/LSTM implementation. Distinct nominal budgets prevent an
+architecture-only interpretation. No I3D or SFormer local score is asserted.
+                                                                                    convincing basis for attributing their retained performance to
+                                                                                    progressively learned exchange. These are candidate explana-
+        Table 8. Controlled fusion-head results on 280 C23 videos.
+                                                                                    tions, not identified mechanisms: gate trajectories, attention
+Readout                         Head M        AUC Fake F1 Acc. (%)                  interventions, and controlled retraining were not available to
+                                                                                    distinguish them. Nonzero or zero gates cannot be inferred
+Late concatenation                   1.58 0.9952         0.9892        98.93
+                                                                                    from equal AUC alone.
+No-exchange                          6.51 0.9964         0.9857        98.57
+                                                                                       Late concatenation used about one quarter of the trainable
+Full TLBG-HCA                        6.51 0.9964         0.9857        98.57
+                                                                                    head parameters (1.58 million versus 6.51 million) while re-
+All heads share fixed seed-1701 encoders and a four-completed-epoch sched-          taining comparable observed ranking and slightly higher F1.
+ule. Head M denotes millions of trainable head parameters. Full/no-exchange
+retain different logits despite identical AUC, F1, and class decisions.             This identifies a substantive simpler control, not a definitive
+                                                                                    deployment recommendation: its total system still includes
+val [−0.0005, 0.0040]), while the F1 difference was −0.0035                         both encoders, and its AUC/F1 differences were not signifi-
+([−0.0141, 0.0075]). All four RQ4 adjusted probabilities were                       cant under the retained procedure. A future test of end-to-end
+1.0000. No incremental AUC or F1 advantage over either con-                         co-adaptation, additional seeds, alignment variants, or stage
+trol was established in this experiment.                                            ablation would answer questions that this single-seed readout
+   The full-versus-no-exchange finding is particularly informa-                     experiment does not. RQ4 therefore does not support an incre-
+tive because both heads had 6,506,897 trainable parameters,                         mental AUC/F1 improvement within this narrow, reproducible
+the same selected fixed encoders, and the same addressed train-                     intervention.
+ing evidence. It weakens an exchange-specific explanation of
+the observed discrimination in that regime. However, the no-                        5.6. Frozen Transfer: Ranking Does Not Ensure Useful
+exchange model still jointly classified both streams, their ab-                           Decisions
+solute difference, and their product; independent self-attention                    Table 9 keeps the C23-trained weights, source operating
+replaced cross-attention. The result does not test whether all fu-                  points, and ensemble membership fixed. Source-only trans-
+sion is unnecessary, whether temporal information is unused,                        fer is stricter than evaluating target-trained systems, and
+or whether either encoder alone contains all useful information.                    source-cohort differences make fusion-versus-standalone com-
+   Directly aligned predictions had identical class decisions on                    parisons descriptive. On C40, fusion transferred with AUC
+all 280 test videos, but the maximum absolute logit difference                      0.9686 ([0.9522, 0.9829]), but F1 fell to 0.7686 and accuracy
+was 0.0208333 and the maximum calibrated-probability differ-                        to 81.07%. It produced only one false positive among 140 au-
+ence approximately 0.0005716. Checkpoint hashes differed.                           thentic videos while missing 52 of 140 fake videos. High preci-
+Equal reported metrics therefore did not arise from a demon-                        sion (0.9888) thus coexisted with recall 0.6286. The principal
+strated identity of models or outputs. The zero-width stored                        C40-trained fusion ensemble’s F1 of 0.9420 does not demon-
+AUC/F1 effect intervals describe the empirical contrast gen-                        strate that the source-trained system can retain that operating
+erated by this sample and resampling scheme; they are not an                        behavior without target information.
+
+                                                                               12
+                                                                                                                       SWINFUSION++ DEEPFAKE DETECTION
+
+                  Table 9. Frozen C23-source ensembles: unchanged source weights, temperature, threshold, and three-member composition.
+
+Target/view                                              Source model                      AUC 95% AUC interval Fake F1 Acc. (%) Recall (%)
+C40                                                      Swin-B                          0.9719        [0.9532, 0.9878]       0.8664         88.21          76.43
+C40                                                      Video Swin-B                    0.9440        [0.9190, 0.9677]       0.7182         77.86          56.43
+C40                                                      SwinFusion++                    0.9686        [0.9522, 0.9829]       0.7686         81.07          62.86
+Celeb-DF                                                 Swin-B                          0.9052        [0.8958, 0.9118]       0.9315         88.24          95.02
+Celeb-DF                                                 Video Swin-B                    0.9045        [0.8901, 0.9138]       0.9289         88.24          91.29
+Celeb-DF                                                 SwinFusion++                    0.8730        [0.8549, 0.8864]       0.8821         81.49          82.30
+DeeperForensics (full)                                   Swin-B                          0.8002        [0.7663, 0.8350]       0.3555         28.09          21.65
+DeeperForensics (full)                                   Video Swin-B                    0.7508        [0.7175, 0.7898]       0.2110         19.12          11.81
+DeeperForensics (full)                                   SwinFusion++                    0.8021        [0.7764, 0.8317]       0.2362         20.55          13.41
+DeeperForensics (strict)                                 Swin-B                          0.7767        [0.6978, 0.8593]       0.3636         28.81          22.22
+DeeperForensics (strict)                                 Video Swin-B                    0.7465        [0.6885, 0.8150]       0.3029         24.58          17.90
+DeeperForensics (strict)                                 SwinFusion++                    0.7682        [0.7148, 0.8282]       0.3029         24.58          17.90
+Analyzed/manifest denominators: C40 280/280; Celeb-DF 859/859; DeeperForensics full 2,385/2,412; strict 354/360. Fusion source checkpoints belong to the
+correction cohort; standalone sources are full-budget. Cross-cohort ranks remain descriptive. Full and strict target views represent different populations; neither
+target operating point was refitted.
+
+
+   On Celeb-DF, transferred fusion AUC was 0.8730                                    fusion counts were 29 true negatives, one false positive, 266
+([0.8549, 0.8864]), below the standalone source ensembles’                           false negatives, and 58 true positives. There were 17 recorded
+0.9052 and 0.9045. Its accuracy of 81.49% and F1 of 0.8821                           dependency groups. This smaller population removes the au-
+were below the always-fake references of 84.17% and 0.9140                           dited development-lineage intersection but is not a random sub-
+on this particular 723/859-fake population. Those reference                          sample of the full target. The full-to-strict AUC change must
+comparisons invalidate an unqualified high-accuracy success                          therefore not be described as a causal estimate of leakage in-
+claim, but do not imply absence of useful discrimination.                            flation: prevalence, identities, and other composition may also
+Fusion correctly accepted 105 authentic videos and detected                          differ. Both views are needed to expose the lineage qualifica-
+595 fakes, with 31 false positives and 128 false negatives;                          tion and the persistence of weak decisions.
+balanced accuracy was 79.75%, rather than the reference’s                               Figure 2 places fusion’s ranking and threshold measures
+50%. Specificity was 77.21% and fake recall 82.30%.                                  on the same target axes without treating them as interchange-
+   The competing operating points illustrate the distinction.                        able. AUC remains informative even where recall deterio-
+Transferred Swin-B had higher Celeb-DF accuracy (88.24%)                             rates sharply. A mismatch between source-trained score dis-
+and recall (95.02%) but lower specificity (52.21%) and bal-                          tributions and the retained threshold is consistent with this pat-
+anced accuracy (73.61%). Video Swin-B also had 88.24% ac-                            tern; the experiment does not identify whether the underlying
+curacy, with recall 91.29%, specificity 72.06%, and balanced                         cause is synthesis variation, acquisition, preprocessing, source-
+accuracy 81.67%. These differences describe which errors                             specific cues, or their combination. In particular, the fall from
+each fixed system made on the same target population. They                           near-ceiling target-trained DeeperForensics AUC to materially
+do not identify the optimal trade-off for another class preva-                       lower source-only AUC shows that the difficulty is not solely
+lence or cost of error. Choosing a new threshold after inspect-                      a threshold choice. Retuning the threshold could not, by itself,
+ing these target labels would change the experiment into target-                     recover the lost score ordering.
+informed adaptation and is not done here.                                               The defensible RQ5 conclusion is that transfer is condition-
+   Full-view DeeperForensics transfer exposed the most se-                           dependent and weakest for the lineage-qualified DeeperForen-
+vere operational failure. Fusion maintained AUC 0.8021                               sics construction. Compression transfer, cross-dataset trans-
+([0.7764, 0.8317]), yet obtained F1 0.2362 and accuracy                              fer, and strict source-lineage transfer answer different ques-
+20.55%. It missed 1,892 of 2,185 fake videos, with recall only                       tions. None of these observations establishes behavior on ev-
+13.41%, while rejecting three of 200 authentic videos. Bal-                          ery present-day deepfake generator or on audio and full-scene
+anced accuracy was 55.95%. Precision of 0.9899 is not reas-                          synthesis outside the retained visual task.
+suring in isolation: the system flagged very few positives in a
+                                                                                     5.7. Calibration and Uncertainty Limits
+test set where 91.61% of videos were fake. The always-fake
+accuracy/F1 references were 91.61%/0.9562. Conversely, an                            Table 10 reports seed-1701 calibration to avoid attaching indi-
+always-authentic rule would obtain only 8.39% accuracy. Nei-                         vidual operating points to ensemble metrics. In each of the four
+ther trivial rule supplies useful discrimination; together they                      within-dataset fusion evaluations, temperature scaling slightly
+reveal how strongly the reported accuracy depends on the di-                         reduced Brier score but increased ECE. On Celeb-DF, for ex-
+rection of errors under this prevalence.                                             ample, Brier fell from 0.1218 to 0.1203 while ECE rose from
+   Strict lineage filtering did not restore reliable transfer. On                    0.1279 to 0.2447, with validation-fitted temperature 5.8923.
+the 354 analyzed strict videos, fusion AUC was 0.7682                                This is not evidence that one calculation must be wrong: Brier
+([0.7148, 0.8282]), F1 0.3029, and accuracy 24.58%. Its con-                         evaluates squared probabilistic error, whereas ECE aggregates
+
+
+                                                                                13
+                                                                                                                  SWINFUSION++ DEEPFAKE DETECTION
+
+
+                  1                                                                   conditional analysis, not a certification of population-wide cer-
+                                                                                      tainty.
+                 0.8                                                                  5.8. Relationship to Previous Studies
+                                                                                      The positive C40 recurrent comparison is compatible with the
+                                                                                      motivation for richer video representations, but does not re-
+  Metric value
+
+
+
+
+                 0.6
+                                                                                      fute recurrent approaches as a family. The present ResNet-
+                                                                                      18/LSTM baseline differs from the architectures and training
+                 0.4                                                                  settings of Güera and Delp (2018) and B. Chen et al. (2022).
+                                                                                      Likewise, the implemented Xception results reflect a common
+                                   AUC
+                                                                                      aligned-cache adaptation and fixed local training procedure.
+                 0.2
+                                Fake recall                                           Their weaker FF++ scores cannot establish that all spatial meth-
+                             Balanced accuracy                                        ods fail to capture transferable evidence. The local experiment
+                  0                                                                   evaluates selected systems, whereas the RRL describes a much
+                       C40           Celeb-DF    DF full           DF strict
+                                                                                      broader design space.
+Figure 2. Frozen-transfer fusion ensemble profile. Ranking, fake recall, and             The RQ4 result differs from the positive cross-attention ab-
+   balanced accuracy diverge under a fixed source operating point. Lines
+   connect target categories for readability, not a temporal trajectory. DF
+                                                                                      lations reported for deepfake CAST. In its revised primary
+denotes the DeeperForensics construction; full and strict views have different        preprint, CAST compares CNN/Transformer cross-attention
+  populations. Balanced accuracy is secondary descriptive analysis; AUC               with removed or decoupled attention and reports improved per-
+                        intervals appear in Table 9.                                  formance; the same study reports that its multiscale variant un-
+                                                                                      derperforms its main configuration (Thakre et al., 2026a, Sec-
+absolute discrepancies over probability bins. They also dif-
+                                                                                      tions 5.5.1–5.5.4). Our null incremental finding concerns fixed
+fer from the validation binary-cross-entropy objective used to
+                                                                                      Swin/Video-Swin features and a capacity-matched joint read-
+choose temperature.
+                                                                                      out. The studies therefore do not estimate the same interven-
+   The source-only seed-1701 temperature 1.8251 and thresh-
+                                                                                      tion. Their combined implication is conditional: neither cross-
+old 0.6629 were carried unchanged to all three targets. On
+                                                                                      attention nor multiscale aggregation has a benefit guaranteed
+DeeperForensics, scaling reduced Brier from 0.6362 to 0.5815
+                                                                                      independently of representation, control design, and optimiza-
+and ECE from 0.6815 to 0.6632, but the remaining errors were
+                                                                                      tion. The present result does not invalidate CAST’s evidence,
+large. Relative improvement after a transformation is not suf-
+                                                                                      and CAST’s evidence does not establish an unobserved benefit
+ficient evidence of adequate probability quality. This behavior
+                                                                                      for TLBG-HCA.
+is consistent with the wider finding that source calibration does
+                                                                                         Temporal-focused literature also supplies an alternative to
+not guarantee calibration after distribution shift (Ovadia et al.,
+                                                                                      adding capacity. FTCN limits spatial convolution while re-
+2019). It also illustrates why temperature scaling, despite its
+                                                                                      taining temporal modeling, and LipForensics builds on repre-
+established utility (Guo et al., 2017), should not be presented
+                                                                                      sentations learned from natural mouth motion (Haliassos et al.,
+as a solution to the transfer problem demonstrated here.
+                                                                                      2021; Zheng et al., 2021). AltFreezing changes how spatial
+   The dependence structure is a more fundamental qualifica-
+                                                                                      and temporal weights are optimized to reduce reliance on only
+tion than the number of printed decimal places. FF++ had
+                                                                                      one cue family (Wang et al., 2023). Our high within-dataset
+70 groups across 280 test videos; DeeperForensics had 20
+                                                                                      scores and weaker transfer are compatible with the concern
+across 2,385. Celeb-DF had 46 groups, but the largest con-
+                                                                                      motivating these studies: availability of temporal computation
+tained 814/859 videos (94.76%). A descriptive inspection of
+                                                                                      does not ensure use of transferable temporal evidence. They
+the saved group labels further showed that this component con-
+                                                                                      do not, however, prove that SwinFusion++ relied on shortcuts;
+tained all 723 fake videos and 91 authentic videos; the remain-
+                                                                                      no cue-removal intervention or causal attribution analysis was
+ing 45 videos were authentic. Thus, a cluster bootstrap draw
+                                                                                      performed here. Training objectives and pretraining informa-
+excluding the dominant component contains only one class and
+                                                                                      tion remain plausible explanatory factors, not experimentally
+is rejected by the implemented procedure. The resulting valid
+                                                                                      identified causes.
+draws necessarily retain that source of fake-class support.
+                                                                                         The comparison policy follows the methodological con-
+   Consequently, a narrow Celeb-DF interval cannot be read as
+                                                                                      cern highlighted by DeepfakeBench: preprocessing, partitions,
+evidence of broad, independently replicated fake-identity gen-
+                                                                                      training settings, and scoring units can change the meaning of
+eralization. Resampling the dominant component with vary-
+                                                                                      a reported result (Yan et al., 2023). Accordingly, published
+ing multiplicity does not create new manipulated components,
+                                                                                      CAST, TSFF-Net, and SFormer values were not merged with
+and the inferential design conditions on this unusually concen-
+                                                                                      local measurements into a common leaderboard. In particular,
+trated support. The same limitation qualifies the statistically
+                                                                                      the retained evidence does not authenticate the metric and pro-
+detectable negative seed-2203 comparisons rather than being
+                                                                                      tocol details needed for a numerical SFormer comparison. Its
+invoked only for unfavorable results. A cluster-influence anal-
+                                                                                      published architecture remains relevant context, but its scores
+ysis and more independently supported manipulated groups
+                                                                                      cannot substantiate local superiority. A valid numerical com-
+would strengthen inference, but neither was retrospectively
+                                                                                      parison would require a compatible implementation or a fully
+manufactured. The present intervals remain the documented
+                                                                                      reconciled evaluation protocol.
+
+
+                                                                                 14
+                                                                                                                     SWINFUSION++ DEEPFAKE DETECTION
+
+                        Table 10. Probability quality before and after validation-fitted temperature scaling, for fusion seed 1701 only.
+
+Evaluation                                                            Temperature Threshold Brier raw Brier scaled ECE raw ECE scaled
+C23 (within)                                                                 1.8251         0.6629         0.0229           0.0211         0.0266      0.0295
+C40 (within)                                                                 3.3636         0.7294         0.0455           0.0430         0.0460      0.0493
+Celeb-DF (within)                                                            5.8923         0.2907         0.1218           0.1203         0.1279      0.2447
+DeeperForensics (within)                                                     2.2448         0.8367         0.0053           0.0051         0.0057      0.0073
+C40 (transfer)                                                               1.8251         0.6629         0.1296           0.1185         0.1496      0.1445
+Celeb-DF (transfer)                                                          1.8251         0.6629         0.0979           0.0937         0.0736      0.0730
+DeeperForensics (transfer)                                                   1.8251         0.6629         0.6362           0.5815         0.6815      0.6632
+Smaller Brier/ECE values are preferable; ECE uses 15 equal-width fake-probability bins. Transfer rows inherit the C23 validation operating point. DeeperForen-
+sics transfer is the full overlap-qualified view. These single-seed values are not ensemble calibration estimates.
+
+                        Table 11. Archived network-only inference profile on two RTX 5090 workers, bfloat16, batch one per device.
+
+Model                                                              Parameters (M) Clip (ms) Video (ms) Dual-GPU clips/s Peak alloc. (GiB)
+Swin-B                                                                         86.74         11.51           34.46                172.84                0.599
+Video Swin-B                                                                   87.64         14.08           42.10                140.56                0.813
+SwinFusion++                                                                  180.89         28.06           84.11                 70.77                1.204
+Xception                                                                       20.81          7.86           23.72                253.46                0.421
+CNN–LSTM                                                                       11.97          1.56            4.62               1277.86                0.177
+Times are per-device means; a video comprises three sequential anchors. Throughput aggregates both workers. Memory is maximum allocated across workers.
+Measurements exclude decoding, face processing, input preparation, and multi-seed ensemble execution; principal models use the selected C23 seed-1701 profiles.
+
+
+   Finally, Deepfake-Eval-2024 documents a broader gap be-                            In the controlled experiment, late concatenation had mean
+tween curated benchmarks and collected contemporary media                          clip latency 25.63 ms, compared with 28.13 ms for full TLBG-
+(Chandra et al., 2026). Its acquisition process and multimodal                     HCA and 27.97 ms for no-exchange. The similar total timing
+scope differ from the face-centered task here; it is supporting                    reflects the encoders shared by all three designs; a substantial
+context for external-validity caution, not an additional dataset                   reduction in head parameters need not proportionally reduce
+evaluated by this study. The present contribution is therefore                     complete-system cost. Neither a smaller head nor a favorable
+the implementation-grounded assessment of a specific aligned                       network-only profile resolves preprocessing coverage or trans-
+dual-Swin design, including evidence against a stronger mech-                      ferred threshold failures. The practical implication is to report
+anism claim, rather than a general solution to all deepfake de-                    a joint accuracy–error–resource profile before claiming that
+tection.                                                                           the additional exchange machinery is justified.
+                                                                                      The absence of raw videos and large checkpoints in the re-
+5.9. Computational Cost and Practical Implications
+                                                                                   view archive limits additional qualitative or deployment anal-
+The measured resource profile in Table 11 places predictive                        ysis. The saved predictions support error counts, but not input-
+findings in context. The complete fusion detector had 180.89                       level diagnoses of why particular videos were misclassified.
+million parameters, compared with 86.74 million for Swin-B                         Attribution to a specific lip region, facial texture, or motion
+and 87.64 million for Video Swin-B. Mean clip latency was                          artifact requires the corresponding inputs and an appropriate
+28.06 ms versus 11.51 and 14.08 ms, respectively; peak al-                         intervention or validated attribution procedure. The quantita-
+located memory was 1.204 GiB versus 0.599 and 0.813 GiB.                           tive findings therefore describe predictive behavior without as-
+Relative to Swin-B, fusion required approximately 2.44 times                       signing unobserved visual causes.
+the clip latency. Dual-GPU clip throughput fell from 172.84
+to 70.77 clips/s. These are material costs when improved dis-                      5.10. Integrated Findings and Limitations
+crimination over the constituent encoders is not consistently                      Taken together, the five questions receive distinct answers.
+established.                                                                       RQ1 shows high but condition-dependent principal discrim-
+   The timing boundary matters. Fusion’s mean three-anchor                         ination, without consistent superiority over standalone Swin
+video-network time was 84.11 ms per device, but excluded                           variants. RQ2 establishes local cross-family evidence for the
+decoding, tracking, alignment, input preparation, and execu-                       six verified baseline cells, not the blocked families. RQ3
+tion of all seed-ensemble members. The reported dual-GPU                           supplies a substantial, protocol-eligible C40 seed-1701 advan-
+throughput is not single-device throughput, and repeatedly tim-                    tage over the representative CNN–LSTM. RQ4 provides no
+ing one network-ready input is not a distribution of end-to-end                    observed incremental AUC/F1 advantage over the capacity-
+latency over arbitrary videos. Consequently, the results do not                    matched no-exchange head under the single-seed fixed-feature
+establish a universal real-time deployment claim. Local atten-                     regime. RQ5 reveals weaker frozen transfer, score/threshold
+tion constrains one component of computation without elimi-                        and calibration failures, high but incomplete preprocessing
+nating the cost of two encoders.                                                   coverage, and additional computational cost.
+
+
+                                                                              15
+                                                                                                        SWINFUSION++ DEEPFAKE DETECTION
+
+
+   The contribution is therefore not a claim that complexity               AUC and balanced accuracy than Swin-B, reflecting differ-
+necessarily improves detection. It is a controlled separation              ent false-positive and false-negative trade-offs. No protocol-
+of three propositions: a system can discriminate well within               eligible internal comparison established a positive fusion AUC
+a benchmark; its exchange component may add no detectable                  or F1 advantage after the retained multiplicity correction.
+value beyond a strong joint control; and its source operating              Small within-cohort seed variation described only two or three
+point can still fail on another population. This separation is sci-        optimization runs; it did not establish stability across new iden-
+entifically useful because it prevents a large baseline improve-           tities, training budgets, or data-generating conditions.
+ment from being recycled as evidence for a mechanism that the                  The cross-family objective produced a more specific posi-
+corresponding intervention did not support. Positive, negative,            tive finding. On 280 common C40 test videos, seed-1701 fu-
+and inconclusive findings all constrain the thesis.                        sion exceeded the representative CNN–LSTM by 0.1846 in
+   Several limits govern that interpretation. Training amend-              AUC and 0.1867 in F1, with Holm-adjusted p = 0.0003999 for
+ments and different nominal budgets restrict architecture attri-           both endpoints (Table 6). The corresponding paired intervals
+bution; two or three seeds characterize only limited optimiza-             were positive. This finding supports the specified trained fu-
+tion variation. The single-seed frozen-backbone comparison                 sion system relative to that implemented recurrent comparator,
+cannot establish end-to-end potential or the separate effects              not an architecture-only causal effect or a conclusion about all
+of alignment, locality, stage access, gate initialization, or pre-         recurrent detectors. Differences in pretraining, capacity, and
+training. Celeb-DF’s custom split and dominant dependency                  nominal training budgets remain relevant even for an eligible
+component constrain comparisons with standard test protocols               paired test. Similarly, the verified Xception evaluations pro-
+and the generality of its intervals. DeeperForensics is a class-           vide local comparison evidence, whereas the blocked I3D and
+imbalanced, lineage-linked binary construction; the strict sub-            SFormer reproductions and protocol-qualified literature com-
+set addresses one documented dependency, not every possi-                  parisons cannot substantiate additional numerical superiority
+ble relationship. No formal equivalence margin, prospective                claims.
+power study, or independent relabeling was available.                          The direct mechanism test did not establish the expected in-
+   These limitations identify the scope of the completed ev-               cremental benefit of cross-attention. Under fixed C23 back-
+idence rather than licenses to replace it with more favor-                 bone features, full TLBG-HCA and the capacity-matched no-
+able assumptions. Additional multi-seed matched-budget                     exchange head both achieved AUC 0.9964, F1 0.9857, and ac-
+training, component interventions, target-lineage audits, and              curacy 98.57%; late concatenation achieved AUC 0.9952 and
+independent-group calibration studies would be needed to                   F1 0.9892 (Table 8). Neither full-versus-control contrast es-
+strengthen the unresolved claims. They are future tests, not               tablished an AUC or F1 improvement under the retained pro-
+results of this manuscript. Within the retained evidence, Swin-            cedure. Because the no-exchange control still combines both
+Fusion++ is best understood as a technically specified and au-             streams and their interaction features, the conclusion concerns
+ditable dual-stream detector whose benchmark discrimination                cross-stream attention versus independent within-stream atten-
+is established more strongly than its exchange-specific advan-             tion, not fusion versus no fusion. Identical observed metrics
+tage or its general-purpose forensic reliability.                          and decisions also do not establish equivalent models: the
+                                                                           saved logits differed. This single-seed, frozen-feature exper-
+6. Conclusions                                                             iment leaves end-to-end co-adaptation and the separate effects
+This study evaluated whether face-aligned, hierarchical inte-              of alignment, locality, hierarchy, and gate initialization unre-
+gration of Swin-B and Video Swin-B provides useful deep-                   solved. It nevertheless prevents the positive recurrent-baseline
+fake discrimination and whether that usefulness can be at-                 result from being used as evidence for an exchange-specific
+tributed specifically to TLBG-HCA. Its central finding is that             benefit that the controlled comparison did not demonstrate.
+within-benchmark discrimination, an incremental advantage                      The transfer objective exposed the clearest boundary on
+from cross-stream exchange, and reliable decisions after distri-           generalization. With C23 weights, calibration, and threshold
+bution shift are separate empirical outcomes. The completed                unchanged, fusion AUC declined to 0.9686 on C40, 0.8730
+evidence supports the first more strongly than the latter two.             on Celeb-DF, 0.8021 on the full DeeperForensics target, and
+The contribution is therefore an implemented and auditable                 0.7682 on its strict lineage-filtered subset (Table 9). On the full
+dual-stream configuration together with a bounded assessment               DeeperForensics construction, fake recall was only 13.41%,
+of its benefits, rather than a general demonstration that increas-         despite an AUC indicating residual ranking information; re-
+ing fusion complexity improves forensic reliability.                       call was 17.90% in the strict subset, which likewise did not
+   With respect to the discrimination objective, the homoge-               exhibit dependable decisions. The full and strict views differ
+neous fusion ensembles obtained video-level ROC-AUCs of                    in composition and cannot be used to estimate a causal effect of
+0.9965 on FaceForensics++ DeepFakes C23, 0.9854 on C40,                    lineage overlap. Both frozen-transfer views exhibited weaker
+0.9724 on Celeb-DF v2, and 0.9990 on the retained Deep-                    ranking and operating behavior than the target-trained evalua-
+erForensics binary construction (Table 4). These results es-               tion. A different threshold could change the error balance, but
+tablish strong ranking on the analyzed within-dataset popula-              would not itself recover the lost ranking, and target-label-based
+tions, but not consistent superiority over the standalone en-              retuning was not part of the completed experiment.
+coders. The Celeb-DF fusion ensemble illustrates the distinc-                  Calibration, coverage, and dependence further qualify the
+tion: higher fake-class F1 and accuracy accompanied lower                  findings. Temperature scaling slightly reduced within-dataset
+
+
+                                                                      16
+                                                                                                     SWINFUSION++ DEEPFAKE DETECTION
+
+
+Brier error for fusion seed 1701 while increasing its ECE in ev-          source implementations of the Swin and Video Swin Trans-
+ery retained condition; source-fitted scaling also left substan-          former architectures, as well as the creators of the facial de-
+tial probabilistic error on transferred DeeperForensics inputs.           tection and alignment utilities that formed the foundation of
+Thus, a validation-fitted calibration transformation is not suffi-        our preprocessing pipeline.
+cient evidence of reliable target probabilities. Classification              Finally, the authors thank the College of Computer Studies
+performance remained conditional on successful preprocess-                and Systems at the University of the East-Manila for provid-
+ing: all C23, C40, and Celeb-DF test videos were analyzed,                ing the academic environment within which this research was
+compared with 2,385 of 2,412 full DeeperForensics videos and              conducted.
+354 of 360 strict-subset videos. Moreover, Celeb-DF’s largest
+dependency component contained 814 of 859 test videos, in-                References
+cluding all manipulated examples. Its narrow conditional in-              Bachlechner, T., Majumder, B. P., Mao, H., Cottrell, G., &
+tervals therefore cannot establish generalization across many                     McAuley, J. (2021). ReZero is all you need: Fast
+independently represented manipulated groups.                                     convergence at large depth. In C. de Campos &
+   The computational objective also argues against treating pre-                  M. H. Maathuis (Eds.), Proceedings of the Thirty-
+dictive scores in isolation. The complete fusion model con-                       Seventh Conference on Uncertainty in Artificial In-
+tained 180.89 million parameters and required 28.06 ms per                        telligence (Vol. 161, pp. 1352–1361). PMLR. https:
+network-ready clip, compared with 11.51 ms for Swin-B on                          //proceedings.mlr.press/v161/bachlechner21a.html
+the recorded profiling configuration. Its 84.11 ms three-anchor
+                                                                          Carreira, J., & Zisserman, A. (2017). Quo vadis, action recog-
+video time excluded decoding, face processing, input prepa-
+                                                                                   nition? A new model and the Kinetics dataset. In
+ration, and multi-seed ensemble execution. These measure-
+                                                                                   Proceedings of the IEEE Conference on Computer
+ments document an additional resource requirement, not end-
+                                                                                   Vision and Pattern Recognition (pp. 6299–6308).
+to-end real-time readiness. Given the absence of a consistent
+                                                                                   IEEE. https://doi.org/10.1109/CVPR.2017.502
+constituent-encoder advantage and the unestablished exchange
+benefit, the completed evaluation does not yet demonstrate                Chandra, N. A., Lee, H., Murtfeldt, R., Qiu, L., Karmakar,
+that this additional cost is offset by a reproducible mechanism-                  A., Tanumihardja, E., Farhat, K., Caffee, B., Lee,
+specific improvement.                                                             C., Choi, J., Paik, S., Kim, A., & Etzioni, O. (2026).
+   The scope of these conclusions remains the retained visual,                    Deepfake-Eval-2024: A multi-modal in-the-wild
+face-centered benchmarks and documented training regimes.                         benchmark of deepfakes circulated in 2024 [Preprint,
+Training amendments, unequal budgets, limited seeds, concen-                      version 5]. arXiv. https://doi.org/10.48550/arXiv.
+trated dependency groups, inherited labels, and the lineage-                      2503.02857
+linked DeeperForensics construction restrict broader attribu-             Chen, B., Li, T., & Ding, W. (2022). Detecting deepfake
+tion. The unresolved claims require matched-budget multi-                         videos based on spatiotemporal attention and con-
+seed comparisons, targeted component interventions, indepen-                      volutional LSTM. Information Sciences, 601, 58–70.
+dently supported target populations, and evaluation of the com-                   https://doi.org/10.1016/j.ins.2022.04.014
+plete processing pipeline. Those are subsequent tests, not find-
+ings supplied by the present study. Overall, SwinFusion++                 Chen, C.-F., Fan, Q., & Panda, R. (2021). CrossViT: Cross-
+provides evidence that a well-specified dual-stream detector                      attention multi-scale vision transformer for image
+can achieve strong benchmark discrimination while leaving                         classification. In Proceedings of the IEEE/CVF
+the value of its exchange mechanism and the reliability of its                    International Conference on Computer Vision
+transferred decisions unproven. The resulting contribution is                     (pp. 357–366). IEEE. https://openaccess.thecvf.com/
+both architectural and evaluative: it identifies what the imple-                  content/ICCV2021/html/Chen_CrossViT_Cross-
+mented integration achieves, what simpler controls already ex-                    Attention_Multi- Scale_Vision_Transformer_for_
+plain, and where the evidence stops.                                              Image_Classification_ICCV_2021_paper.html
+                                                                          Chollet, F. (2017). Xception: Deep learning with depthwise
+7. Acknowledgements                                                                separable convolutions. In Proceedings of the IEEE
+This research received no specific grant from any funding                          Conference on Computer Vision and Pattern Recog-
+agency in the public, commercial, or not-for-profit sectors. No                    nition (pp. 1251–1258). IEEE. https://doi.org/10.
+external computational sponsorship, technical assistance, or                       1109/CVPR.2017.195
+endorsement is asserted.                                                  Cubuk, E. D., Zoph, B., Shlens, J., & Le, Q. V. (2020). Ran-
+   The authors acknowledge the indispensable role of open-                        dAugment: Practical automated data augmentation
+source software and open-access data in enabling this evalua-                     with a reduced search space. In Proceedings of the
+tion. We extend our gratitude to the research teams responsible                   IEEE/CVF Conference on Computer Vision and Pat-
+for constructing and maintaining the FaceForensics++, Celeb-                      tern Recognition Workshops (pp. 3008–3017). IEEE.
+DF, and DeeperForensics datasets; their commitment to shar-                       https://doi.org/10.1109/CVPRW50498.2020.00359
+ing standardized evaluation materials makes rigorous compar-
+ative forensics possible. We similarly acknowledge the devel-             Geirhos, R., Jacobsen, J.-H., Michaelis, C., Zemel, R., Bren-
+opers and maintainers of PyTorch, torchvision, and the open-                       del, W., Bethge, M., & Wichmann, F. A. (2020).
+                                                                                   Shortcut learning in deep neural networks. Nature
+
+                                                                     17
+                                                                                                     SWINFUSION++ DEEPFAKE DETECTION
+
+
+         Machine Intelligence, 2, 665–673. https://doi.org/10.                  forgery detection. In Proceedings of the IEEE/CVF
+         1038/s42256-020-00257-z                                                Conference on Computer Vision and Pattern Recog-
+Güera, D., & Delp, E. J. (2018). Deepfake video detection                       nition (pp. 5001–5010). IEEE. https://doi.org/10.
+        using recurrent neural networks. In 15th IEEE In-                       1109/CVPR42600.2020.00505
+        ternational Conference on Advanced Video and                  Li, Y., Yang, X., Sun, P., Qi, H., & Lyu, S. (2020). Celeb-
+        Signal Based Surveillance (pp. 1–6). IEEE. https :                      DF: A large-scale challenging dataset for DeepFake
+        //doi.org/10.1109/AVSS.2018.8639163                                     forensics. In Proceedings of the IEEE/CVF Confer-
+Guo, C., Pleiss, G., Sun, Y., & Weinberger, K. Q. (2017). On                    ence on Computer Vision and Pattern Recognition
+         calibration of modern neural networks. In D. Precup                    (pp. 3207–3216). IEEE. https://doi.org/10.1109/
+         & Y. W. Teh (Eds.), Proceedings of the 34th Inter-                     CVPR42600.2020.00327
+         national Conference on Machine Learning (Vol. 70,            Liu, Z., Lin, Y., Cao, Y., Hu, H., Wei, Y., Zhang, Z., Lin, S.,
+         pp. 1321–1330). PMLR. https://proceedings.mlr.                         & Guo, B. (2021). Swin Transformer: Hierarchi-
+         press/v70/guo17a.html                                                  cal vision transformer using shifted windows. In
+Haliassos, A., Mira, R., Petridis, S., & Pantic, M. (2022).                     Proceedings of the IEEE/CVF International Confer-
+        Leveraging real talking faces via self-supervision                      ence on Computer Vision (pp. 10012–10022). IEEE.
+        for robust forgery detection. In Proceedings of the                     https://doi.org/10.1109/ICCV48922.2021.00986
+        IEEE/CVF Conference on Computer Vision and Pat-               Liu, Z., Ning, J., Cao, Y., Wei, Y., Zhang, Z., Lin, S., & Hu,
+        tern Recognition (pp. 14950–14962). IEEE. https:                        H. (2022). Video Swin Transformer. In Proceedings
+        //openaccess.thecvf.com/content/CVPR2022/html/                          of the IEEE/CVF Conference on Computer Vision
+        Haliassos_Leveraging_Real_Talking_Faces_via_                            and Pattern Recognition (pp. 3202–3211). IEEE.
+        Self-Supervision_for_Robust_Forgery_Detection_                          https://doi.org/10.1109/CVPR52688.2022.00320
+        CVPR_2022_paper.html                                          Loshchilov, I., & Hutter, F. (2019). Decoupled weight de-
+Haliassos, A., Vougioukas, K., Petridis, S., & Pantic, M.                     cay regularization. In International Conference on
+        (2021). Lips don’t lie: A generalisable and robust                    Learning Representations. https://openreview.net/
+        approach to face forgery detection. In Proceedings                    forum?id=Bkg6RiCqY7
+        of the IEEE/CVF Conference on Computer Vision                 Nguyen, D., Mejri, N., Singh, I. P., Kuleshova, P., Astrid,
+        and Pattern Recognition (pp. 5039–5049). IEEE.                        M., Kacem, A., Ghorbel, E., & Aouada, D. (2024).
+        https://doi.org/10.1109/CVPR46437.2021.00500                          LAA-Net: Localized artifact attention network for
+Holm, S. (1979). A simple sequentially rejective multiple test                quality-agnostic and generalizable deepfake de-
+        procedure. Scandinavian Journal of Statistics, 6(2),                  tection. In Proceedings of the IEEE/CVF Confer-
+        65–70. https://www.jstor.org/stable/4615733                           ence on Computer Vision and Pattern Recognition
+Jiang, L., Li, R., Wu, W., Qian, C., & Loy, C. C. (2020).                     (pp. 17395–17405). IEEE. https://doi.org/10.1109/
+          DeeperForensics-1.0: A large-scale dataset for real-                CVPR52733.2024.01647
+         world face forgery detection. In Proceedings of the          Ovadia, Y., Fertig, E., Ren, J., Nado, Z., Sculley, D.,
+          IEEE/CVF Conference on Computer Vision and                          Nowozin, S., Dillon, J. V., Lakshminarayanan, B.,
+          Pattern Recognition (pp. 2889–2898). IEEE. https:                   & Snoek, J. (2019). Can you trust your model’s
+         //doi.org/10.1109/CVPR42600.2020.00296                               uncertainty? Evaluating predictive uncertainty un-
+Kingra, S., Aggarwal, N., & Kaur, N. (2024). SFormer: An                      der dataset shift. In H. Wallach, H. Larochelle, A.
+         end-to-end spatio-temporal transformer architecture                  Beygelzimer, F. d’Alché-Buc, E. Fox, & R. Gar-
+         for deepfake detection. Forensic Science Interna-                    nett (Eds.), Advances in neural information pro-
+         tional: Digital Investigation, 51, Article 301817.                   cessing systems (Vol. 32). Curran Associates, Inc.
+         https://doi.org/10.1016/j.fsidi.2024.301817                          https://proceedings.neurips.cc/paper/2019/hash/
+                                                                              8558cb408c1d76621371888657d2eb1d- Abstract.
+Lakens, D. (2017). Equivalence tests: A practical primer for                  html
+        t tests, correlations, and meta-analyses. Social Psy-
+        chological and Personality Science, 8(4), 355–362.            Phipson, B., & Smyth, G. K. (2010). Permutation p-values
+        https://doi.org/10.1177/1948550617697177                               should never be zero: Calculating exact p-values
+                                                                              when permutations are randomly drawn. Statistical
+Lee, D., Lee, J., & Choi, J. (2023). CAST: Cross-attention                    Applications in Genetics and Molecular Biology,
+         in space and time for video action recognition. In                    9(1), Article 39. https : / / doi . org / 10 . 2202 / 1544 -
+         A. Oh, T. Naumann, A. Globerson, K. Saenko, M.                        6115.1585
+         Hardt, & S. Levine (Eds.), Advances in neural infor-
+         mation processing systems (Vol. 36). Curran Asso-            Qian, Y., Yin, G., Sheng, L., Chen, Z., & Shao, J. (2020).
+         ciates, Inc. https://doi.org/10.52202/075280-3475                     Thinking in frequency: Face forgery detection by
+                                                                               mining frequency-aware clues. In A. Vedaldi, H.
+Li, L., Bao, J., Zhang, T., Yang, H., Chen, D., Wen, F., &                     Bischof, T. Brox, & J.-M. Frahm (Eds.), Computer
+         Guo, B. (2020). Face X-ray for more general face
+
+                                                                 18
+                                                                                                             SWINFUSION++ DEEPFAKE DETECTION
+
+
+         vision – ECCV 2020 (Vol. 12357, pp. 86–103).                                   proceedings . neurips . cc / paper / 2017 / hash /
+         Springer. https : / / doi . org / 10 . 1007 / 978 - 3 - 030 -                  3f5ee243547dee91fbd053c1c4a845aa-Abstract.html
+         58610-2_6                                                            Wang, Z., Bao, J., Zhou, W., Wang, W., & Li, H. (2023).
+Roberts, D. R., Bahn, V., Ciuti, S., Boyce, M. S., Elith, J.,                         AltFreezing for more general video face forgery
+         Guillera-Arroita, G., Hauenstein, S., Lahoz-Monfort,                         detection. In Proceedings of the IEEE/CVF Con-
+         J. J., Schröder, B., Thuiller, W., Warton, D. I., Win-                       ference on Computer Vision and Pattern Recogni-
+         tle, B. A., Hartig, F., & Dormann, C. F. (2017).                             tion (pp. 4129–4138). IEEE. https : / / openaccess .
+         Cross-validation strategies for data with temporal,                          thecvf . com / content / CVPR2023 / html / Wang _
+         spatial, hierarchical, or phylogenetic structure. Ecog-                      AltFreezing _ for _ More _ General _ Video _ Face _
+         raphy, 40(8), 913–929. https://doi.org/10.1111/ecog.                         Forgery_Detection_CVPR_2023_paper.html
+         02881                                                                Xu, Y., Liang, J., Jia, G., Yang, Z., Zhang, Y., & He, R.
+Rössler, A., Cozzolino, D., Verdoliva, L., Riess, C., Thies, J.,                       (2023). TALL: Thumbnail layout for deepfake video
+         & Nießner, M. (2019). FaceForensics++: Learning                               detection. In Proceedings of the IEEE/CVF Interna-
+         to detect manipulated facial images. In Proceedings                           tional Conference on Computer Vision (pp. 22658–
+         of the IEEE/CVF International Conference on Com-                              22668). IEEE. https : / / openaccess . thecvf . com /
+         puter Vision (pp. 1–11). IEEE. https://doi.org/10.                            content/ICCV2023/html/Xu_TALL_Thumbnail_
+         1109/ICCV.2019.00009                                                          Layout_for_Deepfake_Video_Detection_ICCV_
+Saito, T., & Rehmsmeier, M. (2015). The precision-recall                               2023_paper.html
+          plot is more informative than the ROC plot when                     Yan, Z., Zhang, Y., Yuan, X., Lyu, S., & Wu, B. (2023).
+          evaluating binary classifiers on imbalanced datasets.                        DeepfakeBench: A comprehensive benchmark
+          PLOS ONE, 10(3), Article e0118432. https://doi.org/                          of deepfake detection. In A. Oh, T. Naumann, A.
+          10.1371/journal.pone.0118432                                                 Globerson, K. Saenko, M. Hardt, & S. Levine
+Schroff, F., Kalenichenko, D., & Philbin, J. (2015). FaceNet:                          (Eds.), Advances in neural information processing
+         A unified embedding for face recognition and clus-                            systems (Vol. 36, pp. 4534–4565). Curran Asso-
+         tering. In Proceedings of the IEEE Conference on                              ciates, Inc. https : / / doi . org / 10 . 52202 / 075280 -
+         Computer Vision and Pattern Recognition (pp. 815–                             0201
+         823). IEEE. https://doi.org/10.1109/CVPR.2015.                       Zhang, H., Hu, C., Min, S., Sui, H., & Zhou, G. (2024).
+         7298682                                                                      TSFF-Net: A deep fake video detection model based
+Shiohara, K., & Yamasaki, T. (2022). Detecting deepfakes                              on two-stream feature domain fusion. PLOS ONE,
+        with self-blended images. In Proceedings of the                               19(12), Article e0311366. https://doi.org/10.1371/
+        IEEE/CVF Conference on Computer Vision and Pat-                               journal.pone.0311366
+        tern Recognition (pp. 18720–18729). IEEE. https:                      Zhang, K., Zhang, Z., Li, Z., & Qiao, Y. (2016). Joint face
+        //doi.org/10.1109/CVPR52688.2022.01816                                        detection and alignment using multitask cascaded
+Thakre, A., Nagwekar, O., Talekar, V., & Biswas, A. S.                                convolutional networks. IEEE Signal Processing
+        (2026a). CAST: Cross-attentive spatio-temporal                                Letters, 23(10), 1499–1503. https://doi.org/10.1109/
+        feature fusion for deepfake detection [Preprint, ver-                         LSP.2016.2603342
+        sion 2]. arXiv. https://doi.org/10.48550/arXiv.2506.                  Zhao, C., Wang, C., Hu, G., Chen, H., Liu, C., & Tang, J.
+        21711                                                                         (2023). ISTVT: Interpretable spatial-temporal video
+Thakre, A., Nagwekar, O., Talekar, V., & Biswas, A. S.                                 transformer for deepfake detection. IEEE Transac-
+        (2026b). CAST: Cross-attentive spatio-temporal                                 tions on Information Forensics and Security, 18,
+        feature fusion for deepfake detection. Knowledge-                             1335–1348. https://doi.org/10.1109/TIFS.2023.
+        Based Systems, 338, Article 115560. https://doi.org/                           3239223
+        10.1016/j.knosys.2026.115560                                          Zheng, Y., Bao, J., Chen, D., Zeng, M., & Wen, F. (2021).
+Touvron, H., Cord, M., Sablayrolles, A., Synnaeve, G., & Jé-                          Exploring temporal coherence for more general
+        gou, H. (2021). Going deeper with image transform-                            video face forgery detection. In Proceedings of the
+        ers. In Proceedings of the IEEE/CVF International                             IEEE/CVF International Conference on Computer
+        Conference on Computer Vision (pp. 32–42). IEEE.                              Vision (pp. 15044–15054). IEEE. https://openaccess.
+        https://doi.org/10.1109/ICCV48922.2021.00010                                  thecvf . com / content / ICCV2021 / html / Zheng _
+                                                                                      Exploring _ Temporal _ Coherence _ for _ More _
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones,                           General_Video_Face_Forgery_Detection_ICCV_
+        L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I.                                2021_paper.html
+        (2017). Attention is all you need. In I. Guyon,
+        U. von Luxburg, S. Bengio, H. Wallach, R. Fer-
+        gus, S. Vishwanathan, & R. Garnett (Eds.), Ad-
+        vances in neural information processing sys-
+        tems (Vol. 30). Curran Associates, Inc. https : / /
+                                                                         19
+

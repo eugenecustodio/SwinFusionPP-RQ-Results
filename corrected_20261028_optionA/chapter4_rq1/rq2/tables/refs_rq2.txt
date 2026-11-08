@@ -1,0 +1,1 @@
+Li, X., Lang, Y., Chen, Y., Mao, X., He, Y., Wang, S., Xue, H., & Lu, Q. (2020). Sharp multiple instance learning for DeepFake video detection. In Proceedings of the 28th ACM International Conference on Multimedia (pp. 1864–1872). Association for Computing Machinery. https://doi.org/10.1145/3394171.3414034

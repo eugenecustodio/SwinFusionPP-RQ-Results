@@ -1,0 +1,131 @@
+{
+ "revisionId": "AHj4eMSdTp_Vd8mpkrXd6gWhp0n5_4mIb8oq3blYin7SAGWyv8rsZhDKWSkpbm3JbIjNcgrtjKIyqoNAKJ_hyhJ-eVSRx7unRZOUliNqTUs",
+ "chunks": [
+  {
+   "chunk": "chunk_01.json",
+   "requests": 237,
+   "bytes": 31629,
+   "units": [
+    "J:fig J1",
+    "J:table J8",
+    "J:table J7",
+    "J:table J6"
+   ]
+  },
+  {
+   "chunk": "chunk_02.json",
+   "requests": 542,
+   "bytes": 53695,
+   "units": [
+    "J:table J5"
+   ]
+  },
+  {
+   "chunk": "chunk_03.json",
+   "requests": 223,
+   "bytes": 24308,
+   "units": [
+    "J:table J4",
+    "J:table J3"
+   ]
+  },
+  {
+   "chunk": "chunk_04.json",
+   "requests": 163,
+   "bytes": 18571,
+   "units": [
+    "J:table J2"
+   ]
+  },
+  {
+   "chunk": "chunk_05.json",
+   "requests": 367,
+   "bytes": 40475,
+   "units": [
+    "J:table J1",
+    "J:p",
+    "J:apxtitle",
+    "J:apxhead",
+    "del lorem C",
+    "C:p",
+    "C:p"
+   ]
+  },
+  {
+   "chunk": "chunk_06.json",
+   "requests": 134,
+   "bytes": 22378,
+   "units": [
+    "C:p",
+    "C:p",
+    "C:p",
+    "del placeholders",
+    "del lorem B",
+    "B:p",
+    "B:table XII",
+    "B:p"
+   ]
+  },
+  {
+   "chunk": "chunk_07.json",
+   "requests": 250,
+   "bytes": 32869,
+   "units": [
+    "B:table XI",
+    "B:p",
+    "B:sub",
+    "B:p",
+    "B:p",
+    "B:p",
+    "B:fig fig13_transfer_roc.png"
+   ]
+  },
+  {
+   "chunk": "chunk_08.json",
+   "requests": 326,
+   "bytes": 41317,
+   "units": [
+    "B:table X",
+    "B:p",
+    "B:sub",
+    "B:p",
+    "B:p",
+    "B:p",
+    "B:fig fig12_forest.png"
+   ]
+  },
+  {
+   "chunk": "chunk_09.json",
+   "requests": 254,
+   "bytes": 35601,
+   "units": [
+    "B:table IX",
+    "B:fig fig11_transfer_heatmap.png",
+    "B:p",
+    "B:sub",
+    "B:p",
+    "B:table VIII",
+    "B:p",
+    "B:p"
+   ]
+  },
+  {
+   "chunk": "chunk_10.json",
+   "requests": 252,
+   "bytes": 38136,
+   "units": [
+    "B:table VII",
+    "B:p",
+    "del lorem A",
+    "A:p",
+    "A:p",
+    "A:p",
+    "A:table VI",
+    "A:p",
+    "A:p",
+    "A:p",
+    "A:p"
+   ]
+  }
+ ]
+}

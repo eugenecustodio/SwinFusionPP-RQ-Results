@@ -1,0 +1,8 @@
+Three features limit how cleanly the test sets are separated from model development. First, most FaceForensics++ and DeeperForensics-1.0 test videos share source lineage with another condition’s training or validation videos: 260 of 280 in each FaceForensics++ set and 382 of 402 in DeeperForensics-1.0. The Celeb-DF v2 test set has no recorded cross-condition overlap. Table 1 gives these counts. Second, the preprocessing recovery rules were developed on 247 pooled training videos, 67 of which share lineage with held-out videos (15 physically identical). In addition, frames from 157 held-out videos were shown, without labels or scores, during face-quality review. No claim of untouched preprocessing selection is therefore made. Third, a metadata-only audit before training found that raw file metadata separated real from fake videos in Celeb-DF v2 (validation AUC 0.67) and DeeperForensics-1.0 (0.68). The models were then restricted to the rebuilt face-clip cache, and the repeated audit gave 0.50 on every dataset.
+
+Sources:
+[260/280, 382/402, 0/978: PKG/00_Shared/protocol_and_decisions/evaluation_protocol_v020.json, required_disclosures → cross_condition_test_lineage_overlap (primary rows)]
+[247, 67, 15: same file, required_disclosures → historical_preprocessing_development_exposure]
+[157: same file, required_disclosures → heldout_images_displayed_for_face_quality_review]
+[0.67, 0.68, 0.50, decision D-43: PKG/corrected_20261028_optionA/CHAPTER4_NOTES.md §4, summarizing the backup file reports/audit/metadata_shortcut_audit_v001.md (2026-08-23), which is NOT in the package; copy it into the package before citing]
+[D-43 stratified reporting not produced: Table 3]

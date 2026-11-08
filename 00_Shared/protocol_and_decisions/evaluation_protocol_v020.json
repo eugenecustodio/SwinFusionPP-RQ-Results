@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "frozen_at_utc": "2026-09-29T12:25:42Z",
+  "status": "FROZEN_BY_USER_DECISION",
+  "prerequisite": "evaluation_protocol_accounting_for_historical_exposure",
+  "user_choice": "Full tests + disclosure (Recommended)",
+  "resolves": {
+    "hold": "reports/audit/coverage_protocol_hold_v005.json",
+    "direction": "explicit amendment accepting pooled-training preprocessing development with overlap disclosures",
+    "clarification_flag": "evaluation.historical_preprocessing_exposure_requires_separate_resolution"
+  },
+  "evaluation": {
+    "metric_unit": "video",
+    "aggregation": "mean_of_seven_locked_clip_logits",
+    "threshold_selection": "source_validation_only",
+    "calibration_selection": "source_validation_only",
+    "transfer_target_labels_for_selection": false,
+    "historical_preprocessing_exposure_requires_separate_resolution": false,
+    "historical_exposure_resolution": "disclose_and_report_full_frozen_tests"
+  },
+  "test_partitions": "full_frozen_split_manifest_v001_test_partitions_unchanged",
+  "coverage_denominator": 22529,
+  "failed_inputs_policy": "reports/audit/phase23_coverage_disposition_v017.json",
+  "lineage_clean_subset_analysis": "not_adopted",
+  "independent_evaluation_corpus": null,
+  "required_disclosures": [
+    {
+      "topic": "historical_preprocessing_development_exposure",
+      "development_rows": 247,
+      "rows_with_other_condition_heldout_lineage": 67,
+      "rows_with_exact_physical_heldout_overlap": 15,
+      "counts_by_development_condition": {
+        "ffpp_deepfakes_lq": 21,
+        "deeperforensics_1_0": 26,
+        "ffpp_deepfakes_hq": 20
+      },
+      "statement": "Preprocessing recovery rules were developed on pooled training videos, 67 of 247 of which share lineage with held-out rows of another condition (15 physically identical). No claim of fully untouched cross-dataset preprocessing selection may be made."
+    },
+    {
+      "topic": "cross_condition_test_lineage_overlap",
+      "rows": [
+        {
+          "condition": "celeb_df_v2",
+          "role": "primary",
+          "test_videos": 978,
+          "with_cross_condition_lineage_or_unknown": 0,
+          "lineage_clean": 978
+        },
+        {
+          "condition": "deeperforensics_1_0",
+          "role": "primary",
+          "test_videos": 402,
+          "with_cross_condition_lineage_or_unknown": 382,
+          "lineage_clean": 20
+        },
+        {
+          "condition": "deeperforensics_1_0",
+          "role": "robustness",
+          "test_videos": 2010,
+          "with_cross_condition_lineage_or_unknown": 1910,
+          "lineage_clean": 100
+        },
+        {
+          "condition": "ffpp_deepfakes_hq",
+          "role": "primary",
+          "test_videos": 280,
+          "with_cross_condition_lineage_or_unknown": 260,
+          "lineage_clean": 20
+        },
+        {
+          "condition": "ffpp_deepfakes_lq",
+          "role": "primary",
+          "test_videos": 280,
+          "with_cross_condition_lineage_or_unknown": 260,
+          "lineage_clean": 20
+        }
+      ],
+      "statement": "FF++ C23/C40 and DeeperForensics test rows share source lineage with other conditions' train/validation rows; report these counts beside every within-condition and transfer result. Celeb-DF v2 test has zero recorded overlap and is the cleanest evidence."
+    },
+    {
+      "topic": "heldout_images_displayed_for_face_quality_review",
+      "heldout_videos_displayed": 157,
+      "report": "artifacts/pilots/face_quality_review_v020/report.json",
+      "statement": "Label-blind quality sheets displayed held-out frames; no labels, scores or predictions were shown and no selection used them."
+    }
+  ],
+  "forbidden": [
+    "tuning_or_selecting_on_test_labels",
+    "target_threshold_or_calibration_fitting",
+    "claiming_untouched_cross_dataset_preprocessing_selection",
+    "dropping_failed_rows_from_denominators",
+    "silently_omitting_overlap_counts"
+  ],
+  "bindings": {
+    "configs/experiments/phase42_user_decisions_v020.json": "710273e63f547bb09c24e4eece19658b40c43bbb9a98a12c020498baa8fce2f9",
+    "configs/experiments/coverage_protocol_clarifications_v015.json": "39ddee4ac2ba8876686f5851a4abaff9aa80393158a560e6ea6e9ff3123204e3",
+    "reports/audit/coverage_development_cross_condition_overlap_v005.json": "5674c18196dd74a5e430ddaf83ec99716d2f496dbaf4db685ded1ffedaee40ab",
+    "reports/audit/coverage_clean_evaluation_feasibility_v001.json": "725b9c1ba859742ba1a488de647650f59e07cdfd10a2452cfc8768fcb30de185",
+    "reports/audit/coverage_protocol_hold_v005.json": "4cc179e50a6a88e7d8eed712387689c65260d4aab5a2f75b81a9a390585ca14a",
+    "reports/audit/phase23_coverage_disposition_v017.json": "43b3da88c8d37a7d1040e458bba5e56c093c2f6741fc3818e27e5b15552c0583",
+    "artifacts/pilots/face_quality_review_v020/report.json": "3db90de50be9925b1139af228588b1d056562d96fd0c340ea30abac8753d00cf",
+    "scripts/freeze_evaluation_protocol_v020.py": "d36b7bd64e9e626ee5c22e3f13ccc48c7124b31c5d35bfc3aa255926d4e6f470"
+  }
+}

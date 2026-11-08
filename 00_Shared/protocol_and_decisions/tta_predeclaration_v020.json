@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-30T14:20:46Z",
+  "authorized_by": "user",
+  "user_message": "Our Aim is to make the Swinfusion++ as best model as possible ... you can also improve the model if you deem it will improve the model ... I am not saying we are going to cheat the results ... As long as it will be going to be around 3-4 days",
+  "decision": "No architecture or training change (would invalidate the completed studies and the deadline). Pre-declared inference-only improvement: horizontal-flip test-time augmentation (TTA), evaluated FIRST on source validation and reported as a labelled variant beside the plain result; never selected on test results.",
+  "tta": {
+    "transform": "horizontal_flip",
+    "aggregation": "mean of clip logits over {identity, flip} before the frozen 7-anchor video mean",
+    "applies_to": [
+      "swinfusionpp_bo",
+      "swinfusionpp_fixed",
+      "swin_b",
+      "video_swin_b"
+    ],
+    "selection_rule": "TTA variant reported alongside plain; any per-model choice uses source validation only",
+    "predeclared_before_any_test_result": true
+  },
+  "ensembles": "three-seed mean-logit ensemble per model (already in the frozen protocol, D-40)"
+}

@@ -1,0 +1,17 @@
+Model,Test videos (fake %),ROC-AUC [95% CI],Acc (%),Rec (%),Spec (%),F1
+__SPAN__,FF++ C23 — this study: 280 videos (50.00% fake),,,,,
+SwinFusion++ (BO-selected),280 (50.00),"0.9964 [0.9886, 1.0000]",98.21,98.57,97.86,0.9822
+SwinFusion++ (fixed recipe),280 (50.00),"0.9942 [0.9834, 0.9999]",97.86,97.14,98.57,0.9784
+Xception (preliminary study),280 (50.00),0.7725,69.64,67.14,72.14,0.6886
+__SPAN__,FF++ C40 — this study: 280 videos (50.00% fake),,,,,
+SwinFusion++ (BO-selected),280 (50.00),"0.9941 [0.9875, 0.9989]",96.07,98.57,93.57,0.9617
+SwinFusion++ (fixed recipe),280 (50.00),"0.9878 [0.9772, 0.9965]",94.64,95.71,93.57,0.9470
+Xception (preliminary study),280 (50.00),0.8109,74.29,74.29,74.29,0.7429
+__SPAN__,Celeb-DF v2 — this study: 978 videos (86.20% fake); all fakes in 9 identity clusters,,,,,
+SwinFusion++ (BO-selected),978 (86.20),"0.9983 [0.9963, 1.0000]",98.36,98.34,98.52,0.9904
+SwinFusion++ (fixed recipe),978 (86.20),"0.9951 [0.9905, 0.9995]",97.75,98.10,95.56,0.9869
+Xception (preliminary study),859 (84.17),0.6480,84.17*,100.00*,0.00*,0.9140*
+__SPAN__,DeeperForensics-1.0 — this study: 402 videos (50.00% fake),,,,,
+SwinFusion++ (BO-selected),402 (50.00),"0.9954 [0.9874, 1.0000]",98.51,97.01,100.00,0.9848
+SwinFusion++ (fixed recipe),402 (50.00),"0.9974 [0.9921, 1.0000]",98.76,97.51,100.00,0.9874
+Xception (preliminary study),"2,385 (91.61)",0.9978,46.00†,41.05†,100.00†,0.5821†

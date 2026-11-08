@@ -1,0 +1,13 @@
+training,test,comparison,delta_auc,ci_low,ci_high,permutation_p,holm_p,videos,p_method
+Celeb-DF v2,Celeb-DF v2,swinfusionpp__fixed_no_bo vs swin_b__fixed_no_bo,-0.0007205307323931986,-0.004810243612841972,0.0026447415689944405,0.9252149570085982,1.0,978,rank_permutation_corrected_20261004
+DeeperForensics-1.0,DeeperForensics-1.0,swinfusionpp__fixed_no_bo vs swin_b__fixed_no_bo,0.0008663151902180699,-0.0006930521521744115,0.003589329472042822,0.6524695060987803,1.0,402,rank_permutation_corrected_20261004
+FF++ C23 (HQ),FF++ C23 (HQ),swinfusionpp__fixed_no_bo vs swin_b__fixed_no_bo,-0.002295918367346994,-0.00790816326530619,0.0008673469387755484,0.46070785842831435,1.0,280,rank_permutation_corrected_20261004
+FF++ C40 (LQ),FF++ C40 (LQ),swinfusionpp__fixed_no_bo vs swin_b__fixed_no_bo,-0.000459183673469421,-0.007551020408163247,0.0060714285714285054,0.9068186362727455,1.0,280,rank_permutation_corrected_20261004
+Celeb-DF v2,Celeb-DF v2,swinfusionpp__fixed_no_bo vs video_swin_b__fixed_no_bo,-0.0006897763718642924,-0.0032824838160890294,0.0011964782780228612,0.7740451909618077,1.0,978,rank_permutation_corrected_20261004
+DeeperForensics-1.0,DeeperForensics-1.0,swinfusionpp__fixed_no_bo vs video_swin_b__fixed_no_bo,0.0029083438528748617,-0.0005445409767084186,0.008489888864137044,0.29874025194961007,1.0,402,rank_permutation_corrected_20261004
+FF++ C23 (HQ),FF++ C23 (HQ),swinfusionpp__fixed_no_bo vs video_swin_b__fixed_no_bo,-0.0008163265306122547,-0.003061224489795844,0.00020408163265306367,0.2539492101579684,1.0,280,rank_permutation_corrected_20261004
+FF++ C40 (LQ),FF++ C40 (LQ),swinfusionpp__fixed_no_bo vs video_swin_b__fixed_no_bo,-0.0037244897959184398,-0.010051020408163303,0.0013265306122449694,0.1975604879024195,1.0,280,rank_permutation_corrected_20261004
+Celeb-DF v2,Celeb-DF v2,swinfusionpp__dataset_specific_bo vs swinfusionpp__fixed_no_bo,0.0031281578138043775,0.0004983906249441062,0.006021719828287196,0.006998600279944011,0.07698460307938412,978,rank_permutation_corrected_20261004
+DeeperForensics-1.0,DeeperForensics-1.0,swinfusionpp__dataset_specific_bo vs swinfusionpp__fixed_no_bo,-0.0020667805252344573,-0.0051483874161530885,0.0,0.11517696460707859,1.0,402,rank_permutation_corrected_20261004
+FF++ C23 (HQ),FF++ C23 (HQ),swinfusionpp__dataset_specific_bo vs swinfusionpp__fixed_no_bo,0.0021938775510205177,5.102040816318265e-05,0.005765306122448857,0.07418516296740651,0.7418516296740651,280,rank_permutation_corrected_20261004
+FF++ C40 (LQ),FF++ C40 (LQ),swinfusionpp__dataset_specific_bo vs swinfusionpp__fixed_no_bo,0.006275510204081569,0.001835459183673383,0.011838010204081751,0.0005998800239952009,0.007198560287942411,280,rank_permutation_corrected_20261004

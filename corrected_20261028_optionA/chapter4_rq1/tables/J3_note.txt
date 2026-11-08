@@ -1,0 +1,1 @@
+Note. Strict lineage-free subsets: target test videos whose lineage never appears in the source training or validation split. Per-seed ROC-AUC only; no ensemble, interval or test. Other directions are lineage-free on the full test set. C23/C40 = FaceForensics++ DeepFakes at compression C23/C40; CDF = Celeb-DF v2; DFo = DeeperForensics-1.0.

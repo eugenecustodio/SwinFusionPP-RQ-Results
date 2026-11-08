@@ -1,0 +1,3 @@
+model,train_condition,test_condition,roc_auc,f1,accuracy,location
+"CNN-LSTM (ResNet-18 + LSTM, reproduced)",FF++ C23 (HQ),FF++ C23 (HQ),0.7876,0.7452,0.7143,Table 7
+"CNN-LSTM (ResNet-18 + LSTM, reproduced)",FF++ C40 (LQ),FF++ C40 (LQ),0.7984,0.7515,0.7071,Table 7

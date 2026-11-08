@@ -1,0 +1,1 @@
+Note. Three-seed mean-logit ensembles; thresholds frozen on source validation. ROC-AUC intervals: 95% percentile intervals from 5,000 stratified cluster-bootstrap draws. Balanced accuracy = (recall + specificity)/2; with 50% fake videos it equals accuracy. The fixed-recipe rows repeat Table 3. Celeb-DF v2 intervals are approximate: all 843 fake videos lie in 9 identity clusters.

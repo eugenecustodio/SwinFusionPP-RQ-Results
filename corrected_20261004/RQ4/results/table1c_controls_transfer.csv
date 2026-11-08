@@ -1,0 +1,7 @@
+training,test,comparison,delta_auc,ci_low,ci_high,permutation_p,holm_p,videos,p_method
+FF++ C23 (HQ),Celeb-DF v2,swinfusionpp__fixed_no_bo vs topology_control__fixed_no_bo,0.004621941039497313,-0.007240290427908497,0.015920999919466192,0.4387122575484903,1.0,978,rank_permutation_corrected_20261004
+FF++ C23 (HQ),DeeperForensics-1.0,swinfusionpp__fixed_no_bo vs topology_control__fixed_no_bo,-0.021942526175094623,-0.03799441845498864,-0.00638598054503603,0.005598880223955209,0.027994401119776045,402,rank_permutation_corrected_20261004
+FF++ C23 (HQ),FF++ C40 (LQ),swinfusionpp__fixed_no_bo vs topology_control__fixed_no_bo,-0.0020153061224489344,-0.006173469387755093,0.0015816326530613267,0.261747650469906,1.0,280,rank_permutation_corrected_20261004
+FF++ C23 (HQ),Celeb-DF v2,swinfusionpp__fixed_no_bo vs capacity_control__fixed_no_bo,-0.00029875664513878686,-0.011335038340766972,0.01312831904176994,0.9656068786242752,1.0,978,rank_permutation_corrected_20261004
+FF++ C23 (HQ),DeeperForensics-1.0,swinfusionpp__fixed_no_bo vs capacity_control__fixed_no_bo,0.04155837726788947,0.02266033018984681,0.06124941214326385,0.0003999200159968006,0.0023995200959808036,402,rank_permutation_corrected_20261004
+FF++ C23 (HQ),FF++ C40 (LQ),swinfusionpp__fixed_no_bo vs capacity_control__fixed_no_bo,-0.00033163265306124234,-0.004694515306122504,0.0036230867346939938,0.870625874825035,1.0,280,rank_permutation_corrected_20261004

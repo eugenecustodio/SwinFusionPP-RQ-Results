@@ -1,0 +1,33 @@
+Model,FF++ C23 Acc (%),FF++ C23 AUC,FF++ C40 Acc (%),FF++ C40 AUC,Setting,Source
+__SPAN__,This study (DeepFakes subset only; not like-for-like with the rows below),,,,,
+SwinFusion++ (BO-selected),98.21,0.9964,96.07,0.9941,DeepFakes subset; video level,This study
+SwinFusion++ (fixed recipe),97.86,0.9942,94.64,0.9878,DeepFakes subset; video level,This study
+__SPAN__,"Previously reported, Tier B (pooled manipulations, unstated subset, or frame level)",,,,,
+MesoNet,83.10‡,—,70.47‡,—,All four manipulations; video level,ᵃ
+Xception,95.73‡,0.9630,86.86,0.8930,All four manipulations; video level,ᵃ
+Face X-ray,—,0.8735,—,0.6160,All four manipulations; video level,ᵃ
+Two-branch,96.43,—,86.34,—,All four manipulations; video level,ᵃ
+Add-Net,96.78,0.9774,87.50,0.9101,All four manipulations; video level,ᵃ
+F3-Net,97.52,0.9810,90.43,0.9043,All four manipulations; video level,ᵃ
+FDFL,96.69,0.9930,89.00,0.9240,All four manipulations; video level,ᵃ
+Multi-attentional,97.60,0.9929,88.69,0.9040,All four manipulations; video level,ᵃ
+RECCE,97.06,0.9932,91.03,0.9502,All four manipulations; video level,ᵃ
+LipForensics,98.80,0.9970,94.20,0.9810,All four manipulations; video level,ᵃ
+DFDT,98.18,0.9926,92.67,0.9448,All four manipulations; video level,ᵃ
+ADT,92.05,0.9630,81.48,0.8252,All four manipulations; video level,ᵃ
+M2TR (ST-M2TR),—,0.9942,—,0.9531,All four manipulations; video level,ᵃ
+VTN,98.47,—,94.02,—,All four manipulations; video level,ᵃ
+VidTr,97.42,—,92.12,—,All four manipulations; video level,ᵃ
+ViViT (re-implemented),92.60,—,88.02,—,All four manipulations; video level,ᵃ
+ISTVT (not re-verified),99.00,—,96.15,—,All four manipulations; video level,ᵃ
+TALL-Swin,98.65,0.9987,92.82,0.9457,All four manipulations; video level,ᵃ
+LipForensics,98.8,0.997,94.2,0.981,All four manipulations; video level,ᵇ
+Xception,97.0,0.993,89.0,0.920,All four manipulations; video level,ᵇ
+Face X-ray,78.4,0.978,34.2,0.773,All four manipulations; video level,ᵇ
+CNN–GRU,97.0,0.993,90.1,0.922,All four manipulations; video level,ᵇ
+Two-branch,—,0.9912,—,0.9110,All four manipulations; video level; 700 test videos,ᶜ
+Xception,—,0.9250,—,0.8675,All four manipulations; video level; 700 test videos,ᶜ
+DSP-FWA,—,0.5749,—,0.6234,All four manipulations; video level; 700 test videos,ᶜ
+MesoNet,95.26,—,89.52,—,DeepFakes-specific detector; frame level,ᵈ
+Xception,98.85,—,94.28,—,DeepFakes-specific detector; frame level,ᵈ
+FTCN with Temporal Transformer,99.1,0.998,—,0.983,Subset not stated; video level; DeeperForensics-1.0 (own split): AUC 1.000,ᵉ

@@ -1,0 +1,13 @@
+number,state,params,best_val_auc
+0,COMPLETE,"{""backbone_lr"": 1.6888248072693154e-05, ""effective_batch"": 16, ""new_lr"": 0.00023863038506739085, ""schedule"": ""A"", ""weight_decay"": 0.06699073097033217}",0.9971736896197329
+1,COMPLETE,"{""backbone_lr"": 5.071034900249002e-07, ""effective_batch"": 16, ""new_lr"": 0.00015718191583202732, ""schedule"": ""B"", ""weight_decay"": 0.013610014836543779}",0.9950154162384378
+2,COMPLETE,"{""backbone_lr"": 6.02891899695009e-06, ""effective_batch"": 8, ""new_lr"": 7.208770451615844e-05, ""schedule"": ""C"", ""weight_decay"": 0.004596390510746633}",0.992934224049332
+3,COMPLETE,"{""backbone_lr"": 1.5243526326204316e-06, ""effective_batch"": 16, ""new_lr"": 0.0001842665755828478, ""schedule"": ""A"", ""weight_decay"": 0.02347797926663673}",0.9932682425488182
+4,COMPLETE,"{""backbone_lr"": 2.6808921893592635e-05, ""effective_batch"": 16, ""new_lr"": 3.2115703988244395e-05, ""schedule"": ""A"", ""weight_decay"": 0.00011995013915784732}",0.9992805755395683
+5,COMPLETE,"{""backbone_lr"": 2.868721131698852e-05, ""effective_batch"": 8, ""new_lr"": 3.197520254880731e-05, ""schedule"": ""A"", ""weight_decay"": 0.00011304914131584352}",0.9991264131551902
+6,PRUNED,"{""backbone_lr"": 5.971178974662523e-06, ""effective_batch"": 16, ""new_lr"": 3.161852008730781e-05, ""schedule"": ""B"", ""weight_decay"": 0.00010335612754744288}",
+7,PRUNED,"{""backbone_lr"": 1.8606300379364602e-06, ""effective_batch"": 16, ""new_lr"": 6.558277738579035e-05, ""schedule"": ""C"", ""weight_decay"": 0.0008105714419926989}",
+8,COMPLETE,"{""backbone_lr"": 1.3075196769311757e-05, ""effective_batch"": 8, ""new_lr"": 5.2154059914646014e-05, ""schedule"": ""A"", ""weight_decay"": 0.0007159929680646213}",0.9979445015416238
+9,PRUNED,"{""backbone_lr"": 3.867633758286298e-07, ""effective_batch"": 16, ""new_lr"": 0.00010286119683676836, ""schedule"": ""A"", ""weight_decay"": 0.0006070169925639313}",
+10,PRUNED,"{""backbone_lr"": 5.023080854281121e-06, ""effective_batch"": 8, ""new_lr"": 4.6841225532918934e-05, ""schedule"": ""B"", ""weight_decay"": 0.002636113029269954}",
+11,COMPLETE,"{""backbone_lr"": 2.782333203497327e-05, ""effective_batch"": 8, ""new_lr"": 3.1501897989482966e-05, ""schedule"": ""A"", ""weight_decay"": 0.00012153523540617565}",0.999383350462487

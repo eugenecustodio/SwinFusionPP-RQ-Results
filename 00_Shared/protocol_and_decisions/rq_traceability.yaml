@@ -1,0 +1,381 @@
+schema_version: 1
+registry_id: rq_traceability_v001
+protocol_status: draft_decision_bound
+source_rq_anchor: references/thesis_current.pdf:PDF-pages-14-15
+source_thesis_sha256: a4d3ca3d5b7b914d3a1a89188a26e5534ee2326817da0659c4e670acd84e9a10
+matrix: configs/experiments/master_experiment_matrix_draft_v001.yaml
+research_questions:
+- rq_id: RQ1
+  exact_wording: To what extent does SwinFusion++ improve video-level deepfake detection performance compared with standalone
+    Swin Transformer and standalone Video Swin Transformer under in-distribution and cross-dataset evaluation, in terms of
+    Accuracy, Precision, Recall, F1-Score, and ROC-AUC?
+  included: true
+  claim: Fixed-recipe architecture effect plus separately labeled optimized-system and directional-transfer evidence.
+  models:
+  - swin_b
+  - video_swin_b
+  - swinfusion_pp
+  dataset_conditions:
+  - ffpp_c23
+  - ffpp_c40
+  - celeb_df_v2
+  - deeperforensics_binary
+  matrix_roles:
+  - fixed_recipe_architecture_comparison
+  - bo_optimized_system_comparison
+  - directional_frozen_transfer_core
+  evaluation_unit: one video for common protocol
+  metrics: &id001
+  - roc_auc
+  - pr_auc
+  - accuracy
+  - precision
+  - recall
+  - specificity
+  - f1
+  - fpr
+  - fnr
+  - coverage
+  - preprocessing_failure_rate
+  statistical_family: dependency-clustered intervals/tests with paired common-video analysis and multiplicity control (D-19/D-40)
+  outputs:
+    files: results/metrics/rq1_*
+    tables:
+    - fixed_architecture
+    - optimized_system
+    - directional_transfer
+    figures:
+    - clustered_ci_point_plots
+    discussion: reports/chapter4/discussion/rq1.md
+  limitations:
+  - BO comparison is configured-system evidence, not pure architecture causality.
+  experiment_ids:
+  - rq1_fixed_swin_b_ffpp_c23
+  - rq1_fixed_video_swin_b_ffpp_c23
+  - rq1_fixed_swinfusion_pp_ffpp_c23
+  - rq1_bo_swinfusion_pp_ffpp_c23
+  - rq1_fixed_swin_b_ffpp_c40
+  - rq1_fixed_video_swin_b_ffpp_c40
+  - rq1_fixed_swinfusion_pp_ffpp_c40
+  - rq1_bo_swinfusion_pp_ffpp_c40
+  - rq1_fixed_swin_b_celeb_df_v2
+  - rq1_fixed_video_swin_b_celeb_df_v2
+  - rq1_fixed_swinfusion_pp_celeb_df_v2
+  - rq1_bo_swinfusion_pp_celeb_df_v2
+  - rq1_fixed_swin_b_deeperforensics_binary
+  - rq1_fixed_video_swin_b_deeperforensics_binary
+  - rq1_fixed_swinfusion_pp_deeperforensics_binary
+  - rq1_bo_swinfusion_pp_deeperforensics_binary
+  - rq6_transfer_core_ffpp_c23_to_ffpp_c40
+  - rq6_transfer_core_ffpp_c23_to_celeb_df_v2
+  - rq6_transfer_core_ffpp_c23_to_deeperforensics_binary
+  - rq6_transfer_core_celeb_df_v2_to_ffpp_c23
+  - rq6_transfer_core_celeb_df_v2_to_ffpp_c40
+  - rq6_transfer_core_celeb_df_v2_to_deeperforensics_binary
+  - rq6_transfer_core_deeperforensics_binary_to_ffpp_c23
+  - rq6_transfer_core_deeperforensics_binary_to_ffpp_c40
+  - rq6_transfer_core_deeperforensics_binary_to_celeb_df_v2
+  - rq6_optional_ffpp_c40_to_ffpp_c23
+  - rq6_optional_ffpp_c40_to_celeb_df_v2
+  - rq6_optional_ffpp_c40_to_deeperforensics_binary
+- rq_id: RQ2
+  exact_wording: What is the performance of SwinFusion++ relative to established baselines when evaluated on the Deepfake
+    subset of FaceForensics++ (HQ/LQ), Celeb-DF datasets and DeeperForensics-1.0?
+  included: true
+  claim: Position BO-selected SwinFusion++ against verified established baselines within each dataset.
+  models:
+  - swinfusion_pp
+  - xception
+  - i3d
+  - stil
+  - ftcn_with_temporal_transformer
+  - tall_swin
+  - sformer
+  dataset_conditions:
+  - ffpp_c23
+  - ffpp_c40
+  - celeb_df_v2
+  - deeperforensics_binary
+  matrix_roles:
+  - bo_optimized_system_comparison
+  - established_baseline_common_protocol
+  - sformer_common_within_dataset
+  - sformer_paper_faithful_within_dataset
+  evaluation_unit: one video for common protocol
+  metrics: *id001
+  statistical_family: dependency-clustered intervals/tests with paired common-video analysis and multiplicity control (D-19/D-40)
+  outputs:
+    files: results/metrics/rq2_*
+    tables:
+    - reproduced
+    - literature_only
+    figures:
+    - categorical_ci
+    - pareto
+    discussion: reports/chapter4/discussion/rq2.md
+  limitations:
+  - Native inputs and optimization budgets differ and must be disclosed.
+  experiment_ids:
+  - rq1_bo_swinfusion_pp_ffpp_c23
+  - rq1_bo_swinfusion_pp_ffpp_c40
+  - rq1_bo_swinfusion_pp_celeb_df_v2
+  - rq1_bo_swinfusion_pp_deeperforensics_binary
+  - rq2_common_xception_ffpp_c23
+  - rq2_common_xception_ffpp_c40
+  - rq2_common_xception_celeb_df_v2
+  - rq2_common_xception_deeperforensics_binary
+  - rq2_common_i3d_ffpp_c23
+  - rq2_common_i3d_ffpp_c40
+  - rq2_common_i3d_celeb_df_v2
+  - rq2_common_i3d_deeperforensics_binary
+  - rq2_common_stil_ffpp_c23
+  - rq2_common_stil_ffpp_c40
+  - rq2_common_stil_celeb_df_v2
+  - rq2_common_stil_deeperforensics_binary
+  - rq2_common_ftcn_with_temporal_transformer_ffpp_c23
+  - rq2_common_ftcn_with_temporal_transformer_ffpp_c40
+  - rq2_common_ftcn_with_temporal_transformer_celeb_df_v2
+  - rq2_common_ftcn_with_temporal_transformer_deeperforensics_binary
+  - rq2_common_tall_swin_ffpp_c23
+  - rq2_common_tall_swin_ffpp_c40
+  - rq2_common_tall_swin_celeb_df_v2
+  - rq2_common_tall_swin_deeperforensics_binary
+  - rq2_sformer_common_ffpp_c23
+  - rq2_sformer_paper_faithful_ffpp_c23
+  - rq2_sformer_common_ffpp_c40
+  - rq2_sformer_paper_faithful_ffpp_c40
+  - rq2_sformer_common_celeb_df_v2
+  - rq2_sformer_paper_faithful_celeb_df_v2
+  - rq2_sformer_common_deeperforensics_binary
+  - rq2_sformer_paper_faithful_deeperforensics_binary
+- rq_id: RQ3
+  exact_wording: How does the performance of SwinFusion++ compare to CNN-LSTM models on the FaceForensics++ (HQ/LQ) dataset?
+  included: true
+  claim: Compare SwinFusion++ with two predeclared recurrent families on C23/HQ and C40/LQ.
+  models:
+  - decision_required:D-15:cnn_lstm_slot_a
+  - decision_required:D-15:cnn_lstm_slot_b
+  - swinfusion_pp
+  dataset_conditions:
+  - ffpp_c23
+  - ffpp_c40
+  matrix_roles:
+  - rq3_recurrent_comparator
+  - bo_optimized_system_comparison
+  evaluation_unit: one video for common protocol
+  metrics: *id001
+  statistical_family: dependency-clustered intervals/tests with paired common-video analysis and multiplicity control (D-19/D-40)
+  outputs:
+    files: results/metrics/rq3_cnn_lstm.parquet
+    tables:
+    - rq3_comparison
+    figures:
+    - rq3_clustered_ci
+    discussion: reports/chapter4/discussion/rq3.md
+  limitations:
+  - Two selected models do not represent every CNN-LSTM family.
+  decision_refs:
+  - D-15
+  - D-27
+  experiment_ids:
+  - rq3_cnn_lstm_slot_a_ffpp_c23
+  - rq3_cnn_lstm_slot_b_ffpp_c23
+  - rq3_cnn_lstm_slot_a_ffpp_c40
+  - rq3_cnn_lstm_slot_b_ffpp_c40
+- rq_id: RQ4
+  exact_wording: Does the hierarchical cross-attention between Swin and Video Swin improve detection performance compared
+    to other spatio-temporal models such as CAST and TSFF-Net?
+  included: true
+  claim: Test TLBG-HCA using topology and capacity controls; use CAST/TSFF-Net only as verified external evidence.
+  models:
+  - swinfusion_pp
+  - topology_non_attentive_control
+  - capacity_matched_no_exchange_control
+  - cast
+  - tsff_net
+  dataset_conditions:
+  - ffpp_c23
+  - ffpp_c40
+  - celeb_df_v2
+  - deeperforensics_binary
+  matrix_roles:
+  - tlbg_hca_control
+  - named_external_comparator
+  evaluation_unit: one video for common protocol
+  metrics: *id001
+  statistical_family: dependency-clustered intervals/tests with paired common-video analysis and multiplicity control (D-19/D-40)
+  outputs:
+    files: results/metrics/rq4_*
+    tables:
+    - control_ablation
+    - cast_tsff_status
+    figures:
+    - ablation_effects
+    discussion: reports/chapter4/discussion/rq4.md
+  limitations:
+  - TSFF-Net is spatial/frequency fusion; external values alone cannot establish TLBG-HCA causality.
+  decision_refs:
+  - D-18
+  - D-32
+  - D-33
+  - D-42
+  experiment_ids:
+  - rq4_topology_non_attentive_control_ffpp_c23
+  - rq4_capacity_matched_no_exchange_control_ffpp_c23
+  - rq4_topology_non_attentive_control_ffpp_c40
+  - rq4_capacity_matched_no_exchange_control_ffpp_c40
+  - rq4_topology_non_attentive_control_celeb_df_v2
+  - rq4_capacity_matched_no_exchange_control_celeb_df_v2
+  - rq4_topology_non_attentive_control_deeperforensics_binary
+  - rq4_capacity_matched_no_exchange_control_deeperforensics_binary
+  - rq4_cast_ffpp_c23
+  - rq4_tsff_net_ffpp_c23
+  - rq4_cast_ffpp_c40
+  - rq4_tsff_net_ffpp_c40
+  - rq4_cast_celeb_df_v2
+  - rq4_tsff_net_celeb_df_v2
+  - rq4_cast_deeperforensics_binary
+  - rq4_tsff_net_deeperforensics_binary
+- rq_id: RQ5
+  exact_wording: How do users evaluate the usability and performance of the SwinFusion++ platform?
+  included: false
+  status: excluded_without_renumbering
+  claim: Human evaluation requires a separate approved plan.
+  models: []
+  dataset_conditions: []
+  matrix_roles: []
+  evaluation_unit: human_participant_not_video
+  metrics: []
+  statistical_family: outside_this_training_plan
+  outputs:
+    files: separate_future_human_evaluation_plan
+    tables: []
+    figures: []
+    discussion: separate_future_plan
+  limitations:
+  - User ratings cannot establish predictive validity or security.
+- rq_id: RQ6
+  exact_wording: Does SwinFusion++ improve deepfake detection performance compared to existing CNN- and transformer-based
+    spatio-temporal models, both within datasets and across diverse datasets?
+  included: true
+  claim: Synthesize within-dataset family comparisons and separate directional frozen transfer, including mandatory SFormer
+    paper-faithful/common replications.
+  models:
+  - internal_models
+  - rq2_core
+  - two_cnn_lstm_slots
+  - sformer
+  - conditional_cast_tsff
+  dataset_conditions:
+  - ffpp_c23
+  - ffpp_c40
+  - celeb_df_v2
+  - deeperforensics_binary
+  matrix_roles:
+  - fixed_recipe_architecture_comparison
+  - established_baseline_common_protocol
+  - directional_frozen_transfer_core
+  - mandatory_sformer_common_transfer
+  - mandatory_sformer_paper_faithful_transfer
+  evaluation_unit: one video for common protocol
+  metrics: *id001
+  statistical_family: dependency-clustered intervals/tests with paired common-video analysis and multiplicity control (D-19/D-40)
+  outputs:
+    files: results/metrics/rq6_*
+    tables:
+    - family_synthesis
+    - directional_matrix
+    - sformer_replication_gap
+    figures:
+    - directional_transfer
+    - replication_gap
+    discussion: reports/chapter4/discussion/rq6.md
+  limitations:
+  - FF++/Deeper lineage can inflate transfer; no collapsed generalization score.
+  decision_refs:
+  - D-16
+  - D-17
+  - D-20
+  - D-29
+  - D-34
+  experiment_ids:
+  - rq1_fixed_swin_b_ffpp_c23
+  - rq1_fixed_video_swin_b_ffpp_c23
+  - rq1_fixed_swinfusion_pp_ffpp_c23
+  - rq1_bo_swinfusion_pp_ffpp_c23
+  - rq4_topology_non_attentive_control_ffpp_c23
+  - rq4_capacity_matched_no_exchange_control_ffpp_c23
+  - rq1_fixed_swin_b_ffpp_c40
+  - rq1_fixed_video_swin_b_ffpp_c40
+  - rq1_fixed_swinfusion_pp_ffpp_c40
+  - rq1_bo_swinfusion_pp_ffpp_c40
+  - rq4_topology_non_attentive_control_ffpp_c40
+  - rq4_capacity_matched_no_exchange_control_ffpp_c40
+  - rq1_fixed_swin_b_celeb_df_v2
+  - rq1_fixed_video_swin_b_celeb_df_v2
+  - rq1_fixed_swinfusion_pp_celeb_df_v2
+  - rq1_bo_swinfusion_pp_celeb_df_v2
+  - rq4_topology_non_attentive_control_celeb_df_v2
+  - rq4_capacity_matched_no_exchange_control_celeb_df_v2
+  - rq1_fixed_swin_b_deeperforensics_binary
+  - rq1_fixed_video_swin_b_deeperforensics_binary
+  - rq1_fixed_swinfusion_pp_deeperforensics_binary
+  - rq1_bo_swinfusion_pp_deeperforensics_binary
+  - rq4_topology_non_attentive_control_deeperforensics_binary
+  - rq4_capacity_matched_no_exchange_control_deeperforensics_binary
+  - rq2_common_xception_ffpp_c23
+  - rq2_common_xception_ffpp_c40
+  - rq2_common_xception_celeb_df_v2
+  - rq2_common_xception_deeperforensics_binary
+  - rq2_common_i3d_ffpp_c23
+  - rq2_common_i3d_ffpp_c40
+  - rq2_common_i3d_celeb_df_v2
+  - rq2_common_i3d_deeperforensics_binary
+  - rq2_common_stil_ffpp_c23
+  - rq2_common_stil_ffpp_c40
+  - rq2_common_stil_celeb_df_v2
+  - rq2_common_stil_deeperforensics_binary
+  - rq2_common_ftcn_with_temporal_transformer_ffpp_c23
+  - rq2_common_ftcn_with_temporal_transformer_ffpp_c40
+  - rq2_common_ftcn_with_temporal_transformer_celeb_df_v2
+  - rq2_common_ftcn_with_temporal_transformer_deeperforensics_binary
+  - rq2_common_tall_swin_ffpp_c23
+  - rq2_common_tall_swin_ffpp_c40
+  - rq2_common_tall_swin_celeb_df_v2
+  - rq2_common_tall_swin_deeperforensics_binary
+  - rq2_sformer_common_ffpp_c23
+  - rq2_sformer_paper_faithful_ffpp_c23
+  - rq2_sformer_common_ffpp_c40
+  - rq2_sformer_paper_faithful_ffpp_c40
+  - rq2_sformer_common_celeb_df_v2
+  - rq2_sformer_paper_faithful_celeb_df_v2
+  - rq2_sformer_common_deeperforensics_binary
+  - rq2_sformer_paper_faithful_deeperforensics_binary
+  - rq3_cnn_lstm_slot_a_ffpp_c23
+  - rq3_cnn_lstm_slot_b_ffpp_c23
+  - rq3_cnn_lstm_slot_a_ffpp_c40
+  - rq3_cnn_lstm_slot_b_ffpp_c40
+  - rq4_cast_ffpp_c23
+  - rq4_tsff_net_ffpp_c23
+  - rq4_cast_ffpp_c40
+  - rq4_tsff_net_ffpp_c40
+  - rq4_cast_celeb_df_v2
+  - rq4_tsff_net_celeb_df_v2
+  - rq4_cast_deeperforensics_binary
+  - rq4_tsff_net_deeperforensics_binary
+  - rq6_transfer_core_ffpp_c23_to_ffpp_c40
+  - rq6_transfer_core_ffpp_c23_to_celeb_df_v2
+  - rq6_transfer_core_ffpp_c23_to_deeperforensics_binary
+  - rq6_transfer_core_celeb_df_v2_to_ffpp_c23
+  - rq6_transfer_core_celeb_df_v2_to_ffpp_c40
+  - rq6_transfer_core_celeb_df_v2_to_deeperforensics_binary
+  - rq6_transfer_core_deeperforensics_binary_to_ffpp_c23
+  - rq6_transfer_core_deeperforensics_binary_to_ffpp_c40
+  - rq6_transfer_core_deeperforensics_binary_to_celeb_df_v2
+  - rq6_sformer_common_ffpp_c23_to_celeb_df_v2
+  - rq6_sformer_paper_faithful_ffpp_c23_to_celeb_df_v2
+  - rq6_sformer_common_ffpp_c23_to_deeperforensics_binary
+  - rq6_sformer_paper_faithful_ffpp_c23_to_deeperforensics_binary
+  - rq6_optional_ffpp_c40_to_ffpp_c23
+  - rq6_optional_ffpp_c40_to_celeb_df_v2
+  - rq6_optional_ffpp_c40_to_deeperforensics_binary
